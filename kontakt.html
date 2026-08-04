@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- TODO(placeholder): doplnit město -->
+<title>Kontakt — instalatér Šomek [MĚSTO]</title>
+<meta name="description" content="Telefon, e-mail a poptávkový formulář. Instalatér a topenář [VE MĚSTĚ] a okolí.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<!-- partial:map-head -->
+<!-- Leaflet je vendorovaný, ne z CDN — viz CLAUDE.md. Musí být PŘED style.css,
+     aby šlo přebít .leaflet-container (šedé pozadí) barvou z palety webu. -->
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<!-- /partial:map-head -->
+<link rel="stylesheet" href="css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Kontakt — instalatér Šomek [MĚSTO]">
+<meta property="og:description" content="Telefon, e-mail a poptávkový formulář.">
+</head>
+<body>
+
+<a class="skip-link" href="#obsah">Přejít na obsah</a>
+
+<!-- partial:header current="kontakt" -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">
+      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
+      Instalatér Šomek
+      <span>Voda · topení · hodinový manžel</span>
+    </a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <ul>
+        <li><a href="index.html">Domů</a></li>
+        <li><a href="sluzby.html">Služby</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
+      </ul>
+    </nav>
+    <!-- TODO(placeholder): telefon (i v atributu href) -->
+    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+  </div>
+</header>
+<!-- /partial:header -->
+
+<main id="obsah">
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h1>Kontakt</h1>
+        <p>
+          Nejrychleji se domluvíme telefonicky. Když se vám nechce volat, napište mi
+          přes formulář a ozvu se vám zpátky.
+        </p>
+      </div>
+
+      <!-- Havárie: záměrně bez příslibu času dojezdu — viz komentář v index.html. -->
+      <div class="callout">
+        <p>
+          <strong>Máte havárii?</strong> Teče voda, praskla hadička, zatéká k sousedům —
+          v takovém případě volejte, nepište. Než se dovoláte, zavřete hlavní uzávěr
+          vody. Pevnou pohotovost nedržím: když to jde, přijedu co nejdřív, a když
+          zrovna nemůžu, řeknu vám to hned, ať můžete zkusit někoho dalšího.
+        </p>
+      </div>
+
+      <div class="grid grid--2">
+        <div>
+          <ul class="contact-list">
+            <!-- TODO(placeholder): telefon je i v odkazech sms: a wa.me níže.
+                 WhatsApp chce číslo v mezinárodním tvaru bez + a bez mezer. -->
+            <li>
+              <span class="k">Telefon</span>
+              <span class="v"><a href="tel:+420777123456">777 123 456</a></span>
+            </li>
+            <li>
+              <span class="k">SMS a WhatsApp</span>
+              <span class="v">
+                Na stejné číslo — <a href="sms:+420777123456">poslat SMS</a> ·
+                <a href="https://wa.me/420777123456" rel="noopener">napsat na WhatsApp</a>
+              </span>
+            </li>
+            <li>
+              <span class="k">E-mail</span>
+              <span class="v"><a href="mailto:info@example.com">info@example.com</a></span>
+            </li>
+            <li>
+              <span class="k">Kdy volat</span>
+              <span class="v"><span class="ph">[PO–PÁ 7:00–19:00]</span></span>
+            </li>
+            <li>
+              <span class="k">Kam jezdím</span>
+              <span class="v"><span class="ph">[MĚSTO A SEZNAM OBCÍ]</span></span>
+            </li>
+            <li>
+              <span class="k">Platba</span>
+              <span class="v">Hotově po dokončení, nebo převodem na fakturu</span>
+            </li>
+          </ul>
+
+          <p class="muted">
+            Pevnou pracovní dobu nemám — jezdím podle domluvených termínů. Ve výše
+            uvedeném čase ale klidně volejte, a když to nestihnu zvednout, zavolám zpátky.
+          </p>
+
+          <!-- partial:map spaced="yes" -->
+          <!-- Mapa oblasti. To, co je uvnitř, je náhrada pro prohlížeč bez JavaScriptu —
+               js/map.js obsah nahradí živou mapou. Odkaz do mapy.cz proto musí zůstat
+               platným <a>: bez JS je to jediná cesta ven. -->
+          <div class="map map--spaced" data-map
+               data-geojson="assets/data/zlinsky-kraj.geojson">
+            <a class="map-link" href="https://mapy.cz/" rel="noopener">
+              <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím"
+                   width="1000" height="420">
+              <span>Otevřít v mapě →</span>
+            </a>
+          </div>
+          <!-- /partial:map -->
+        </div>
+
+        <div>
+          <h2 id="poptavka">Poptávka</h2>
+          <p class="muted" style="margin-bottom:1.5rem">
+            Napište, co potřebujete. Čím konkrétnější popis, tím přesněji vám dokážu
+            odpovědět rovnou.
+          </p>
+
+          <!--
+            Web3Forms. Bez JavaScriptu se formulář odešle nativně a služba přesměruje
+            na poptavka-odeslana.html; s JavaScriptem odesílá js/main.js přes fetch.
+            Proto musí zůstat platným <form> s action a method.
+
+            Zde NENÍ a nikdy nesmí být zaškrtávátko se souhlasem se zpracováním
+            osobních údajů. Právním základem je čl. 6 odst. 1 písm. b) GDPR —
+            jednání před uzavřením smlouvy na žádost subjektu. Viz PLAN.md, invariant 2.
+
+            Ochrana proti spamu je skryté pole "botcheck". NIKDY sem nepřidávat
+            reCAPTCHA ani hCaptcha — nastavují cookies.
+          -->
+          <form class="form" data-form action="https://api.web3forms.com/submit" method="POST">
+            <!-- TODO(placeholder): access_key z web3forms.com -->
+            <input type="hidden" name="access_key" value="PLACEHOLDER-WEB3FORMS-KEY">
+            <input type="hidden" name="subject" value="Nová poptávka z webu">
+            <input type="hidden" name="from_name" value="Web instalatersomek">
+            <!-- TODO(placeholder): absolutní URL stránky s poděkováním, jakmile bude
+                 známá adresa webu. Používá se jen při odeslání bez JavaScriptu. -->
+            <input type="hidden" name="redirect" value="PLACEHOLDER-URL/poptavka-odeslana.html">
+
+            <!-- Honeypot: skryté pole, které vyplní jen robot. -->
+            <div class="hp" aria-hidden="true">
+              <label for="botcheck">Toto pole nevyplňujte</label>
+              <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="alert alert--err" data-form-error hidden tabindex="-1">
+              Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi rovnou
+              zavolejte na <a href="tel:+420777123456">777 123 456</a>.
+            </div>
+
+            <div class="field">
+              <label for="jmeno">Jméno <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="jmeno" name="jmeno" autocomplete="name" required>
+            </div>
+
+            <div class="field">
+              <label for="telefon">Telefon <span class="req" aria-hidden="true">*</span>
+                <span class="hint">Ozvu se vám na něj zpátky.</span>
+              </label>
+              <input type="tel" id="telefon" name="telefon" autocomplete="tel" required>
+            </div>
+
+            <div class="field">
+              <label for="email">E-mail
+                <span class="hint">Nepovinné — když radši píšete než voláte.</span>
+              </label>
+              <input type="email" id="email" name="email" autocomplete="email">
+            </div>
+
+            <div class="field">
+              <label for="popis">Co potřebujete <span class="req" aria-hidden="true">*</span>
+                <span class="hint">Napište, o co jde a v jaké obci. Adresu si domluvíme telefonicky.</span>
+              </label>
+              <textarea id="popis" name="popis" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--lg btn--block">Odeslat poptávku</button>
+
+            <p class="form__note">
+              Pole označená <span class="req" aria-hidden="true">*</span> jsou povinná.
+              Údaje použiji jen k vyřízení vaší poptávky — podrobnosti v
+              <a href="ochrana-osobnich-udaju.html">zásadách ochrany osobních údajů</a>.
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- partial:footer-full -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__cols">
+      <div>
+        <h2>Instalatér Šomek</h2>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
+           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <ul>
+          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
+          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
+          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Informace</h2>
+        <ul>
+          <li><a href="sluzby.html">Služby</a></li>
+          <li><a href="reference.html">Reference</a></li>
+          <li><a href="obchodni-podminky.html">Obchodní podmínky</a></li>
+          <li><a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Povinné identifikační údaje podnikatele — § 435 občanského zákoníku.
+         Musí být na každé stránce. Neodstraňovat.
+
+         Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
+         upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
+    <div class="legal-id">
+      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
+      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
+      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
+      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p>
+        Mimosoudní řešení spotřebitelských sporů:
+        <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- /partial:footer-full -->
+
+<!-- partial:callbar secondHref="#poptavka" secondLabel="Formulář" -->
+<div class="callbar">
+  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--ghost" href="#poptavka">Formulář</a>
+</div>
+<!-- /partial:callbar -->
+
+<script src="js/main.js" defer></script>
+<!-- partial:map-scripts -->
+<!-- Pořadí je závazné: leaflet.js musí být dřív než map.js. Obojí defer, takže
+     se spustí v pořadí zápisu, až bude dokument hotový. -->
+<script src="assets/vendor/leaflet/leaflet.js" defer></script>
+<script src="js/map.js" defer></script>
+<!-- /partial:map-scripts -->
+
+</body>
+</html>

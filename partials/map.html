@@ -1,0 +1,11 @@
+<!-- Mapa oblasti. To, co je uvnitř, je náhrada pro prohlížeč bez JavaScriptu —
+     js/map.js obsah nahradí živou mapou. Odkaz do mapy.cz proto musí zůstat
+     platným <a>: bez JS je to jediná cesta ven. -->
+<div class="map{{#spaced=yes}} map--spaced{{/spaced}}" data-map
+     data-geojson="{{krajGeojson}}">
+  <a class="map-link" href="{{mapaUrl}}" rel="noopener">
+    <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím"
+         width="1000" height="420">
+    <span>Otevřít v mapě →</span>
+  </a>
+</div>

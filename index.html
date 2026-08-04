@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- TODO(placeholder): doplnit město do titulku a popisku -->
+<title>Instalatér a topenář [MĚSTO] a okolí — Šomek</title>
+<meta name="description" content="Instalatérské a topenářské práce a hodinový manžel [VE MĚSTĚ] a okolí. Cenu se dozvíte předem, termín domluvíme podle vás.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<!-- partial:map-head -->
+<!-- Leaflet je vendorovaný, ne z CDN — viz CLAUDE.md. Musí být PŘED style.css,
+     aby šlo přebít .leaflet-container (šedé pozadí) barvou z palety webu. -->
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<!-- /partial:map-head -->
+<link rel="stylesheet" href="css/style.css">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Instalatér a topenář [MĚSTO] a okolí — Šomek">
+<meta property="og:description" content="Instalatérské a topenářské práce a hodinový manžel. Cenu se dozvíte předem.">
+<!-- TODO(placeholder): og:url a og:image doplnit, až bude známá adresa webu a fotografie -->
+</head>
+<body>
+
+<a class="skip-link" href="#obsah">Přejít na obsah</a>
+
+<!-- partial:header current="index" -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">
+      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
+      Instalatér Šomek
+      <span>Voda · topení · hodinový manžel</span>
+    </a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <ul>
+        <li><a href="index.html" aria-current="page">Domů</a></li>
+        <li><a href="sluzby.html">Služby</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <!-- TODO(placeholder): telefon (i v atributu href) -->
+    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+  </div>
+</header>
+<!-- /partial:header -->
+
+<main id="obsah">
+
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__inner">
+        <h1>Instalatér a topenář <span class="ph">[MĚSTO]</span> a okolí</h1>
+        <p class="hero__lead">
+          Opravy a montáže vody a topení, hodinový manžel okolo domu. Přijedu, práci si
+          na místě prohlédnu a řeknu cenu předem — teprve potom se pustím do díla.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn--primary btn--lg" href="tel:+420777123456">Zavolat 777 123 456</a>
+          <a class="btn btn--ghost btn--lg" href="kontakt.html">Napsat poptávku</a>
+        </div>
+        <p class="hero__meta">
+          Působím <span class="ph">[VE MĚSTĚ]</span> a okolí do <span class="ph">[DOJEZD XX KM]</span> ·
+          Volat můžete <span class="ph">[PO–PÁ 7:00–19:00]</span> ·
+          Termín domluvíme podle vás
+        </p>
+      </div>
+      <!-- TODO(placeholder): instalatersomek.webp nese viditelný vodoznak Pixers
+           a není licencovaný — před spuštěním nahradit vlastním obrázkem. -->
+      <img class="hero__media" src="assets/img/instalatersomek.webp" alt=""
+           width="700" height="700">
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>S čím vám pomůžu</h2>
+        <p>Tři okruhy prací, které dělám nejčastěji. Nejste si jistí, kam vaše práce patří? Zavolejte a zeptejte se.</p>
+      </div>
+
+      <div class="grid grid--3">
+        <article class="card">
+          <h3>Vodoinstalatérství</h3>
+          <p>Rozvody vody a odpadů, zařizovací předměty, netěsnosti a ucpané odpady.</p>
+          <ul class="ticks">
+            <li>Výměna a oprava baterií</li>
+            <li>Protékající a ucpané WC</li>
+            <li>Umyvadla, vany, sprchové kouty</li>
+            <li>Rozvody vody a odpadů</li>
+            <li>Výměna bojleru</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Topenářství</h3>
+          <p>Radiátory a rozvody topení — výměny, opravy a seřízení otopné soustavy.</p>
+          <ul class="ticks">
+            <li>Výměna radiátorů</li>
+            <li>Rozvody topení</li>
+            <li>Podlahové topení</li>
+            <li>Odvzdušnění a doplnění systému</li>
+            <li>Výměna ventilů a termohlavic</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Hodinový manžel</h3>
+          <p>Práce, kvůli kterým se nevyplatí shánět tři různé řemeslníky.</p>
+          <ul class="ticks">
+            <li>Montáž nábytku a polic</li>
+            <li>Kotvení, vrtání, věšení</li>
+            <li>Výměna sifonů a kohoutů</li>
+            <li>Drobné opravy v bytě i domě</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="sluzby.html">Podrobný přehled služeb</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section__head">
+        <h2>Proč si vybrat mě</h2>
+      </div>
+      <div class="grid grid--2">
+        <article class="card">
+          <h3>Cenu znáte předem</h3>
+          <p>
+            Práci si nejdřív prohlédnu a řeknu vám, co bude potřeba udělat a kolik to
+            bude stát. Kalkulace je nezávazná a zdarma — teprve když souhlasíte,
+            pustím se do toho.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Domluvený termín platí</h3>
+          <p>
+            Když se domluvíme na čase, přijedu. Pokud by mě cokoli zdrželo, ozvu se
+            předem, ne až po termínu.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Po sobě uklidím</h3>
+          <p>
+            Beru jako součást práce, že po odchodu zůstane byt v tom stavu, v jakém
+            jsem ho našel — jen s opravenou vodou nebo topením.
+          </p>
+        </article>
+        <article class="card">
+          <h3>Doklad ke každé zakázce</h3>
+          <p>
+            Ke každé práci dostanete doklad. Platit můžete hotově po dokončení, nebo
+            převodem na fakturu. Kartou bohužel ne.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Kam jezdím</h2>
+        <p>
+          Působím <span class="ph">[VE MĚSTĚ]</span> a okolních obcích:
+          <span class="ph">[SEZNAM OBCÍ]</span>. Nejste si jistí, jestli k vám dojedu?
+          Zavolejte, domluvíme se.
+        </p>
+      </div>
+      <!-- partial:map -->
+      <!-- Mapa oblasti. To, co je uvnitř, je náhrada pro prohlížeč bez JavaScriptu —
+           js/map.js obsah nahradí živou mapou. Odkaz do mapy.cz proto musí zůstat
+           platným <a>: bez JS je to jediná cesta ven. -->
+      <div class="map" data-map
+           data-geojson="assets/data/zlinsky-kraj.geojson">
+        <a class="map-link" href="https://mapy.cz/" rel="noopener">
+          <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím"
+               width="1000" height="420">
+          <span>Otevřít v mapě →</span>
+        </a>
+      </div>
+      <!-- /partial:map -->
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="container">
+      <div class="section__head">
+        <h2>Ukázka práce</h2>
+        <p>Několik zakázek, které mám vyfocené.</p>
+      </div>
+      <div class="gallery">
+        <a href="reference.html">
+          <figure>
+            <img src="assets/img/podlaha-1.webp" alt="Hotová podlaha v pokoji po dokončené pokládce"
+                 width="1200" height="1600" loading="lazy">
+            <figcaption>Pokládka podlahy</figcaption>
+          </figure>
+        </a>
+        <a href="reference.html">
+          <figure>
+            <img src="assets/img/instalaterske-prace2.webp"
+                 alt="Nové rozvody vody a odpadů vedené v drážkách cihlové stěny"
+                 width="1022" height="766" loading="lazy">
+            <figcaption>Nové rozvody vody a odpadů</figcaption>
+          </figure>
+        </a>
+        <a href="reference.html">
+          <figure>
+            <img src="assets/img/podlaha2.webp"
+                 alt="Rozvinuté smyčky podlahového topení na systémové desce"
+                 width="678" height="452" loading="lazy">
+            <figcaption>Podlahové topení před zalitím</figcaption>
+          </figure>
+        </a>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--ghost" href="reference.html">Všechny reference</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Potřebujete instalatéra?</h2>
+        <p>
+          Nejrychlejší je zavolat — popíšete mi, co se děje, a domluvíme termín.
+          Když se vám nechce telefonovat, napište přes formulář.
+        </p>
+      </div>
+
+      <!-- Havárie: záměrně bez příslibu času dojezdu. Jeden člověk bez pohotovosti
+           nemůže slibovat "do 60 minut" — byl by to nepodložený údaj o dostupnosti
+           služby ve smyslu § 4–5 zákona o ochraně spotřebitele. -->
+      <div class="callout">
+        <p>
+          <strong>Havárie?</strong> Zavřete hlavní uzávěr vody a volejte — nepište.
+          Pevnou pohotovost nedržím, ale když to jde, přijedu co nejdřív. A když
+          zrovna nemůžu, řeknu vám to hned, ať zbytečně nečekáte.
+        </p>
+      </div>
+
+      <div class="btn-row mt-0">
+        <a class="btn btn--primary btn--lg" href="tel:+420777123456">Zavolat 777 123 456</a>
+        <a class="btn btn--ghost btn--lg" href="kontakt.html">Napsat poptávku</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- partial:footer-full -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__cols">
+      <div>
+        <h2>Instalatér Šomek</h2>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
+           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <ul>
+          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
+          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
+          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Informace</h2>
+        <ul>
+          <li><a href="sluzby.html">Služby</a></li>
+          <li><a href="reference.html">Reference</a></li>
+          <li><a href="obchodni-podminky.html">Obchodní podmínky</a></li>
+          <li><a href="ochrana-osobnich-udaju.html">Ochrana osobních údajů</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Povinné identifikační údaje podnikatele — § 435 občanského zákoníku.
+         Musí být na každé stránce. Neodstraňovat.
+
+         Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
+         upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
+    <div class="legal-id">
+      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
+      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
+      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
+      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p>
+        Mimosoudní řešení spotřebitelských sporů:
+        <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- /partial:footer-full -->
+
+<!-- partial:callbar secondHref="kontakt.html" secondLabel="Napsat" -->
+<div class="callbar">
+  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--ghost" href="kontakt.html">Napsat</a>
+</div>
+<!-- /partial:callbar -->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "name": "[JMÉNO A PŘÍJMENÍ]",
+  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel.",
+  "telephone": "+420777123456",
+  "email": "info@example.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "[ULICE ČP]",
+    "postalCode": "[PSČ]",
+    "addressLocality": "[OBEC]",
+    "addressCountry": "CZ"
+  },
+  "areaServed": "[MĚSTO A OKOLÍ]",
+  "priceRange": "$$"
+}
+</script>
+<script src="js/main.js" defer></script>
+<!-- partial:map-scripts -->
+<!-- Pořadí je závazné: leaflet.js musí být dřív než map.js. Obojí defer, takže
+     se spustí v pořadí zápisu, až bude dokument hotový. -->
+<script src="assets/vendor/leaflet/leaflet.js" defer></script>
+<script src="js/map.js" defer></script>
+<!-- /partial:map-scripts -->
+
+</body>
+</html>

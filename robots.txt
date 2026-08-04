@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Zdroje pro tools/sync.mjs. GitHub Pages je servíruje jako každý jiný soubor,
+# ale jsou to fragmenty a samy o sobě nedávají smysl — ať se neindexují.
+Disallow: /partials/
+Disallow: /tools/
+
+# TODO(placeholder): `webUrl` ve values.json, pak `node tools/sync.mjs`. Řádek
+# odkomentovat teprve tehdy, až bude adresa skutečná — jinak sem míří nesmysl.
+# Sitemap: PLACEHOLDER-URL/sitemap.xml

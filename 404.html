@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stránka nenalezena — Instalatér Šomek</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<!-- Pozor: GitHub Pages servíruje 404.html i z podadresáře, ale vždy z kořene webu.
+     Relativní cesty proto musí zůstat relativní ke kořeni — viz CLAUDE.md. -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#obsah">Přejít na obsah</a>
+
+<!-- partial:header current="none" -->
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">
+      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
+      Instalatér Šomek
+      <span>Voda · topení · hodinový manžel</span>
+    </a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <ul>
+        <li><a href="index.html">Domů</a></li>
+        <li><a href="sluzby.html">Služby</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+    </nav>
+    <!-- TODO(placeholder): telefon (i v atributu href) -->
+    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+  </div>
+</header>
+<!-- /partial:header -->
+
+<main id="obsah">
+  <section class="section">
+    <div class="container prose">
+      <h1>Tady nic není</h1>
+      <p class="lede">
+        Stránka, kterou hledáte, neexistuje nebo se přesunula. Za pokus to stálo.
+      </p>
+      <p>Zkuste některou z těchto:</p>
+      <ul>
+        <li><a href="index.html">Úvodní stránka</a></li>
+        <li><a href="sluzby.html">Služby</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="tel:+420777123456">Zavolat 777 123 456</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- partial:footer-slim -->
+<footer class="site-footer">
+  <div class="container">
+    <!-- Povinné identifikační údaje podnikatele — § 435 občanského zákoníku.
+         Musí být na každé stránce. Neodstraňovat.
+
+         Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
+         upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
+    <div class="legal-id legal-id--flush">
+      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
+      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
+      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
+      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p>
+        Mimosoudní řešení spotřebitelských sporů:
+        <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
+      </p>
+    </div>
+  </div>
+</footer>
+<!-- /partial:footer-slim -->
+
+<!-- partial:callbar secondHref="index.html" secondLabel="Úvod" -->
+<div class="callbar">
+  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--ghost" href="index.html">Úvod</a>
+</div>
+<!-- /partial:callbar -->
+
+</body>
+</html>

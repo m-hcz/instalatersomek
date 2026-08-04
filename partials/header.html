@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="index.html">
+      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
+      {{brand}}
+      <span>{{tagline}}</span>
+    </a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <ul>
+        <li><a href="index.html"{{#current=index}} aria-current="page"{{/current}}>Domů</a></li>
+        <li><a href="sluzby.html"{{#current=sluzby}} aria-current="page"{{/current}}>Služby</a></li>
+        <li><a href="reference.html"{{#current=reference}} aria-current="page"{{/current}}>Reference</a></li>
+        <li><a href="kontakt.html"{{#current=kontakt}} aria-current="page"{{/current}}>Kontakt</a></li>
+      </ul>
+    </nav>
+    <!-- TODO(placeholder): telefon (i v atributu href) -->
+    <a class="btn btn--primary" href="tel:{{phoneHref}}">{{phone}}</a>
+  </div>
+</header>

@@ -1,0 +1,15 @@
+<!-- Povinné identifikační údaje podnikatele — § 435 občanského zákoníku.
+     Musí být na každé stránce. Neodstraňovat.
+
+     Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
+     upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
+<div class="legal-id{{#flush=yes}} legal-id--flush{{/flush}}">
+  <p><strong>{{ph:jmeno}}</strong></p>
+  <p>Sídlo: {{ph:sidlo}}</p>
+  <p>IČO: {{ph:ico}} · Nejsem plátcem DPH.</p>
+  <p>Zapsán v živnostenském rejstříku vedeném {{ph:zivnostenskyUrad}}.</p>
+  <p>
+    Mimosoudní řešení spotřebitelských sporů:
+    <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
+  </p>
+</div>

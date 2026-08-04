@@ -1,0 +1,35 @@
+# This is a no-build static site: every HTML, CSS, JS and asset file is meant to be
+# committed and served as-is. Only local noise belongs here — never source or assets.
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editors
+.idea/
+*.swp
+*.swo
+*~
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# Local tooling that may show up incidentally (a dev server, an image optimizer).
+# Nothing here is part of the site.
+node_modules/
+npm-debug.log*
+yarn-error.log
+.cache/
+
+# Secrets — no backend means these should not exist at all; ignored so an
+# experiment can never be published to a public Pages site by accident.
+.env
+.env.*
+
+# Scratch
+*.log
+*.bak
+*.tmp
