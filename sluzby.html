@@ -3,15 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- TODO(placeholder): doplnit město -->
-<title>Služby — instalatér a topenář [MĚSTO] | Šomek</title>
-<meta name="description" content="Vodoinstalatérské práce, topenářství a hodinový manžel [VE MĚSTĚ] a okolí. Přehled toho, co dělám a co si před návštěvou připravit.">
+<title>Služby — instalatér a topenář ve Zlínském kraji | Šomek</title>
+<meta name="description" content="Vodoinstalatérské práce, topenářství a hodinový manžel ve Zlínském kraji. Přehled toho, co dělám a co si před návštěvou připravit.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
-<meta property="og:title" content="Služby — instalatér a topenář [MĚSTO] | Šomek">
+<meta property="og:title" content="Služby — instalatér a topenář ve Zlínském kraji | Šomek">
 <meta property="og:description" content="Vodoinstalatérské práce, topenářství a hodinový manžel.">
+<!-- partial:head-meta path="sluzby.html" og="yes" -->
+<!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
+     jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
+     GitHub Pages servíruje "…/" i "…/index.html"; canonical vybírá jednu z nich,
+     aby měl vyhledávač i jazykový model co citovat. -->
+<link rel="canonical" href="https://vodotoposomek.cz/sluzby.html">
+<meta property="og:url" content="https://vodotoposomek.cz/sluzby.html">
+<!-- /partial:head-meta -->
 </head>
 <body>
 
@@ -21,7 +28,6 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="index.html">
-      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
       Instalatér Šomek
       <span>Voda · topení · hodinový manžel</span>
     </a>
@@ -33,8 +39,7 @@
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </nav>
-    <!-- TODO(placeholder): telefon (i v atributu href) -->
-    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+    <a class="btn btn--primary" href="tel:+420608542877">608 542 877</a>
   </div>
 </header>
 <!-- /partial:header -->
@@ -46,9 +51,8 @@
       <div class="section__head">
         <h1>Služby</h1>
         <p>
-          Dělám vodu, topení a hodinového manžela <span class="ph">[VE MĚSTĚ]</span>
-          a okolí. Níže je přehled toho nejčastějšího — když tam vaši práci nenajdete,
-          zavolejte a zeptejte se.
+          Dělám vodu, topení a hodinového manžela ve Zlínském kraji. Níže je přehled
+          toho nejčastějšího — když tam vaši práci nenajdete, zavolejte a zeptejte se.
         </p>
       </div>
 
@@ -86,7 +90,7 @@
           </div>
         </div>
         <div class="btn-row">
-          <a class="btn btn--primary" href="tel:+420777123456">Zavolat 777 123 456</a>
+          <a class="btn btn--primary" href="tel:+420608542877">Zavolat 608 542 877</a>
           <a class="btn btn--ghost" href="kontakt.html">Napsat poptávku</a>
         </div>
       </article>
@@ -131,7 +135,7 @@
           </p>
         </div>
         <div class="btn-row">
-          <a class="btn btn--primary" href="tel:+420777123456">Zavolat 777 123 456</a>
+          <a class="btn btn--primary" href="tel:+420608542877">Zavolat 608 542 877</a>
           <a class="btn btn--ghost" href="kontakt.html">Napsat poptávku</a>
         </div>
       </article>
@@ -165,7 +169,7 @@
           </div>
         </div>
         <div class="btn-row">
-          <a class="btn btn--primary" href="tel:+420777123456">Zavolat 777 123 456</a>
+          <a class="btn btn--primary" href="tel:+420608542877">Zavolat 608 542 877</a>
           <a class="btn btn--ghost" href="kontakt.html">Napsat poptávku</a>
         </div>
       </article>
@@ -221,15 +225,17 @@
       <ul class="contact-list">
         <li>
           <span class="k">Práce</span>
-          <span class="v">od <span class="ph">[SAZBA XXX KČ/HOD]</span> podle náročnosti.
+          <span class="v">od 400 Kč / hod podle náročnosti.
             První hodina se účtuje celá, další pak
-            <span class="ph">[PO XX MINUTÁCH]</span>.</span>
+            po 30 minutách.</span>
         </li>
         <li>
+          <!-- TODO(owner): sazby dopravy jsou návrh, ne údaj od majitele. Jakmile je
+               potvrdí, smazat tuhle poznámku. Viz values.json → _comment_navrh. -->
           <span class="k">Doprava</span>
-          <span class="v">Paušál <span class="ph">[PAUŠÁL XXX KČ]</span> do
-            <span class="ph">[PÁSMO XX KM]</span> (cesta k vám i zpět), nad
-            <span class="ph">[PÁSMO XX KM]</span> <span class="ph">[XX KČ/KM]</span>.</span>
+          <span class="v">Paušál 200 Kč do
+            15 km (cesta k vám i zpět), nad
+            15 km 12 Kč / km.</span>
         </li>
         <li>
           <span class="k">Materiál</span>
@@ -258,7 +264,7 @@
         <p>Zavolejte, nebo mi popište práci ve formuláři a ozvu se vám.</p>
       </div>
       <div class="btn-row mt-0">
-        <a class="btn btn--primary btn--lg" href="tel:+420777123456">Zavolat 777 123 456</a>
+        <a class="btn btn--primary btn--lg" href="tel:+420608542877">Zavolat 608 542 877</a>
         <a class="btn btn--ghost btn--lg" href="kontakt.html">Napsat poptávku</a>
       </div>
     </div>
@@ -272,15 +278,14 @@
     <div class="site-footer__cols">
       <div>
         <h2>Instalatér Šomek</h2>
-        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
-           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.</p>
       </div>
       <div>
         <h2>Kontakt</h2>
         <ul>
-          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
-          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
-          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+          <li>Telefon: <a href="tel:+420608542877">608 542 877</a></li>
+          <li>E-mail: <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a></li>
+          <li>Volat: PO–PÁ 7:00–19:00</li>
         </ul>
       </div>
       <div>
@@ -300,22 +305,55 @@
          Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
          upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
     <div class="legal-id">
-      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
-      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
-      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
-      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p><strong>Tomáš Šomek</strong></p>
+      <p>Sídlo: Soukenická 781, 766 01 Valašské Klobouky</p>
+      <p>IČO: 68340435 · Nejsem plátcem DPH.</p>
+      <!-- „…, který vede X“ a ne „…vedeném X“: druhá vazba chce 7. pád, takže by název
+           úřadu musel být uložený skloněný. Takhle stačí 1. pád, jako je v rejstříku. -->
+      <p>Zapsán v živnostenském rejstříku, který vede Živnostenský úřad Valašské Klobouky.</p>
       <p>
         Mimosoudní řešení spotřebitelských sporů:
         <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
       </p>
     </div>
+
+    <!-- Last line of every page: the copyright notice and the developer credit.
+         Nothing to do with § 435 — the statutory identification is in
+         partials/legal-id.html and stands above this block, so it stays the first
+         thing read in the footer.
+
+         The year is filled in from the browser's clock so it does not go stale in
+         January. The one written in the HTML is the year of first publication: with
+         JavaScript off that is what the visitor sees, and it is a valid thing for a
+         copyright notice to say rather than a blank. That is why it does not change.
+
+         The year is NOT a values.json value and must not become one: sync substitutes
+         values by plain text, so "2026" would, on the move to 2027, also rewrite
+         datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+         The script lives here rather than in js/main.js, which only four of the eight
+         pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+         JavaScript at all — is not worth one number. Here the year travels wherever
+         sync puts the footer, so no page can be forgotten. -->
+    <p class="colophon">
+      <span>© <span data-year>2026</span> Instalatér Šomek. Všechna práva vyhrazena.</span>
+      <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+    </p>
+    <script>
+      (function () {
+        'use strict';
+        var year = String(new Date().getFullYear());
+        var slots = document.querySelectorAll('[data-year]');
+        for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+      })();
+    </script>
   </div>
 </footer>
 <!-- /partial:footer-full -->
 
 <!-- partial:callbar secondHref="kontakt.html" secondLabel="Napsat" -->
 <div class="callbar">
-  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--primary" href="tel:+420608542877">Zavolat</a>
   <a class="btn btn--ghost" href="kontakt.html">Napsat</a>
 </div>
 <!-- /partial:callbar -->

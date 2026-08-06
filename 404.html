@@ -18,7 +18,6 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="index.html">
-      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
       Instalatér Šomek
       <span>Voda · topení · hodinový manžel</span>
     </a>
@@ -30,8 +29,7 @@
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </nav>
-    <!-- TODO(placeholder): telefon (i v atributu href) -->
-    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+    <a class="btn btn--primary" href="tel:+420608542877">608 542 877</a>
   </div>
 </header>
 <!-- /partial:header -->
@@ -51,7 +49,7 @@
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
       <div class="btn-row">
-        <a class="btn btn--primary" href="tel:+420777123456">Zavolat 777 123 456</a>
+        <a class="btn btn--primary" href="tel:+420608542877">Zavolat 608 542 877</a>
       </div>
     </div>
   </section>
@@ -66,22 +64,55 @@
          Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
          upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
     <div class="legal-id legal-id--flush">
-      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
-      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
-      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
-      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p><strong>Tomáš Šomek</strong></p>
+      <p>Sídlo: Soukenická 781, 766 01 Valašské Klobouky</p>
+      <p>IČO: 68340435 · Nejsem plátcem DPH.</p>
+      <!-- „…, který vede X“ a ne „…vedeném X“: druhá vazba chce 7. pád, takže by název
+           úřadu musel být uložený skloněný. Takhle stačí 1. pád, jako je v rejstříku. -->
+      <p>Zapsán v živnostenském rejstříku, který vede Živnostenský úřad Valašské Klobouky.</p>
       <p>
         Mimosoudní řešení spotřebitelských sporů:
         <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
       </p>
     </div>
+
+    <!-- Last line of every page: the copyright notice and the developer credit.
+         Nothing to do with § 435 — the statutory identification is in
+         partials/legal-id.html and stands above this block, so it stays the first
+         thing read in the footer.
+
+         The year is filled in from the browser's clock so it does not go stale in
+         January. The one written in the HTML is the year of first publication: with
+         JavaScript off that is what the visitor sees, and it is a valid thing for a
+         copyright notice to say rather than a blank. That is why it does not change.
+
+         The year is NOT a values.json value and must not become one: sync substitutes
+         values by plain text, so "2026" would, on the move to 2027, also rewrite
+         datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+         The script lives here rather than in js/main.js, which only four of the eight
+         pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+         JavaScript at all — is not worth one number. Here the year travels wherever
+         sync puts the footer, so no page can be forgotten. -->
+    <p class="colophon">
+      <span>© <span data-year>2026</span> Instalatér Šomek. Všechna práva vyhrazena.</span>
+      <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+    </p>
+    <script>
+      (function () {
+        'use strict';
+        var year = String(new Date().getFullYear());
+        var slots = document.querySelectorAll('[data-year]');
+        for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+      })();
+    </script>
   </div>
 </footer>
 <!-- /partial:footer-slim -->
 
 <!-- partial:callbar secondHref="index.html" secondLabel="Úvod" -->
 <div class="callbar">
-  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--primary" href="tel:+420608542877">Zavolat</a>
   <a class="btn btn--ghost" href="index.html">Úvod</a>
 </div>
 <!-- /partial:callbar -->

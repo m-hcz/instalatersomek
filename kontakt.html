@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- TODO(placeholder): doplnit město -->
-<title>Kontakt — instalatér Šomek [MĚSTO]</title>
-<meta name="description" content="Telefon, e-mail a poptávkový formulář. Instalatér a topenář [VE MĚSTĚ] a okolí.">
+<title>Kontakt — instalatér Šomek, Zlínský kraj</title>
+<meta name="description" content="Telefon, e-mail a poptávkový formulář. Instalatér a topenář ve Zlínském kraji.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <!-- partial:map-head -->
 <!-- Leaflet je vendorovaný, ne z CDN — viz CLAUDE.md. Musí být PŘED style.css,
@@ -15,8 +14,16 @@
 <link rel="stylesheet" href="css/style.css">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
-<meta property="og:title" content="Kontakt — instalatér Šomek [MĚSTO]">
+<meta property="og:title" content="Kontakt — instalatér Šomek, Zlínský kraj">
 <meta property="og:description" content="Telefon, e-mail a poptávkový formulář.">
+<!-- partial:head-meta path="kontakt.html" og="yes" -->
+<!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
+     jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
+     GitHub Pages servíruje "…/" i "…/index.html"; canonical vybírá jednu z nich,
+     aby měl vyhledávač i jazykový model co citovat. -->
+<link rel="canonical" href="https://vodotoposomek.cz/kontakt.html">
+<meta property="og:url" content="https://vodotoposomek.cz/kontakt.html">
+<!-- /partial:head-meta -->
 </head>
 <body>
 
@@ -26,7 +33,6 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="index.html">
-      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
       Instalatér Šomek
       <span>Voda · topení · hodinový manžel</span>
     </a>
@@ -38,8 +44,7 @@
         <li><a href="kontakt.html" aria-current="page">Kontakt</a></li>
       </ul>
     </nav>
-    <!-- TODO(placeholder): telefon (i v atributu href) -->
-    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+    <a class="btn btn--primary" href="tel:+420608542877">608 542 877</a>
   </div>
 </header>
 <!-- /partial:header -->
@@ -69,34 +74,38 @@
       <div class="grid grid--2">
         <div>
           <ul class="contact-list">
-            <!-- TODO(placeholder): telefon je i v odkazech sms: a wa.me níže.
-                 WhatsApp chce číslo v mezinárodním tvaru bez + a bez mezer. -->
+            <!-- Telefon je i v odkazech sms: a wa.me níže, všechny tři tvary odvozuje
+                 sync z `phone`. WhatsApp chce číslo v mezinárodním tvaru bez + a bez mezer. -->
             <li>
               <span class="k">Telefon</span>
-              <span class="v"><a href="tel:+420777123456">777 123 456</a></span>
+              <span class="v"><a href="tel:+420608542877">608 542 877</a></span>
             </li>
             <li>
               <span class="k">SMS a WhatsApp</span>
-              <span class="v">
-                Na stejné číslo — <a href="sms:+420777123456">poslat SMS</a> ·
-                <a href="https://wa.me/420777123456" rel="noopener">napsat na WhatsApp</a>
+              <span class="v v--rows">
+                <span>Na stejné číslo</span>
+                <span><a href="sms:+420608542877">Poslat SMS</a></span>
+                <span><a href="https://wa.me/420608542877" rel="noopener">Napsat na WhatsApp</a></span>
               </span>
             </li>
             <li>
               <span class="k">E-mail</span>
-              <span class="v"><a href="mailto:info@example.com">info@example.com</a></span>
+              <span class="v"><a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a></span>
             </li>
             <li>
               <span class="k">Kdy volat</span>
-              <span class="v"><span class="ph">[PO–PÁ 7:00–19:00]</span></span>
+              <span class="v">PO–PÁ 7:00–19:00</span>
             </li>
             <li>
               <span class="k">Kam jezdím</span>
-              <span class="v"><span class="ph">[MĚSTO A SEZNAM OBCÍ]</span></span>
+              <span class="v">Zlínský kraj</span>
             </li>
             <li>
               <span class="k">Platba</span>
-              <span class="v">Hotově po dokončení, nebo převodem na fakturu</span>
+              <span class="v v--rows">
+                <span>Hotově po dokončení</span>
+                <span>Nebo převodem na fakturu</span>
+              </span>
             </li>
           </ul>
 
@@ -105,6 +114,47 @@
             uvedeném čase ale klidně volejte, a když to nestihnu zvednout, zavolám zpátky.
           </p>
 
+          <!-- QR s vizitkou (vCard). Soubor generuje tools/qr.mjs z values.json —
+               needitovat ho ručně a po změně kontaktních hodnot spustit
+               `node tools/qr.mjs`, případně `--check` před commitem.
+
+               Kód nese vizitku přímo v sobě, ne odkaz na cizí QR službu. Takový
+               odkaz by byl závislost vytištěná na vizitkách a autě, kterou už nelze
+               stáhnout zpátky: provozovatel může kód zpoplatnit, omezit počet
+               načtení, přesměrovat jinam nebo skončit. Tenhle kód bude fungovat i
+               bez internetu a bez toho, aby cokoli dalšího existovalo.
+
+               Alt neopakuje údaje z kódu — stejné jméno, telefon i e-mail jsou
+               čitelné v seznamu nad ním, takže kdo QR nenačte, o nic nepřijde. -->
+          <h2 id="vizitka">Uložit kontakt do telefonu</h2>
+          <p class="muted">
+            Namiřte na kód foťák v mobilu a telefon sám nabídne uložení vizitky.
+            Nic se přitom nikam neodesílá — údaje jsou přímo v obrázku.
+          </p>
+          <img class="qr" src="assets/img/qr-kontakt.svg"
+               alt="QR kód s vizitkou — obsahuje stejné jméno, telefon, e-mail a adresu jako seznam výše"
+               width="616" height="616">
+
+          <!-- partial:profily -->
+          <!-- Zápisy v katalozích. Nejsou to jen odkazy navíc: vyhledávače a jazykové modely
+               odpovídají na dotazy typu "instalatér Zlínský kraj" většinou z katalogů, ne z osobního webu.
+               Tenhle seznam a `sameAs` ve strukturovaných datech říkají "to jsem pořád já" —
+               proto v nich musí být jméno, adresa a telefon do písmene stejné jako v patičce.
+               Odkazy vedou ven, proto rel="noopener". -->
+          <!-- The whole block, heading included, is dropped while neither address is real:
+               `profily` is a derived flag in tools/sync.mjs that is a placeholder only when
+               both of these are. A section promising "you can also find me here" above two
+               links that go nowhere is worse than no section — the visitor clicks one and
+               lands on an error, which says more about the trade than the missing profile
+               would. Each item is conditional in its own right too, so supplying one address
+               shows one row rather than waiting for both.
+
+               Structured data needs no such guard: the jsonlist marker in partials/schema.html
+               already omits whatever is still a placeholder, and prints [] when neither is real.
+               Written without its braces on purpose — a marker inside a comment is still a
+               marker, and sync would expand this one into the page. -->
+          <!-- /partial:profily -->
+
           <!-- partial:map spaced="yes" -->
           <!-- Mapa oblasti. To, co je uvnitř, je náhrada pro prohlížeč bez JavaScriptu —
                js/map.js obsah nahradí živou mapou. Odkaz do mapy.cz proto musí zůstat
@@ -112,7 +162,7 @@
           <div class="map map--spaced" data-map
                data-geojson="assets/data/zlinsky-kraj.geojson">
             <a class="map-link" href="https://mapy.cz/" rel="noopener">
-              <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím"
+              <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím — Zlínský kraj"
                    width="1000" height="420">
               <span>Otevřít v mapě →</span>
             </a>
@@ -129,8 +179,9 @@
 
           <!--
             Web3Forms. Bez JavaScriptu se formulář odešle nativně a služba přesměruje
-            na poptavka-odeslana.html; s JavaScriptem odesílá js/main.js přes fetch.
-            Proto musí zůstat platným <form> s action a method.
+            na poptavka-odeslana.html; s JavaScriptem odesílá js/main.js přes fetch
+            a výsledek ukáže v dialogu uprostřed obrazovky. Proto musí zůstat
+            platným <form> s action a method.
 
             Zde NENÍ a nikdy nesmí být zaškrtávátko se souhlasem se zpracováním
             osobních údajů. Právním základem je čl. 6 odst. 1 písm. b) GDPR —
@@ -138,51 +189,128 @@
 
             Ochrana proti spamu je skryté pole "botcheck". NIKDY sem nepřidávat
             reCAPTCHA ani hCaptcha — nastavují cookies.
+
+            Podmínky pro vyplnění stojí u každého pole v <p class="hint">, takže je
+            návštěvník čte dřív, než začne psát. Totéž vynucuje js/main.js (živě,
+            s obarvením rámečku) i prohlížeč sám přes required/pattern/minlength —
+            bez JavaScriptu tedy formulář hlídá pořád, jen bez barev a bez dialogu.
+            Když se pravidlo změní, musí se změnit na obou místech.
+
+            Hlášky jsou popisné, ne obviňující: říkají, co se čeká, ne co je špatně.
           -->
           <form class="form" data-form action="https://api.web3forms.com/submit" method="POST">
-            <!-- TODO(placeholder): access_key z web3forms.com -->
-            <input type="hidden" name="access_key" value="PLACEHOLDER-WEB3FORMS-KEY">
-            <input type="hidden" name="subject" value="Nová poptávka z webu">
-            <input type="hidden" name="from_name" value="Web instalatersomek">
-            <!-- TODO(placeholder): absolutní URL stránky s poděkováním, jakmile bude
-                 známá adresa webu. Používá se jen při odeslání bez JavaScriptu. -->
-            <input type="hidden" name="redirect" value="PLACEHOLDER-URL/poptavka-odeslana.html">
+            <!-- access_key z web3forms.com, doplněný 2026-08-06. Je veřejný záměrně —
+                 není to tajemství, jen identifikátor schránky, a vázání na cílovou
+                 adresu je na straně služby. Kdyby se sem někdy vrátila zástupná
+                 hodnota, js/main.js formulář vůbec neodešle a ukáže dialog o chybě:
+                 nativní odeslání by skončilo na anglické chybové stránce Web3Forms. -->
+            <input type="hidden" name="access_key" value="44ac43b4-3c3d-4d75-9b1e-0e6c78e04495">
+            <!-- `subject` a `from_name` jsou vyhrazená jména polí, ne obsah zprávy:
+                 první je předmět e-mailu, druhé jméno odesílatele (bez něj posílá
+                 služba „Notifications“). Totéž jde nastavit i v účtu na web3forms.com
+                 jako Email Subject / Sender Name. Ověřeno na doručené zprávě
+                 2026-08-06: přednost má hodnota poslaná s formulářem, takže platí
+                 tyhle dva řádky a nastavení v účtu nedělá nic. Kdo bude ladit předmět
+                 nebo odesílatele, musí sáhnout sem, ne do účtu.
 
-            <!-- Honeypot: skryté pole, které vyplní jen robot. -->
+                 `from_name` je to, co majitel uvidí ve schránce na řádku odesílatele —
+                 proto adresa webu, ne název repozitáře. Bez „https://“: sync nahrazuje
+                 `webUrl` prostým textem a s prefixem by tuhle hodnotu přepsal taky.
+
+                 Vyhrazená jména jsou access_key, email, subject, from_name, replyto,
+                 redirect, ccemail a webhook. Všechna ostatní pole služba přeposílá tak,
+                 jak jsou — proto můžou být pojmenovaná česky. -->
+            <input type="hidden" name="subject" value="Email z webového formuláře">
+            <input type="hidden" name="from_name" value="vodotoposomek.cz">
+            <!-- Absolutní URL z `webUrl`. Používá se jen při odeslání bez JavaScriptu;
+                 do JSON požadavku ho js/main.js záměrně nepřidává. -->
+            <input type="hidden" name="redirect" value="https://vodotoposomek.cz/poptavka-odeslana.html">
+
+            <!-- Honeypot: skryté pole, které vyplní jen robot. Web3Forms vyžaduje
+                 právě název "botcheck" a právě typ checkbox — nezaškrtnuté se do
+                 odesílaných dat vůbec nedostane, zaškrtnuté službě řekne „spam“. -->
             <div class="hp" aria-hidden="true">
               <label for="botcheck">Toto pole nevyplňujte</label>
               <input type="checkbox" name="botcheck" id="botcheck" tabindex="-1" autocomplete="off">
             </div>
 
-            <div class="alert alert--err" data-form-error hidden tabindex="-1">
-              Zprávu se nepodařilo odeslat. Zkuste to prosím znovu, nebo mi rovnou
-              zavolejte na <a href="tel:+420777123456">777 123 456</a>.
+            <!-- Podmínka a chybová hláška jsou v aria-describedby, ne v <label>:
+                 uvnitř labelu by se staly součástí názvu pole a odečítač by je
+                 předčítal při každém průchodu formulářem. -->
+
+            <!-- POZOR na `name` u polí níž: nejsou to identifikátory, ale text.
+                 Web3Forms nevyhrazená pole přeposílá tak, jak jsou, a jméno pole
+                 použije jako popisek řádku v e-mailu, který majiteli přijde. Proto
+                 tam stojí česky a s diakritikou — „Jméno a příjmení: Jan Novák“ se
+                 čte, „jmeno: Jan Novák“ ne. Přeformulovat je smí majitel, je to text
+                 jako každý jiný na stránce.
+
+                 Kód se o ně proto neopírá: js/main.js hledá pole podle `id`, které
+                 zůstává bez diakritiky a beze změny. Kdyby se sem někdy sáhlo, musí
+                 zůstat mimo vyhrazená jména (access_key, email, subject, from_name,
+                 replyto, redirect, ccemail, webhook) — pole pojmenované „email“ by
+                 se stalo adresou pro odpověď místo obsahu zprávy. -->
+            <div class="field" data-field>
+              <label for="jmeno">Jméno a příjmení <span class="req" aria-hidden="true">*</span></label>
+              <p class="hint" id="jmeno-hint">Dvě slova — jméno i příjmení, každé alespoň 2 znaky.</p>
+              <!-- pattern je záloha pro prohlížeč bez JavaScriptu: dvě a více skupin
+                   nebílých znaků po nejméně dvou, s tolerancí mezer na krajích.
+                   `title` je text, který v takovém případě ukáže bublina prohlížeče. -->
+              <!-- `placeholder` je jen ukázka tvaru, ne náhrada popisku: mizí, jakmile
+                   se do pole píše, takže podmínka musí zůstat v .hint nad polem. -->
+              <input type="text" id="jmeno" name="Jméno a příjmení" autocomplete="name" required
+                     placeholder="Jan Novák"
+                     pattern="\s*\S{2,}(\s+\S{2,})+\s*"
+                     title="Zadejte jméno i příjmení, každé alespoň 2 znaky."
+                     aria-describedby="jmeno-hint jmeno-msg">
+              <p class="field__msg" id="jmeno-msg" data-msg></p>
             </div>
 
-            <div class="field">
-              <label for="jmeno">Jméno <span class="req" aria-hidden="true">*</span></label>
-              <input type="text" id="jmeno" name="jmeno" autocomplete="name" required>
+            <div class="field" data-field>
+              <label for="telefon">Telefon <span class="req" aria-hidden="true">*</span></label>
+              <p class="hint" id="telefon-hint">Alespoň 9 číslic. Ozvu se vám na něj zpátky.</p>
+              <!-- Dopředný test (?=(\D*\d){9,}) spočítá číslice bez ohledu na to, čím
+                   jsou proložené; znaková třída pak povolí jen tvary, které se
+                   u telefonu píšou: +420 608 542 877, 608542877, (608) 542-877.
+                   Závorky, lomítko a pomlčka jsou uvnitř třídy escapované — prohlížeč
+                   překládá `pattern` s příznakem `v`, kde jsou to řídicí znaky. -->
+              <!-- Ukázkové číslo je záměrně jiné než jeho vlastní: kdyby v poli svítilo
+                   to z patičky, část lidí ho odešle beze změny. Ukázka je v tom tvaru,
+                   do kterého js/main.js po vyplnění číslo stejně převede — co pole
+                   napovídá a co s číslem udělá, je tak jedno a totéž. -->
+              <input type="tel" id="telefon" name="Telefon" autocomplete="tel" required
+                     placeholder="+420 777 123 456"
+                     pattern="(?=(\D*\d){9,})[0-9+\(\)\/\s.\-]+"
+                     title="Zadejte telefonní číslo, alespoň 9 číslic."
+                     aria-describedby="telefon-hint telefon-msg">
+              <p class="field__msg" id="telefon-msg" data-msg></p>
             </div>
 
-            <div class="field">
-              <label for="telefon">Telefon <span class="req" aria-hidden="true">*</span>
-                <span class="hint">Ozvu se vám na něj zpátky.</span>
-              </label>
-              <input type="tel" id="telefon" name="telefon" autocomplete="tel" required>
+            <!-- Pole se musí jmenovat "email": Web3Forms z něj udělá reply-to
+                 odchozí zprávy, takže na poptávku jde odpovědět rovnou z pošty.
+                 Zůstává nepovinné — povinný kontakt je telefon. -->
+            <div class="field" data-field>
+              <label for="email">E-mail</label>
+              <p class="hint" id="email-hint">Nepovinné. Když ho vyplníte, musí to být platná adresa ve tvaru jmeno@domena.cz.</p>
+              <input type="email" id="email" name="email" autocomplete="email"
+                     placeholder="jan.novak@email.cz"
+                     aria-describedby="email-hint email-msg">
+              <p class="field__msg" id="email-msg" data-msg></p>
             </div>
 
-            <div class="field">
-              <label for="email">E-mail
-                <span class="hint">Nepovinné — když radši píšete než voláte.</span>
-              </label>
-              <input type="email" id="email" name="email" autocomplete="email">
-            </div>
-
-            <div class="field">
-              <label for="popis">Co potřebujete <span class="req" aria-hidden="true">*</span>
-                <span class="hint">Napište, o co jde a v jaké obci. Adresu si domluvíme telefonicky.</span>
-              </label>
-              <textarea id="popis" name="popis" required></textarea>
+            <div class="field" data-field>
+              <label for="popis">Co potřebujete <span class="req" aria-hidden="true">*</span></label>
+              <p class="hint" id="popis-hint">Alespoň 20 a nejvýše 2000 znaků. Napište, o co jde a v jaké obci — adresu si domluvíme telefonicky.</p>
+              <!-- Ukázka záměrně nejmenuje žádnou obec. Působnost se na webu uvádí
+                   jako celý kraj a nikde se neobjevuje název města — viz CLAUDE.md.
+                   O obec si říká .hint, do příkladu ji dosadí návštěvník sám. -->
+              <textarea id="popis" name="Popis práce" required minlength="20" maxlength="2000"
+                        placeholder="Např. Kape kohoutek u umyvadla v koupelně a nejde dotáhnout. Panelák, 4. patro. Šlo by to tento týden?"
+                        aria-describedby="popis-hint popis-count popis-msg"></textarea>
+              <!-- Počítadlo plní js/main.js a do té doby je skryté. Bez JavaScriptu
+                   drží délku minlength/maxlength, jen bez průběžného odpočtu. -->
+              <p class="field__count" id="popis-count" data-count hidden></p>
+              <p class="field__msg" id="popis-msg" data-msg></p>
             </div>
 
             <button type="submit" class="btn btn--primary btn--lg btn--block">Odeslat poptávku</button>
@@ -193,6 +321,83 @@
               <a href="ochrana-osobnich-udaju.html">zásadách ochrany osobních údajů</a>.
             </p>
           </form>
+
+          <!--
+            Výsledek odeslání. Nativní <dialog>: showModal() ho vykreslí v top layer,
+            tedy uprostřed obrazovky a nad vším ostatním včetně .callbar (z-index tu
+            nehraje roli), a prohlížeč sám obstará zamčení fokusu, zavření Escapem
+            i ztmavení pozadí přes ::backdrop.
+
+            Text stojí tady v HTML, a ne poskládaný v JavaScriptu, aby česká
+            formulace prošla korekturou jako každý jiný text na stránce.
+
+            Bez JavaScriptu se dialogy nikdy neotevřou — tam Web3Forms přesměruje
+            na poptavka-odeslana.html, která říká totéž co dialog „odesláno“.
+
+            `data-autoclose` je doba v milisekundách, po které se dialog zavře sám;
+            bez toho atributu čeká na návštěvníka. Odpočet ruší stisk klávesy —
+            záměrně ne najetí myší: dialog se otevře tam, kde zrovna je kurzor,
+            takže by se odpočet sám od sebe zastavil hned po otevření.
+
+            Tři vteřiny jsou málo. Nese to jen proto, že se zavřením nic neztratí:
+            telefon je v hlavičce, v patičce i v liště dole a totéž co dialog
+            „odesláno“ říká i poptavka-odeslana.html. Kdyby v dialogu mělo být
+            něco, co jinde není, musí `data-autoclose` pryč.
+          -->
+          <dialog class="modal" data-modal="ok" data-autoclose="3000" aria-labelledby="modal-ok-title">
+            <div class="modal__panel">
+              <div class="modal__icon modal__icon--ok" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" focusable="false">
+                  <path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h2 id="modal-ok-title">Poptávka odeslána</h2>
+              <!-- TODO(owner): doba odpovědi je návrh. Je to údaj o dostupnosti služby
+                   (§ 4–5 zákona o ochraně spotřebitele), takže musí platit. Stejná věta
+                   je i na poptavka-odeslana.html — měnit obě naráz přes values.json. -->
+              <p>Děkuji, zprávu mám. Ozvu se vám zpátky, obvykle do jednoho pracovního dne.</p>
+              <p class="muted">
+                Spěchá to? Zavolejte rovnou na <a href="tel:+420608542877">608 542 877</a>.
+              </p>
+              <!-- Odpočet do automatického zavření. Pruh i vteřiny plní js/main.js;
+                   `aria-hidden` na obojím drží přístupný název tlačítka na „Zavřít“ —
+                   text, který by se každou vteřinu měnil, by odečítač předčítal pořád
+                   dokola. Prázdné zůstanou, když se odpočet nespustí. -->
+              <button type="button" class="btn btn--primary btn--block modal__close" data-modal-close>
+                <span class="modal__bar" data-timer-bar aria-hidden="true"></span>
+                <span class="modal__close-text">Zavřít<span class="modal__secs" data-timer-secs aria-hidden="true"></span></span>
+              </button>
+            </div>
+          </dialog>
+
+          <dialog class="modal" data-modal="err" data-autoclose="3000" aria-labelledby="modal-err-title">
+            <div class="modal__panel">
+              <div class="modal__icon modal__icon--err" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="28" height="28" focusable="false">
+                  <path d="M12 7v6.5M12 17h.01" fill="none" stroke="currentColor"
+                        stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h2 id="modal-err-title">Zprávu se nepodařilo odeslat</h2>
+              <!-- Anglická hláška od služby zůstává jen v konzoli — návštěvníkovi
+                   by neřekla nic použitelného. -->
+              <p>
+                Někde na cestě se to zaseklo a vaše poptávka ke mně nedorazila. Zkuste
+                to prosím znovu, nebo mi rovnou zavolejte na
+                <a href="tel:+420608542877">608 542 877</a>.
+              </p>
+              <p class="muted">Co jste napsali, zůstalo ve formuláři — psát to znovu nemusíte.</p>
+              <!-- Odpočet do automatického zavření. Pruh i vteřiny plní js/main.js;
+                   `aria-hidden` na obojím drží přístupný název tlačítka na „Zavřít“ —
+                   text, který by se každou vteřinu měnil, by odečítač předčítal pořád
+                   dokola. Prázdné zůstanou, když se odpočet nespustí. -->
+              <button type="button" class="btn btn--primary btn--block modal__close" data-modal-close>
+                <span class="modal__bar" data-timer-bar aria-hidden="true"></span>
+                <span class="modal__close-text">Zavřít<span class="modal__secs" data-timer-secs aria-hidden="true"></span></span>
+              </button>
+            </div>
+          </dialog>
         </div>
       </div>
     </div>
@@ -206,15 +411,14 @@
     <div class="site-footer__cols">
       <div>
         <h2>Instalatér Šomek</h2>
-        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
-           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.</p>
       </div>
       <div>
         <h2>Kontakt</h2>
         <ul>
-          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
-          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
-          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+          <li>Telefon: <a href="tel:+420608542877">608 542 877</a></li>
+          <li>E-mail: <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a></li>
+          <li>Volat: PO–PÁ 7:00–19:00</li>
         </ul>
       </div>
       <div>
@@ -234,26 +438,163 @@
          Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
          upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
     <div class="legal-id">
-      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
-      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
-      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
-      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p><strong>Tomáš Šomek</strong></p>
+      <p>Sídlo: Soukenická 781, 766 01 Valašské Klobouky</p>
+      <p>IČO: 68340435 · Nejsem plátcem DPH.</p>
+      <!-- „…, který vede X“ a ne „…vedeném X“: druhá vazba chce 7. pád, takže by název
+           úřadu musel být uložený skloněný. Takhle stačí 1. pád, jako je v rejstříku. -->
+      <p>Zapsán v živnostenském rejstříku, který vede Živnostenský úřad Valašské Klobouky.</p>
       <p>
         Mimosoudní řešení spotřebitelských sporů:
         <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
       </p>
     </div>
+
+    <!-- Last line of every page: the copyright notice and the developer credit.
+         Nothing to do with § 435 — the statutory identification is in
+         partials/legal-id.html and stands above this block, so it stays the first
+         thing read in the footer.
+
+         The year is filled in from the browser's clock so it does not go stale in
+         January. The one written in the HTML is the year of first publication: with
+         JavaScript off that is what the visitor sees, and it is a valid thing for a
+         copyright notice to say rather than a blank. That is why it does not change.
+
+         The year is NOT a values.json value and must not become one: sync substitutes
+         values by plain text, so "2026" would, on the move to 2027, also rewrite
+         datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+         The script lives here rather than in js/main.js, which only four of the eight
+         pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+         JavaScript at all — is not worth one number. Here the year travels wherever
+         sync puts the footer, so no page can be forgotten. -->
+    <p class="colophon">
+      <span>© <span data-year>2026</span> Instalatér Šomek. Všechna práva vyhrazena.</span>
+      <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+    </p>
+    <script>
+      (function () {
+        'use strict';
+        var year = String(new Date().getFullYear());
+        var slots = document.querySelectorAll('[data-year]');
+        for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+      })();
+    </script>
   </div>
 </footer>
 <!-- /partial:footer-full -->
 
 <!-- partial:callbar secondHref="#poptavka" secondLabel="Formulář" -->
 <div class="callbar">
-  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--primary" href="tel:+420608542877">Zavolat</a>
   <a class="btn btn--ghost" href="#poptavka">Formulář</a>
 </div>
 <!-- /partial:callbar -->
 
+<!-- partial:schema -->
+<!-- Strukturovaná data. Tohle si přečte vyhledávač i jazykový model, když má web
+     někomu doporučit — proto sem nepatří nic, co není ověřený fakt.
+
+     Co tu záměrně NENÍ:
+     · openingHours — pevnou pracovní dobu nemá. Vymyšlený rozsah by Google
+       zobrazoval přímo ve výsledcích a lidé by volali mimo něj. Viz PLAN.md 5.1.
+       `volaciDoba` je volný text ("[PO–PÁ 7:00–19:00]") a na OpeningHoursSpecification
+       ji nelze převést, aniž bychom si strukturu domysleli.
+     · priceRange — ceny web nezveřejňuje, takže dřívější "$$" byl údaj, který nikdo
+       neověřil. Google ho už roky nevyžaduje.
+
+     `identifier` s IČO je tu naopak to nejcennější: přes něj se web spáruje se
+     záznamem v ARES, tedy s autoritativním zdrojem. `sameAs` dělá totéž pro zápisy
+     v katalozích — dokud jsou zástupné, vypíše se prázdné pole. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "@id": "https://vodotoposomek.cz/#firma",
+  "name": "Tomáš Šomek",
+  "alternateName": "Instalatér Šomek",
+  "url": "https://vodotoposomek.cz/",
+  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.",
+  "telephone": "+420608542877",
+  "email": "somi.vodo.topo@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Soukenická 781",
+    "postalCode": "766 01",
+    "addressLocality": "Valašské Klobouky",
+    "addressCountry": "CZ"
+  },
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ICO",
+    "value": "68340435"
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zlínský kraj"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Kroměříž"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Uherské Hradiště"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Vsetín"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Zlín"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "+420608542877",
+    "email": "somi.vodo.topo@gmail.com",
+    "availableLanguage": "cs"
+  },
+  "knowsLanguage": "cs",
+  "currenciesAccepted": "CZK",
+  "paymentAccepted": "Hotově, převodem na fakturu",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Služby",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Vodoinstalatérství",
+          "description": "Rozvody vody a odpadů, zařizovací předměty, netěsnosti a ucpané odpady."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Topenářství",
+          "description": "Výměny a opravy radiátorů, rozvody topení, podlahové topení, seřízení otopné soustavy."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hodinový manžel",
+          "description": "Montáž nábytku a polic, kotvení a vrtání, drobné opravy v bytě i domě."
+        }
+      }
+    ]
+  },
+  "sameAs": []
+}
+</script>
+<!-- /partial:schema -->
 <script src="js/main.js" defer></script>
 <!-- partial:map-scripts -->
 <!-- Pořadí je závazné: leaflet.js musí být dřív než map.js. Obojí defer, takže

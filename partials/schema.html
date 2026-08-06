@@ -1,0 +1,82 @@
+<!-- Strukturovaná data. Tohle si přečte vyhledávač i jazykový model, když má web
+     někomu doporučit — proto sem nepatří nic, co není ověřený fakt.
+
+     Co tu záměrně NENÍ:
+     · openingHours — pevnou pracovní dobu nemá. Vymyšlený rozsah by Google
+       zobrazoval přímo ve výsledcích a lidé by volali mimo něj. Viz PLAN.md 5.1.
+       `volaciDoba` je volný text ("[PO–PÁ 7:00–19:00]") a na OpeningHoursSpecification
+       ji nelze převést, aniž bychom si strukturu domysleli.
+     · priceRange — ceny web nezveřejňuje, takže dřívější "$$" byl údaj, který nikdo
+       neověřil. Google ho už roky nevyžaduje.
+
+     `identifier` s IČO je tu naopak to nejcennější: přes něj se web spáruje se
+     záznamem v ARES, tedy s autoritativním zdrojem. `sameAs` dělá totéž pro zápisy
+     v katalozích — dokud jsou zástupné, vypíše se prázdné pole. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Plumber",
+  "@id": "{{webUrl}}/#firma",
+  "name": "{{jmeno}}",
+  "alternateName": "{{brand}}",
+  "url": "{{webUrl}}/",{{#real:ogImage}}
+  "image": "{{webUrl}}/{{ogImage}}",{{/real:ogImage}}
+  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel {{krajKde}}.",
+  "telephone": "{{phoneHref}}",
+  "email": "{{email}}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ulice}}",
+    "postalCode": "{{psc}}",
+    "addressLocality": "{{obec}}",
+    "addressCountry": "CZ"
+  },
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ICO",
+    "value": "{{ico}}"
+  },
+  "areaServed": {{areaServed}},
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "{{phoneHref}}",
+    "email": "{{email}}",
+    "availableLanguage": "cs"
+  },
+  "knowsLanguage": "cs",
+  "currenciesAccepted": "CZK",
+  "paymentAccepted": "Hotově, převodem na fakturu",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Služby",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Vodoinstalatérství",
+          "description": "Rozvody vody a odpadů, zařizovací předměty, netěsnosti a ucpané odpady."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Topenářství",
+          "description": "Výměny a opravy radiátorů, rozvody topení, podlahové topení, seřízení otopné soustavy."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hodinový manžel",
+          "description": "Montáž nábytku a polic, kotvení a vrtání, drobné opravy v bytě i domě."
+        }
+      }
+    ]
+  },
+  "sameAs": {{jsonlist:firmyCz,bazos}}
+}
+</script>

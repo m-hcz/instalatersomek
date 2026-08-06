@@ -7,6 +7,13 @@
 <meta name="description" content="Jaké osobní údaje zpracovávám, proč, jak dlouho a jaká máte práva. Web nepoužívá cookies ani analytiku.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="css/style.css">
+<!-- partial:head-meta path="ochrana-osobnich-udaju.html" og="no" -->
+<!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
+     jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
+     GitHub Pages servíruje "…/" i "…/index.html"; canonical vybírá jednu z nich,
+     aby měl vyhledávač i jazykový model co citovat. -->
+<link rel="canonical" href="https://vodotoposomek.cz/ochrana-osobnich-udaju.html">
+<!-- /partial:head-meta -->
 </head>
 <body>
 
@@ -16,7 +23,6 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="index.html">
-      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
       Instalatér Šomek
       <span>Voda · topení · hodinový manžel</span>
     </a>
@@ -28,8 +34,7 @@
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </nav>
-    <!-- TODO(placeholder): telefon (i v atributu href) -->
-    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+    <a class="btn btn--primary" href="tel:+420608542877">608 542 877</a>
   </div>
 </header>
 <!-- /partial:header -->
@@ -44,7 +49,9 @@
         Nic neprodávám, nikomu nepředávám pro reklamu a nesleduji, kdo si tenhle web
         prohlíží.
       </p>
-      <p class="updated">Účinné od <span class="ph">[DATUM]</span>.</p>
+      <!-- TODO(owner): datum účinnosti je návrh — má to být den spuštění webu.
+           Viz values.json → _comment_navrh. -->
+      <p class="updated">Účinné od 6. 8. 2026.</p>
 
       <div class="callout">
         <p>
@@ -56,17 +63,21 @@
 
       <h2>1. Kdo údaje zpracovává (správce)</h2>
       <p>
-        <strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong>, se sídlem
-        <span class="ph">[ULICE ČP, PSČ, OBEC]</span>, IČO <span class="ph">[00000000]</span>.
+        <strong>Tomáš Šomek</strong>, se sídlem
+        Soukenická 781, 766 01 Valašské Klobouky, IČO 68340435.
       </p>
       <p>
-        Kontakt ve věcech osobních údajů: <a href="mailto:info@example.com">info@example.com</a>,
-        telefon <a href="tel:+420777123456">777 123 456</a>. Pověřence pro ochranu osobních
+        Kontakt ve věcech osobních údajů: <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a>,
+        telefon <a href="tel:+420608542877">608 542 877</a>. Pověřence pro ochranu osobních
         údajů nemám jmenovaného — není to pro mou činnost povinné.
       </p>
 
       <h2>2. Co, proč a na jakém základě zpracovávám</h2>
-      <div class="table-scroll">
+      <!-- Na úzkém displeji se tabulka posouvá do stran. Posuvná oblast musí jít
+           ovládat i z klávesnice, a k tomu potřebuje tabindex; role a popisek
+           z ní dělají něco, co odečítač umí oznámit a najít. -->
+      <div class="table-scroll" tabindex="0" role="region"
+           aria-label="Účely zpracování osobních údajů">
         <table>
           <thead>
             <tr>
@@ -82,8 +93,23 @@
               <td>Jméno, telefon, e-mail, popis požadované práce</td>
               <td>Čl. 6 odst. 1 písm. b) GDPR — opatření přijatá před uzavřením smlouvy
                   na vaši žádost</td>
-              <td><span class="ph">[XX MĚSÍCŮ]</span> od poslední komunikace, pokud
-                  z poptávky nevznikne zakázka</td>
+              <!-- Na tuhle lhůtu žádný zákon číslo nedává. Čl. 5 odst. 1 písm. e) GDPR
+                   říká jen „ne déle, než je nutné“, a čl. 13 odst. 2 písm. a) proto
+                   dovoluje uvést místo pevné doby kritérium, podle kterého se určí.
+                   Odtud tvar věty: rozhoduje kritérium (účel skončil), lhůta je jen
+                   strop. Holé „uchovávám 6 měsíců“ by tvrdilo, že údaje drží i potom,
+                   co je k ničemu nepotřebuje — přesně to, co čl. 5 zakazuje.
+
+                   Tříletá promlčecí lhůta z § 629 NOZ sem nepatří: bez smlouvy není co
+                   hájit a držet kvůli ní každou nepřijatou poptávku tři roky by bylo
+                   nepřiměřené.
+
+                   TODO(owner): strop `retenceMesicu` musí majitel potvrdit a podle něj
+                   schránku opravdu uklízet, jinak je to nepravdivé tvrzení. Kopii drží
+                   i Web3Forms (tabulka příjemců níž), kratší dobu — při žádosti o výmaz
+                   podle čl. 17 GDPR ale nestačí smazat jen Gmail. -->
+              <td>Smažu, jakmile je zřejmé, že ze zakázky nic nebude,
+                  nejdéle po dobu 6 měsíců od poslední komunikace</td>
             </tr>
             <tr>
               <td>Provedení zakázky a předání díla</td>
@@ -117,16 +143,36 @@
       </p>
 
       <h2>3. Komu se údaje dostanou</h2>
-      <p>Kromě mě mohou k údajům přijít tito zpracovatelé:</p>
-      <div class="table-scroll">
+      <!-- "Příjemci", not "zpracovatelé". Art. 13(1)(e) GDPR asks for recipients,
+           and that is the wider word: of the four rows below, only some are
+           processors under an Art. 28 contract. OSMF is an independent controller
+           of the IP address it receives, and the mailbox is a free consumer Gmail
+           account, which Google does not offer an Art. 28 agreement for at all —
+           see values.json, _comment_schranka. Calling them all processors asserted
+           contracts that do not exist; naming them as recipients discharges the
+           actual duty without claiming anything extra. -->
+      <p>Kromě mě se údaje mohou dostat k těmto příjemcům:</p>
+      <div class="table-scroll" tabindex="0" role="region"
+           aria-label="Komu se osobní údaje dostanou">
         <table>
           <thead>
             <tr><th>Kdo</th><th>Proč</th><th>Kde</th></tr>
           </thead>
           <tbody>
+            <!-- Web3Forms zprávu nejen doručí, ale i uloží: v účtu je přehled poptávek
+                 se jménem, telefonem, e-mailem i popisem práce. Ověřeno 2026-08-06 na
+                 skutečně odeslané poptávce. „Doručení“ a „uchování kopie“ nejsou totéž
+                 a čl. 13 GDPR chce vědět obojí.
+
+                 Lhůta je hodnota `retenceSluzby` a nastavuje se v účtu na web3forms.com
+                 (Settings → Data retention policy). Změna tam se musí promítnout sem —
+                 a nikdy nesmí být delší než `retenceMesicu` v tabulce výš, jinak si web
+                 protiřečí sám se sebou. -->
             <tr>
               <td>Web3Forms</td>
-              <td>Doručení zprávy odeslané z poptávkového formuláře do mého e-mailu</td>
+              <td>Doručení zprávy odeslané z poptávkového formuláře do mého e-mailu.
+                  Kopii zprávy u sebe uchovávají po dobu 30 dnů a pak ji automaticky
+                  mažou.</td>
               <td>Mimo EU</td>
             </tr>
             <tr>
@@ -148,15 +194,13 @@
               <td>Spojené království</td>
             </tr>
             <tr>
-              <td><span class="ph">[POSKYTOVATEL E-MAILU]</span></td>
+              <td>Google Ireland Limited (Gmail)</td>
               <td>Provoz e-mailové schránky, do níž poptávky chodí</td>
-              <td><span class="ph">[EU / MIMO EU]</span></td>
+              <td>EU i mimo EU</td>
             </tr>
-            <tr>
-              <td><span class="ph">[ÚČETNÍ]</span></td>
-              <td>Zpracování účetnictví</td>
-              <td>ČR</td>
-            </tr>
+            <!-- Řádek s účetní odstraněn 2026-08-06: účetnictví si vede sám, takže
+                 příjemcem není nikdo další. Kdyby si účetní pořídil, řádek se sem
+                 musí vrátit — příjemce osobních údajů se podle čl. 13 GDPR uvádí. -->
           </tbody>
         </table>
       </div>
@@ -166,10 +210,16 @@
       </p>
 
       <h3>Předání mimo Evropskou unii</h3>
+      <!-- The mailbox provider is deliberately not named again in this sentence.
+           Its name lives in one place, the table row above, which sync fills from
+           `poskytovatelEmailu`. Sync substitutes whole values by plain text, so a
+           second, shortened mention here would not be rewritten when that value
+           changes — it would just quietly start naming the wrong company. -->
       <p>
-        Web3Forms i GitHub sídlí mimo EU. K předání dochází na základě standardních
-        smluvních doložek schválených Evropskou komisí podle čl. 46 GDPR, případně na
-        základě rozhodnutí o odpovídající ochraně.
+        Web3Forms i GitHub sídlí mimo EU. Poskytovatel e-mailové schránky sídlí v EU,
+        zprávy ale drží v síti datových center, jejíž část leží mimo ni. K předání
+        dochází na základě standardních smluvních doložek schválených Evropskou komisí
+        podle čl. 46 GDPR, případně na základě rozhodnutí o odpovídající ochraně.
       </p>
       <!-- Rozhodnutí o odpovídající ochraně pro Spojené království bylo obnoveno
            19. 12. 2025 a platí do 27. 12. 2031. Kdyby padlo, je potřeba tuto větu
@@ -193,7 +243,7 @@
             (fotografie) — odvoláním není dotčena zákonnost zpracování do té doby.</li>
       </ul>
       <p>
-        Stačí napsat na <a href="mailto:info@example.com">info@example.com</a>. Ozvu se
+        Stačí napsat na <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a>. Ozvu se
         nejpozději do jednoho měsíce.
       </p>
 
@@ -232,15 +282,14 @@
     <div class="site-footer__cols">
       <div>
         <h2>Instalatér Šomek</h2>
-        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
-           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.</p>
       </div>
       <div>
         <h2>Kontakt</h2>
         <ul>
-          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
-          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
-          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+          <li>Telefon: <a href="tel:+420608542877">608 542 877</a></li>
+          <li>E-mail: <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a></li>
+          <li>Volat: PO–PÁ 7:00–19:00</li>
         </ul>
       </div>
       <div>
@@ -260,22 +309,55 @@
          Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
          upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
     <div class="legal-id">
-      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
-      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
-      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
-      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p><strong>Tomáš Šomek</strong></p>
+      <p>Sídlo: Soukenická 781, 766 01 Valašské Klobouky</p>
+      <p>IČO: 68340435 · Nejsem plátcem DPH.</p>
+      <!-- „…, který vede X“ a ne „…vedeném X“: druhá vazba chce 7. pád, takže by název
+           úřadu musel být uložený skloněný. Takhle stačí 1. pád, jako je v rejstříku. -->
+      <p>Zapsán v živnostenském rejstříku, který vede Živnostenský úřad Valašské Klobouky.</p>
       <p>
         Mimosoudní řešení spotřebitelských sporů:
         <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
       </p>
     </div>
+
+    <!-- Last line of every page: the copyright notice and the developer credit.
+         Nothing to do with § 435 — the statutory identification is in
+         partials/legal-id.html and stands above this block, so it stays the first
+         thing read in the footer.
+
+         The year is filled in from the browser's clock so it does not go stale in
+         January. The one written in the HTML is the year of first publication: with
+         JavaScript off that is what the visitor sees, and it is a valid thing for a
+         copyright notice to say rather than a blank. That is why it does not change.
+
+         The year is NOT a values.json value and must not become one: sync substitutes
+         values by plain text, so "2026" would, on the move to 2027, also rewrite
+         datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+         The script lives here rather than in js/main.js, which only four of the eight
+         pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+         JavaScript at all — is not worth one number. Here the year travels wherever
+         sync puts the footer, so no page can be forgotten. -->
+    <p class="colophon">
+      <span>© <span data-year>2026</span> Instalatér Šomek. Všechna práva vyhrazena.</span>
+      <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+    </p>
+    <script>
+      (function () {
+        'use strict';
+        var year = String(new Date().getFullYear());
+        var slots = document.querySelectorAll('[data-year]');
+        for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+      })();
+    </script>
   </div>
 </footer>
 <!-- /partial:footer-full -->
 
 <!-- partial:callbar secondHref="kontakt.html" secondLabel="Napsat" -->
 <div class="callbar">
-  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--primary" href="tel:+420608542877">Zavolat</a>
   <a class="btn btn--ghost" href="kontakt.html">Napsat</a>
 </div>
 <!-- /partial:callbar -->

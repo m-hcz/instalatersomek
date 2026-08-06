@@ -1,0 +1,30 @@
+<!-- Last line of every page: the copyright notice and the developer credit.
+     Nothing to do with § 435 — the statutory identification is in
+     partials/legal-id.html and stands above this block, so it stays the first
+     thing read in the footer.
+
+     The year is filled in from the browser's clock so it does not go stale in
+     January. The one written in the HTML is the year of first publication: with
+     JavaScript off that is what the visitor sees, and it is a valid thing for a
+     copyright notice to say rather than a blank. That is why it does not change.
+
+     The year is NOT a values.json value and must not become one: sync substitutes
+     values by plain text, so "2026" would, on the move to 2027, also rewrite
+     datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+     The script lives here rather than in js/main.js, which only four of the eight
+     pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+     JavaScript at all — is not worth one number. Here the year travels wherever
+     sync puts the footer, so no page can be forgotten. -->
+<p class="colophon">
+  <span>© <span data-year>2026</span> {{brand}}. Všechna práva vyhrazena.</span>
+  <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+</p>
+<script>
+  (function () {
+    'use strict';
+    var year = String(new Date().getFullYear());
+    var slots = document.querySelectorAll('[data-year]');
+    for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+  })();
+</script>

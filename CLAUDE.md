@@ -55,7 +55,14 @@ Approved by the owner on 2026-08-04, when the alternative (Jekyll) was rejected 
 
 Anything between `<!-- partial:name … -->` and `<!-- /partial:name -->` **is overwritten** by the
 next `node tools/sync.mjs`. Editing a page inside those markers is wasted work — the header, both
-footers, the § 435 identification block and the mobile call bar live in `partials/`.
+footers, the § 435 identification block, the mobile call bar, the `canonical`/`og:url` tags, the
+JSON-LD and the catalogue links all live in `partials/`.
+
+Two template features exist specifically so that unfinished values emit **nothing** rather than
+something false: `{{#real:key}}…{{/real:key}}` drops its body while the value still looks like
+`[TAKHLE]`, and `{{jsonlist:a,b}}` builds a JSON array of only the real ones. Structured data is
+read by machines as asserted fact, so a placeholder URL in `sameAs` or in `og:image` is a lie,
+not a visible TODO. Use them for anything a crawler consumes.
 
 Values that recur across pages — phone, e-mail, IČO, town — live in `values.json`. Change one there
 and run sync; it rewrites every occurrence, including the ones no partial covers (page titles, meta
@@ -69,9 +76,9 @@ node tools/sync.mjs --check    # exits 1 if any page is stale; use before commit
 
 Two things that will bite:
 
-- **Czech declension.** One town name is not enough. `mesto` is the nominative for titles;
-  `mestoKde` is the locative **and carries its own preposition** ("ve Frýdku-Místku" vs
-  "v Havířově"), so never write `v` next to it. Same trap for any value dropped into prose.
+- **Czech declension.** One form of a place name is not enough. `kraj` is the nominative
+  ("Zlínský kraj"); `krajKde` is the locative **and carries its own preposition** ("ve Zlínském
+  kraji"), so never write `v`/`ve` next to it. Same trap for any value dropped into prose.
 - **Placeholder → real is one-way.** While a value still looks like `[TAKHLE]`, sync wraps it in
   `<span class="ph">`; supply a real value and the wrapper disappears by itself. Going back cannot
   restore the wrappers — a bare value in body copy and one in a `<title>` are indistinguishable.
@@ -104,6 +111,19 @@ IP address is personal data under the GDPR. Banner and privacy notice are separa
 `index.html` and `kontakt.html` carry a **Leaflet** map (1.9.4, BSD-2-Clause, vendored under
 `assets/vendor/leaflet/`, never a CDN). It draws the outline of Zlínský kraj from
 `assets/data/zlinsky-kraj.geojson` over **OpenStreetMap tiles**.
+
+**The copy states the same area the map draws: the whole kraj, never a town.** Decided 2026-08-06 —
+no home town, no list of villages, no travel radius appears anywhere on the site. This costs real
+local-search ranking (PLAN.md 5.2 spells out why); it was removed deliberately, not lost, so do not
+reintroduce town-level copy without a new decision.
+
+The **visible copy** therefore knows only `kraj` and `krajKde`. Structured data goes one level
+finer: `okresy` lists the region's districts and `sync.mjs` derives `{{areaServed}}` from it plus
+`kraj`, so the JSON-LD says "this kraj and these four okresy" while the page still says only the
+kraj. Added 2026-08-06 as the explicitly chosen middle position — it tells a machine the service
+area is neither the whole country nor one town, without the site committing to a home town. **Do
+not extend `okresy` down to individual obce**: that is the town-level decision above, reached from
+behind, and it needs the same new decision.
 
 Those tiles are the **only** third-party request the site makes. The owner decided this on
 2026-08-04, knowing the cost:
@@ -176,11 +196,25 @@ reviews trigger a disclosure duty about whether and how they are verified (ČOI 
 Kč), and any facility for visitors to post content can make the site an *intermediary service* under
 the **DSA**. A purely static presentation site is outside the DSA entirely — keep it that way.
 
-## Domain: nothing to do
+## Domain: the site's code is ready, the hosting is not
 
-There is no custom domain and none is planned. **Do not create a `CNAME` file** and do not touch
-anything DNS- or domain-related. The repository/folder may be renamed by the owner at some point;
-all internal links are relative, so a rename breaks nothing inside the site.
+The owner bought **`vodotoposomek.cz`** on 2026-08-06, reversing the earlier "no custom domain ever"
+decision. `webUrl` in `values.json` now holds it, and sync has pushed it through every absolute URL
+in the project.
+
+**That is all that was asked for, and all that has been done.** There is deliberately **no `CNAME`
+file** in this repository, no DNS record and no change to the Pages settings — the owner is doing
+that. Do not create any of them unless explicitly asked.
+
+The consequence, which matters until that happens: `canonical`, `og:url`, the sitemap `<loc>`s, the
+`Sitemap:` line and the form's no-JavaScript `redirect` all point at a host that does not yet serve
+the site. The redirect is the one with a user-visible failure mode — submit the form with JS off
+before DNS is live and the visitor lands nowhere. Either finish the domain setup or set `webUrl`
+back to `https://m-hcz.github.io/instalatersomek` until you do.
+
+Because the address no longer derives from the repository name, renaming the repo no longer changes
+the public URL. Internal links are relative regardless, so a rename still breaks nothing inside the
+site.
 
 ## Photos on the References page
 
@@ -200,7 +234,17 @@ keeping the generated regions in sync:
 npx serve .                    # Node 24 is installed on this machine
 node tools/sync.mjs            # after editing partials/ or values.json
 node tools/sync.mjs --check    # before committing — exits 1 if a page is stale
+node tools/qr.mjs              # after changing any value the contact QR carries
+node tools/qr.mjs --check      # before committing — exits 1 if the QR is stale
 ```
+
+`tools/qr.mjs` regenerates `assets/img/qr-kontakt.svg`, the vCard QR on `kontakt.html`. It is the
+same kind of tool as `sync.mjs` — it rewrites a committed file from committed inputs, so it is not
+a build step either. It carries its own QR encoder rather than calling a QR service, and that is
+deliberate: a service URL printed on a van or a business card is a dependency you cannot recall if
+the provider starts metering scans, redirects the code, or shuts down. **It reads `values.json`, so
+it goes stale exactly when a contact value changes and nothing else notices** — run `--check`
+alongside the sync one.
 
 **Python is not installed here** — `python -m http.server` hits a Windows Store stub and fails, so
 don't reach for it out of habit.
@@ -209,20 +253,31 @@ Serve over HTTP rather than opening `index.html` via `file://` — `fetch()` and
 resolution fail under the `file:` origin, so `file://` can show bugs that don't exist and hide ones
 that do.
 
-Useful checks (all pass as of 2026-08-04):
+Useful checks. **All four pass as of 2026-08-06**, with nothing expected or tolerated in the output.
+The first one used to report the two catalogue placeholders, `[PROFIL NA FIRMY.CZ]` and `[INZERÁT NA
+BAZOŠI]`; the "Najdete mě i tady" block now hides itself while neither address is real, so those
+`href`s are no longer in the page at all and a `MISS` line means a genuine broken link again. The
+one real miss it ever caught, `assets/img/mapa.svg`, was generated from the committed GeoJSON on
+that date.
 
 ```sh
 # every internal link and asset resolves
 grep -oh '\(href\|src\)="[^"#]*"' *.html | sed 's/.*="//;s/"//' \
   | grep -v '^https\?:\|^tel:\|^mailto:\|^sms:' | sort -u | while read f; do [ -e "$f" ] || echo "MISS $f"; done
 
-# no third-party <script>/<link>/<iframe> in the markup
-grep -n '<script[^>]*src="http\|<link[^>]*href="http\|<iframe' *.html
+# no third-party <script>/<link>/<iframe> in the markup. rel="canonical" is filtered
+# out: it is an absolute URL by necessity, but it points at this site and fetches nothing.
+grep -n '<script[^>]*src="http\|<link[^>]*href="http\|<iframe' *.html | grep -v 'rel="canonical"'
 
-# every remote origin the browser actually contacts. Expected, and nothing else:
-#   tile.openstreetmap.org   map tiles      (listed in the privacy notice)
-#   api.web3forms.com        form submit    (listed in the privacy notice)
-# Anything new here is a third party that has to be added to the privacy notice
+# every remote origin named anywhere in the source. Only two of them are actually
+# fetched by the browser, and both are in the privacy notice:
+#   tile.openstreetmap.org   map tiles
+#   api.web3forms.com        form submit
+# The rest are inert and need no privacy-notice row — they are <a> targets the visitor
+# has to click (mapy.cz, wa.me, coi.cz, adr.coi.cz, uoou.gov.cz, openstreetmap.org,
+# leafletjs.com, msharp.cz), this site's own origin in canonical/og:url/JSON-LD (vodotoposomek.cz),
+# or a vocabulary identifier that is never dereferenced (schema.org, in @context).
+# Anything beyond that list is a third party that has to be added to the privacy notice
 # first — and if it sets a cookie, it brings the consent banner with it.
 grep -ohE 'https?://[a-z0-9.-]+' js/*.js css/style.css *.html \
   | sed 's|https\?://||' | sort -u
@@ -238,16 +293,32 @@ unsynced page deploys exactly as stale as it is committed.
 
 ## The GitHub Pages path trap
 
-There will **never** be a custom domain — that is a settled decision, not a deferred one — so the
-site is permanently served from a **subpath**: `https://<user>.github.io/instalatersomek/`.
-
-Root-absolute paths (`/css/style.css`, `<img src="/assets/logo.svg">`) resolve correctly on
-`localhost:8000` but **404 on the live site**, because `/css/style.css` means
-`<user>.github.io/css/style.css` — outside the repo. This is the most common way this kind of site
-breaks in production only.
+Until the domain above actually serves the site, it is still reached at a **subpath**:
+`https://m-hcz.github.io/instalatersomek/`. Root-absolute paths (`/css/style.css`,
+`<img src="/assets/logo.svg">`) resolve correctly on `localhost` but **404 there**, because
+`/css/style.css` means `m-hcz.github.io/css/style.css` — outside the repo. This is the most common
+way this kind of site breaks in production only.
 
 **Always use relative paths** — `css/style.css`, `./sluzby.html`, `assets/img/logo.webp`. This holds
-for `href`/`src`, CSS `url()`, and JS `fetch()` alike.
+for `href`/`src`, CSS `url()`, and JS `fetch()` alike. The rule does not relax once the domain is
+live: relative paths are correct under both, and they are what lets the site be served from either
+without touching a single link.
+
+**`robots.txt` is only ever read from the origin root**, and that is the one thing the domain
+genuinely fixes. On the subpath a crawler fetches `m-hcz.github.io/robots.txt` — a different
+repository — and never `…/instalatersomek/robots.txt`, so the committed file was a record of intent
+rather than an effective setting. On `vodotoposomek.cz` it sits at the root and binds. Its own header
+tells that story. Either way, anything that must bind a crawler regardless of hosting goes in the
+page: `<meta name="robots">` is what keeps `404.html` and `poptavka-odeslana.html` out of the index.
+
+The handful of places that genuinely need an absolute URL — `sitemap.xml`, `canonical`, `og:url`,
+the form's no-JS `redirect`, JSON-LD `@id` — all derive from the single `webUrl` value, so moving
+between the two is one edit plus a sync.
+
+One trap when you do move it: `webUrl` is substituted by plain text search, so **prose that quotes
+the old address gets rewritten too.** Mentioning a previous URL in a comment means writing it
+without the `https://` prefix, or the next sync silently replaces it and the comment starts
+contradicting itself. `robots.txt` has a note where this already happened once.
 
 ## `.nojekyll`
 

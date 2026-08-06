@@ -31,11 +31,25 @@
 //   {{ph:key}}           the same, wrapped in <span class="ph"> while it still
 //                        looks like a placeholder (i.e. starts with "[")
 //   {{#key=value}}…{{/key}}   emit the body only when that attribute matches
+//   {{#real:key}}…{{/real:key}}  emit the body only once that value is no longer
+//                        a placeholder. For markup that must not ship half-filled:
+//                        an <meta property="og:image"> pointing at "[OG IMAGE …]"
+//                        is worse than no tag at all.
+//   {{jsonlist:a,b}}     a JSON array of those values, skipping any that are still
+//                        placeholders — "[]" if none is real yet. Used for the
+//                        JSON-LD sameAs: a machine reads structured data as fact,
+//                        so a made-up URL there is a lie, not a visible TODO.
 //   {{>name key=value}}  include another partial, indented to the include site
 //
 // The phone number is stored once, in international form. Templates get three
 // derived forms: {{phone}} (display, "777 123 456"), {{phoneHref}} (for tel:)
 // and {{phoneWa}} (for wa.me — no "+", no spaces, or the link silently breaks).
+//
+// {{areaServed}} is derived the same way, from `kraj` plus the comma-separated
+// `okresy`: a ready-made JSON-LD value listing the region and each district as
+// an AdministrativeArea. It exists so that the districts stay values rather
+// than becoming literals inside partials/schema.html — moving to another kraj
+// has to stay a values.json change, never a code change.
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -105,8 +119,34 @@ function view(v) {
   // replacements() rewrites the full brand before the bare surname, so the two
   // never collide.
   out.prijmeni = String(v.brand).trim().split(/\s+/).pop()
+  // JSON-LD areaServed: the kraj, then each okres from the comma-separated
+  // `okresy`. Districts are the finest area the site claims — the visible copy
+  // still names only the kraj (PLAN.md 5.2), so this must not grow into towns
+  // without that decision being revisited. Continuation lines get two extra
+  // spaces so the array sits under its own key in the rendered block.
+  const areas = [String(v.kraj)]
+    .concat(String(v.okresy || '').split(',').map((s) => s.trim()).filter(Boolean))
+    .map((name) => ({ '@type': 'AdministrativeArea', name }))
+  out.areaServed = JSON.stringify(areas, null, 2)
+    .split('\n')
+    .map((line, i) => (i ? '  ' + line : line))
+    .join('\n')
+  // "At least one catalogue profile has a real address." {{#real:key}} tests one
+  // value and the template has no way to OR two, but the "Najdete mě i tady" block
+  // on kontakt.html has to appear or vanish as a whole: a heading over two dead
+  // links is worse than no section at all. Computing the answer here keeps the
+  // partial declarative. See FLAGS below — this is tested, never printed.
+  out.profily = isPlaceholder(v.firmyCz) && isPlaceholder(v.bazos) ? '[BEZ PROFILŮ]' : 'ano'
   return out
 }
+
+// Derived flags: computed above, read by {{#real:…}}, never written to a page.
+// They must stay out of the substitution pass, which applies (old text -> new
+// text) pairs to whole files. A flag's value is not page text, so substituting it
+// can only do damage: the day "ano" turned back into "[BEZ PROFILŮ]" it would
+// rewrite every "ano" in the source — attribute values in the partial markers
+// included — and there would be nothing on the page to show what had happened.
+const FLAGS = new Set(['profily'])
 
 assertDistinct(values)
 const VIEW = view(values)
@@ -119,6 +159,7 @@ function replacements() {
   const before = view(lock)
   const pairs = []
   for (const [k, next] of Object.entries(VIEW)) {
+    if (FLAGS.has(k)) continue
     const prev = before[k]
     if (prev === undefined || prev === next) continue
     // Placeholder -> real is the direction that matters, and it is lossless: the
@@ -158,6 +199,22 @@ function parseAttrs(raw) {
   return attrs
 }
 
+// Applies a replacement until it stops changing anything, which is what makes
+// conditionals nest. One pass cannot: the regex consumes the entire outer block,
+// so when the outer condition holds and its body is returned, the markers that
+// were inside it come back at a position scanning has already passed, and they
+// ship to the page verbatim. Each pass removes at least one marker pair, so this
+// terminates; the guard is only there to turn a future non-shrinking replacement
+// into an error instead of a hang.
+function untilStable(text, re, fn) {
+  for (let i = 0; i < 20; i++) {
+    const next = text.replace(re, fn)
+    if (next === text) return next
+    text = next
+  }
+  throw new Error('template: conditionals did not resolve after 20 passes — check for a marker that rewrites itself')
+}
+
 function render(name, attrs, seen = []) {
   if (seen.includes(name)) throw new Error(`partial include cycle: ${[...seen, name].join(' -> ')}`)
   const lookup = (k) => (k in attrs ? attrs[k] : k in VIEW ? VIEW[k] : `{{${k}}}`)
@@ -172,8 +229,16 @@ function render(name, attrs, seen = []) {
       .join('\n')
   )
 
-  src = src.replace(/\{\{#([\w-]+)=([^}]*)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, k, v, body) =>
+  // Before the attribute conditional, so a {{#real:…}} block may sit inside a
+  // {{#key=value}} one and still be dropped along with it when the outer fails.
+  src = untilStable(src, /\{\{#real:([\w-]+)\}\}([\s\S]*?)\{\{\/real:\1\}\}/g, (_, k, body) =>
+    isPlaceholder(lookup(k)) ? '' : body
+  )
+  src = untilStable(src, /\{\{#([\w-]+)=([^}]*)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, k, v, body) =>
     attrs[k] === v ? body : ''
+  )
+  src = src.replace(/\{\{jsonlist:([\w,\s-]+)\}\}/g, (_, keys) =>
+    JSON.stringify(keys.split(',').map((k) => lookup(k.trim())).filter((v) => !isPlaceholder(v)))
   )
   src = src.replace(/\{\{ph:([\w-]+)\}\}/g, (_, k) => phSpan(lookup(k)))
   src = src.replace(/\{\{([\w-]+)\}\}/g, (_, k) => lookup(k))

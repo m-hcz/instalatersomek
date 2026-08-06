@@ -1,0 +1,8 @@
+<!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
+     jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
+     GitHub Pages servíruje "…/" i "…/index.html"; canonical vybírá jednu z nich,
+     aby měl vyhledávač i jazykový model co citovat. -->
+<link rel="canonical" href="{{webUrl}}/{{path}}">{{#og=yes}}
+<meta property="og:url" content="{{webUrl}}/{{path}}">{{#real:ogImage}}
+<meta property="og:image" content="{{webUrl}}/{{ogImage}}">
+<meta property="og:image:alt" content="{{brand}}">{{/real:ogImage}}{{/og}}

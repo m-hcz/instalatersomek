@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- TODO(placeholder): doplnit město do titulku a popisku -->
-<title>Instalatér a topenář [MĚSTO] a okolí — Šomek</title>
-<meta name="description" content="Instalatérské a topenářské práce a hodinový manžel [VE MĚSTĚ] a okolí. Cenu se dozvíte předem, termín domluvíme podle vás.">
+<title>Instalatér a topenář ve Zlínském kraji — Šomek</title>
+<meta name="description" content="Instalatérské a topenářské práce a hodinový manžel ve Zlínském kraji. Cenu se dozvíte předem, termín domluvíme podle vás.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <!-- partial:map-head -->
 <!-- Leaflet je vendorovaný, ne z CDN — viz CLAUDE.md. Musí být PŘED style.css,
@@ -15,9 +14,16 @@
 <link rel="stylesheet" href="css/style.css">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
-<meta property="og:title" content="Instalatér a topenář [MĚSTO] a okolí — Šomek">
+<meta property="og:title" content="Instalatér a topenář ve Zlínském kraji — Šomek">
 <meta property="og:description" content="Instalatérské a topenářské práce a hodinový manžel. Cenu se dozvíte předem.">
-<!-- TODO(placeholder): og:url a og:image doplnit, až bude známá adresa webu a fotografie -->
+<!-- partial:head-meta path="" og="yes" -->
+<!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
+     jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
+     GitHub Pages servíruje "…/" i "…/index.html"; canonical vybírá jednu z nich,
+     aby měl vyhledávač i jazykový model co citovat. -->
+<link rel="canonical" href="https://vodotoposomek.cz/">
+<meta property="og:url" content="https://vodotoposomek.cz/">
+<!-- /partial:head-meta -->
 </head>
 <body>
 
@@ -27,7 +33,6 @@
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="index.html">
-      <!-- TODO(placeholder): jméno dle živnostenského rejstříku -->
       Instalatér Šomek
       <span>Voda · topení · hodinový manžel</span>
     </a>
@@ -39,8 +44,7 @@
         <li><a href="kontakt.html">Kontakt</a></li>
       </ul>
     </nav>
-    <!-- TODO(placeholder): telefon (i v atributu href) -->
-    <a class="btn btn--primary" href="tel:+420777123456">777 123 456</a>
+    <a class="btn btn--primary" href="tel:+420608542877">608 542 877</a>
   </div>
 </header>
 <!-- /partial:header -->
@@ -50,18 +54,18 @@
   <section class="hero">
     <div class="container hero__grid">
       <div class="hero__inner">
-        <h1>Instalatér a topenář <span class="ph">[MĚSTO]</span> a okolí</h1>
+        <h1>Instalatér a topenář ve Zlínském kraji</h1>
         <p class="hero__lead">
           Opravy a montáže vody a topení, hodinový manžel okolo domu. Přijedu, práci si
           na místě prohlédnu a řeknu cenu předem — teprve potom se pustím do díla.
         </p>
         <div class="btn-row">
-          <a class="btn btn--primary btn--lg" href="tel:+420777123456">Zavolat 777 123 456</a>
+          <a class="btn btn--primary btn--lg" href="tel:+420608542877">Zavolat 608 542 877</a>
           <a class="btn btn--ghost btn--lg" href="kontakt.html">Napsat poptávku</a>
         </div>
         <p class="hero__meta">
-          Působím <span class="ph">[VE MĚSTĚ]</span> a okolí do <span class="ph">[DOJEZD XX KM]</span> ·
-          Volat můžete <span class="ph">[PO–PÁ 7:00–19:00]</span> ·
+          Působím ve Zlínském kraji ·
+          Volat můžete PO–PÁ 7:00–19:00 ·
           Termín domluvíme podle vás
         </p>
       </div>
@@ -166,8 +170,7 @@
       <div class="section__head">
         <h2>Kam jezdím</h2>
         <p>
-          Působím <span class="ph">[VE MĚSTĚ]</span> a okolních obcích:
-          <span class="ph">[SEZNAM OBCÍ]</span>. Nejste si jistí, jestli k vám dojedu?
+          Působím ve Zlínském kraji. Nejste si jistí, jestli k vám dojedu?
           Zavolejte, domluvíme se.
         </p>
       </div>
@@ -178,7 +181,7 @@
       <div class="map" data-map
            data-geojson="assets/data/zlinsky-kraj.geojson">
         <a class="map-link" href="https://mapy.cz/" rel="noopener">
-          <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím"
+          <img src="assets/img/mapa.svg" alt="Orientační mapa oblasti, kam dojíždím — Zlínský kraj"
                width="1000" height="420">
           <span>Otevřít v mapě →</span>
         </a>
@@ -196,15 +199,16 @@
       <div class="gallery">
         <a href="reference.html">
           <figure>
-            <img src="assets/img/podlaha-1.webp" alt="Hotová podlaha v pokoji po dokončené pokládce"
+            <img src="assets/img/podlaha-1.webp"
+                 alt="Nová korková podlaha položená v pokoji, u stěny bílá soklová lišta a radiátor"
                  width="1200" height="1600" loading="lazy">
-            <figcaption>Pokládka podlahy</figcaption>
+            <figcaption>Pokládka korkové podlahy</figcaption>
           </figure>
         </a>
         <a href="reference.html">
           <figure>
             <img src="assets/img/instalaterske-prace2.webp"
-                 alt="Nové rozvody vody a odpadů vedené v drážkách cihlové stěny"
+                 alt="Nové rozvody vody a odpadu ze šedých plastových trubek vedené po stěně z cihelných bloků a zafixované maltou"
                  width="1022" height="766" loading="lazy">
             <figcaption>Nové rozvody vody a odpadů</figcaption>
           </figure>
@@ -212,7 +216,7 @@
         <a href="reference.html">
           <figure>
             <img src="assets/img/podlaha2.webp"
-                 alt="Rozvinuté smyčky podlahového topení na systémové desce"
+                 alt="Smyčky podlahového topení rozvinuté na černé systémové desce s výstupky, připravené k zalití"
                  width="678" height="452" loading="lazy">
             <figcaption>Podlahové topení před zalitím</figcaption>
           </figure>
@@ -246,7 +250,7 @@
       </div>
 
       <div class="btn-row mt-0">
-        <a class="btn btn--primary btn--lg" href="tel:+420777123456">Zavolat 777 123 456</a>
+        <a class="btn btn--primary btn--lg" href="tel:+420608542877">Zavolat 608 542 877</a>
         <a class="btn btn--ghost btn--lg" href="kontakt.html">Napsat poptávku</a>
       </div>
     </div>
@@ -260,15 +264,14 @@
     <div class="site-footer__cols">
       <div>
         <h2>Instalatér Šomek</h2>
-        <p>Vodoinstalatérské a topenářské práce a hodinový manžel
-           <span class="ph">[VE MĚSTĚ]</span> a okolí.</p>
+        <p>Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.</p>
       </div>
       <div>
         <h2>Kontakt</h2>
         <ul>
-          <li>Telefon: <a href="tel:+420777123456">777 123 456</a></li>
-          <li>E-mail: <a href="mailto:info@example.com">info@example.com</a></li>
-          <li>Volat: <span class="ph">[PO–PÁ 7:00–19:00]</span></li>
+          <li>Telefon: <a href="tel:+420608542877">608 542 877</a></li>
+          <li>E-mail: <a href="mailto:somi.vodo.topo@gmail.com">somi.vodo.topo@gmail.com</a></li>
+          <li>Volat: PO–PÁ 7:00–19:00</li>
         </ul>
       </div>
       <div>
@@ -288,45 +291,163 @@
          Toto je JEDINÝ zdroj těchto údajů pro celý web. Needitovat ve stránkách —
          upravit zde nebo ve values.json a spustit `node tools/sync.mjs`. -->
     <div class="legal-id">
-      <p><strong><span class="ph">[JMÉNO A PŘÍJMENÍ]</span></strong></p>
-      <p>Sídlo: <span class="ph">[ULICE ČP, PSČ, OBEC]</span></p>
-      <p>IČO: <span class="ph">[00000000]</span> · Nejsem plátcem DPH.</p>
-      <p>Zapsán v živnostenském rejstříku vedeném <span class="ph">[OBECNÍ ŽIVNOSTENSKÝ ÚŘAD]</span>.</p>
+      <p><strong>Tomáš Šomek</strong></p>
+      <p>Sídlo: Soukenická 781, 766 01 Valašské Klobouky</p>
+      <p>IČO: 68340435 · Nejsem plátcem DPH.</p>
+      <!-- „…, který vede X“ a ne „…vedeném X“: druhá vazba chce 7. pád, takže by název
+           úřadu musel být uložený skloněný. Takhle stačí 1. pád, jako je v rejstříku. -->
+      <p>Zapsán v živnostenském rejstříku, který vede Živnostenský úřad Valašské Klobouky.</p>
       <p>
         Mimosoudní řešení spotřebitelských sporů:
         <a href="https://www.coi.cz/" rel="noopener">Česká obchodní inspekce, www.coi.cz</a>
       </p>
     </div>
+
+    <!-- Last line of every page: the copyright notice and the developer credit.
+         Nothing to do with § 435 — the statutory identification is in
+         partials/legal-id.html and stands above this block, so it stays the first
+         thing read in the footer.
+
+         The year is filled in from the browser's clock so it does not go stale in
+         January. The one written in the HTML is the year of first publication: with
+         JavaScript off that is what the visitor sees, and it is a valid thing for a
+         copyright notice to say rather than a blank. That is why it does not change.
+
+         The year is NOT a values.json value and must not become one: sync substitutes
+         values by plain text, so "2026" would, on the move to 2027, also rewrite
+         datumAktualizace (2026-08-06) and datumUcinnosti (6. 8. 2026).
+
+         The script lives here rather than in js/main.js, which only four of the eight
+         pages load. Pulling it onto 404 and the legal pages — which otherwise ship no
+         JavaScript at all — is not worth one number. Here the year travels wherever
+         sync puts the footer, so no page can be forgotten. -->
+    <p class="colophon">
+      <span>© <span data-year>2026</span> Instalatér Šomek. Všechna práva vyhrazena.</span>
+      <span>Vývoj webu: <a href="https://msharp.cz/" rel="noopener">msharp.cz</a></span>
+    </p>
+    <script>
+      (function () {
+        'use strict';
+        var year = String(new Date().getFullYear());
+        var slots = document.querySelectorAll('[data-year]');
+        for (var i = 0; i < slots.length; i++) { slots[i].textContent = year; }
+      })();
+    </script>
   </div>
 </footer>
 <!-- /partial:footer-full -->
 
 <!-- partial:callbar secondHref="kontakt.html" secondLabel="Napsat" -->
 <div class="callbar">
-  <a class="btn btn--primary" href="tel:+420777123456">Zavolat</a>
+  <a class="btn btn--primary" href="tel:+420608542877">Zavolat</a>
   <a class="btn btn--ghost" href="kontakt.html">Napsat</a>
 </div>
 <!-- /partial:callbar -->
 
+<!-- partial:schema -->
+<!-- Strukturovaná data. Tohle si přečte vyhledávač i jazykový model, když má web
+     někomu doporučit — proto sem nepatří nic, co není ověřený fakt.
+
+     Co tu záměrně NENÍ:
+     · openingHours — pevnou pracovní dobu nemá. Vymyšlený rozsah by Google
+       zobrazoval přímo ve výsledcích a lidé by volali mimo něj. Viz PLAN.md 5.1.
+       `volaciDoba` je volný text ("[PO–PÁ 7:00–19:00]") a na OpeningHoursSpecification
+       ji nelze převést, aniž bychom si strukturu domysleli.
+     · priceRange — ceny web nezveřejňuje, takže dřívější "$$" byl údaj, který nikdo
+       neověřil. Google ho už roky nevyžaduje.
+
+     `identifier` s IČO je tu naopak to nejcennější: přes něj se web spáruje se
+     záznamem v ARES, tedy s autoritativním zdrojem. `sameAs` dělá totéž pro zápisy
+     v katalozích — dokud jsou zástupné, vypíše se prázdné pole. -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Plumber",
-  "name": "[JMÉNO A PŘÍJMENÍ]",
-  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel.",
-  "telephone": "+420777123456",
-  "email": "info@example.com",
+  "@id": "https://vodotoposomek.cz/#firma",
+  "name": "Tomáš Šomek",
+  "alternateName": "Instalatér Šomek",
+  "url": "https://vodotoposomek.cz/",
+  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.",
+  "telephone": "+420608542877",
+  "email": "somi.vodo.topo@gmail.com",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "[ULICE ČP]",
-    "postalCode": "[PSČ]",
-    "addressLocality": "[OBEC]",
+    "streetAddress": "Soukenická 781",
+    "postalCode": "766 01",
+    "addressLocality": "Valašské Klobouky",
     "addressCountry": "CZ"
   },
-  "areaServed": "[MĚSTO A OKOLÍ]",
-  "priceRange": "$$"
+  "identifier": {
+    "@type": "PropertyValue",
+    "propertyID": "ICO",
+    "value": "68340435"
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "Zlínský kraj"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Kroměříž"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Uherské Hradiště"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Vsetín"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "okres Zlín"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": "+420608542877",
+    "email": "somi.vodo.topo@gmail.com",
+    "availableLanguage": "cs"
+  },
+  "knowsLanguage": "cs",
+  "currenciesAccepted": "CZK",
+  "paymentAccepted": "Hotově, převodem na fakturu",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Služby",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Vodoinstalatérství",
+          "description": "Rozvody vody a odpadů, zařizovací předměty, netěsnosti a ucpané odpady."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Topenářství",
+          "description": "Výměny a opravy radiátorů, rozvody topení, podlahové topení, seřízení otopné soustavy."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Hodinový manžel",
+          "description": "Montáž nábytku a polic, kotvení a vrtání, drobné opravy v bytě i domě."
+        }
+      }
+    ]
+  },
+  "sameAs": []
 }
 </script>
+<!-- /partial:schema -->
 <script src="js/main.js" defer></script>
 <!-- partial:map-scripts -->
 <!-- Pořadí je závazné: leaflet.js musí být dřív než map.js. Obojí defer, takže

@@ -37,8 +37,13 @@
   --radius: 10px;
   --shadow: 0 1px 2px rgba(10, 50, 82, .06), 0 6px 20px rgba(10, 50, 82, .07);
 
-  /* Height of the fixed mobile call bar; 0 on desktop. */
-  --callbar: 4.25rem;
+  /* Height of the fixed mobile call bar; 0 on desktop. Measured, not guessed:
+     the bar is its .btn (3rem min-height, but 54px once padding and the 2px
+     border are counted) plus .6rem padding top and bottom plus the 1px border,
+     which comes to ~74px. It was 4.25rem — 6px short, and the only thing
+     hiding that was the footer's own bottom padding. Keep this in step with
+     .callbar, since it is what reserves room at the end of the page. */
+  --callbar: 4.65rem;
 }
 
 /* --- Reset -------------------------------------------------------------- */
@@ -92,6 +97,21 @@ h1, h2, h3 {
 h1 { font-size: clamp(1.85rem, 1.3rem + 2.4vw, 2.9rem); }
 h2 { font-size: clamp(1.45rem, 1.15rem + 1.3vw, 2rem); }
 h3 { font-size: 1.2rem; }
+
+/* The reset zeroes heading margins because in most blocks the spacing comes
+   from a wrapper (.section__head, .service__head, a footer column). Where a
+   heading stands directly in the flow instead — the columns on kontakt — these
+   sibling selectors have to supply it. Inside .prose the larger rules below
+   still win, since a class outranks an element selector.
+
+   `* + h2` and not `p + h2`: what comes before a heading is not always a
+   paragraph. The QR image is followed by a heading and had no gap at all
+   while this said `p`, and the next block added here would have hit the same
+   thing. Headings with no preceding sibling — every one inside the wrappers
+   named above — are unaffected, so this stays as narrow as it reads. */
+* + h2 { margin-top: 2.5rem; }
+h2 + p,
+h2 + .contact-list { margin-top: .75rem; }
 
 p { text-wrap: pretty; }
 
@@ -218,11 +238,29 @@ a:hover { color: var(--blue-900); }
 .btn--lg { min-height: 3.5rem; font-size: 1.075rem; padding-inline: 1.75rem; }
 .btn--block { width: 100%; }
 
+/* A column on phones, a row from 40em up. Stacked, the buttons stretch to the
+   full width of the row and so come out identical whatever their labels say;
+   side by side they were sized by their text, and a pair like "Zavolat 608 542
+   877" + "Napsat poptávku" wrapped onto two lines at two different widths,
+   which reads as two unrelated controls rather than a choice between two.
+
+   Equal width by stretching, not by a shared flex-basis: a basis wide enough
+   for the longest label today is one the owner can outgrow with a single word,
+   and it would silently go back to being unequal. 40em is where the card grids
+   become multi-column — below it the page is one column, so a full-width button
+   is what everything else in that column already does.
+
+   flex-wrap stays for the row case: it is the fallback if a third button is
+   ever added, or if a label grows past what one line can hold. */
 .btn-row {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   gap: .85rem;
   margin-top: 1.75rem;
+}
+@media (min-width: 40em) {
+  .btn-row { flex-direction: row; }
 }
 
 /* --- Hero --------------------------------------------------------------- */
@@ -449,17 +487,24 @@ a:hover { color: var(--blue-900); }
 /* --- Forms -------------------------------------------------------------- */
 
 .form { max-width: 34rem; }
-.field { margin-bottom: 1.15rem; }
+/* Tighter than it looks: .field__msg below the control reserves a line of its
+   own, so the gap between two fields is this plus that. */
+.field { margin-bottom: .75rem; }
 .field label {
   display: block;
   font-weight: 600;
-  margin-bottom: .35rem;
+  margin-bottom: .25rem;
 }
+/* The requirement for each field. It sits outside <label> on purpose: inside,
+   it would become part of the field's accessible name and a screen reader
+   would read it out on every pass through the form. It is wired up with
+   aria-describedby instead. */
 .field .hint {
   display: block;
   font-weight: 400;
   font-size: .88rem;
   color: var(--ink-muted);
+  margin-bottom: .4rem;
 }
 .field input,
 .field textarea {
@@ -477,6 +522,64 @@ a:hover { color: var(--blue-900); }
   outline: 3px solid rgba(18, 115, 196, .25);
   outline-offset: 0;
 }
+
+/* Example values. Lighter than .hint so they read as "not typed yet", but
+   still 4.5:1 on white — the browser default is well under that. */
+.field input::placeholder,
+.field textarea::placeholder {
+  color: #66788c;
+  opacity: 1;                 /* Firefox dims placeholders by default */
+}
+
+/* Validation state. js/main.js sets these on the .field wrapper only after
+   the visitor has left the field once, so nothing turns red while it is
+   still being typed into. Colour is never the only signal: a red border
+   always comes with .field__msg, and the message is what gets announced. */
+.field.is-ok input,
+.field.is-ok textarea { border-color: var(--ok-700); }
+
+.field.is-err input,
+.field.is-err textarea {
+  border-color: var(--err-700);
+  background: var(--err-100);
+}
+.field.is-err input:focus,
+.field.is-err textarea:focus {
+  border-color: var(--err-700);
+  outline-color: rgba(163, 32, 32, .25);
+}
+
+/* The message slot is always in the flow, empty most of the time, and holds a
+   line's worth of height whether or not it says anything. That blank line is
+   not spacing — it is what stops the submit button moving.
+
+   Hiding it instead used to swallow the first click on "Odeslat poptávku":
+   pressing the mouse down blurs the textarea, the message appears, everything
+   below it shifts down, and the mouse comes back up somewhere that is no
+   longer the button, so no click event is ever dispatched. With the line
+   reserved a one-line message shifts nothing at all, and the two-line wrap a
+   narrow screen can produce moves the button by less than half its own height,
+   so a press aimed at its middle still lands on it.
+
+   An empty <p> contributes nothing to the accessible name of the field that
+   points at it with aria-describedby, so leaving it in place costs nothing
+   there either. */
+.field__msg {
+  margin-top: .4rem;
+  min-height: 1.35rem;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--err-700);
+}
+
+.field__count {
+  margin-top: .4rem;
+  font-size: .85rem;
+  color: var(--ink-muted);
+}
+.field__count[hidden] { display: none; }
+.field__count.is-ok { color: var(--ok-700); }
+.field__count.is-err { color: var(--err-700); font-weight: 600; }
 
 .req { color: var(--err-700); }
 
@@ -496,16 +599,93 @@ a:hover { color: var(--blue-900); }
   margin-top: 1rem;
 }
 
-.alert {
-  padding: 1rem 1.15rem;
-  border-radius: var(--radius);
-  border: 1px solid transparent;
-  margin-bottom: 1.25rem;
+/* --- Send result dialog ------------------------------------------------- */
+
+/* A real <dialog> opened with showModal(). The top layer puts it above
+   everything — including the fixed .callbar — without a z-index, and the
+   browser handles focus trapping, Escape and the dimmed backdrop.
+
+   The <dialog> itself is only a transparent frame; .modal__panel carries the
+   background and all the padding. That is what makes a click on the dark
+   surround land on the <dialog> element, which is how js/main.js recognises
+   "clicked outside" without measuring anything.
+
+   Centring is the UA stylesheet's doing: dialog:modal is fixed with the block
+   and inline insets at 0, so margin:auto centres it on both axes. */
+.modal {
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  max-width: min(30rem, calc(100vw - 2rem));
+  color: var(--ink);
 }
-.alert[hidden] { display: none; }
-.alert--err { background: var(--err-100); border-color: #efc0c0; color: #6d1616; }
-.alert--ok  { background: var(--ok-100);  border-color: #b9dfc9; color: #124a2c; }
-.alert a { color: inherit; }
+.modal::backdrop { background: rgba(10, 50, 82, .55); }
+
+/* The global prefers-reduced-motion rule near the top of this file cuts this
+   to 0.01ms, so it needs no media query of its own. */
+.modal[open] { animation: modal-in .18s ease-out; }
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(.75rem); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal__panel {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.5rem, 1rem + 2vw, 2rem);
+  text-align: center;
+}
+/* margin-top:0 is load-bearing. The panel manages its own rhythm — the gap
+   above the heading is the 1rem under .modal__icon — but the icon is an
+   element sibling, so the `* + h2` rule near the top of this file would
+   otherwise apply its 2.5rem here and push the title away from its icon. */
+.modal__panel h2 { margin-top: 0; margin-bottom: .6rem; }
+.modal__panel p { margin-bottom: .6rem; }
+.modal__panel .btn { margin-top: 1rem; }
+
+/* Countdown to the automatic close, drawn across the close button. The bar
+   fills from the left as the time runs out, so it reads the way a progress
+   bar does; js/main.js scales it frame by frame rather than handing it to a
+   CSS animation, because the prefers-reduced-motion rule near the top of this
+   file would collapse an animation to 0.01ms and the bar would jump to full
+   while the dialog stayed put. A progress indicator is in any case the kind of
+   movement that rule is not aimed at: it reports state rather than decorating.
+
+   overflow:hidden clips the bar to the button's rounded corners; the label is
+   positioned so that it paints over the bar rather than under it. */
+.modal__close { position: relative; overflow: hidden; }
+.modal__bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: rgba(255, 255, 255, .22);
+  pointer-events: none;
+}
+.modal__close-text { position: relative; }
+.modal__secs { margin-left: .4rem; font-weight: 400; opacity: .85; }
+
+/* Green or red disc behind the glyph. It is the first thing read, so the
+   colour is from the palette rather than chosen for the dialog — but it only
+   repeats what the heading already says, never replaces it. */
+.modal__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+}
+.modal__icon svg { display: block; }
+.modal__icon--ok  { background: var(--ok-100);  color: var(--ok-700); }
+.modal__icon--err { background: var(--err-100); color: var(--err-700); }
 
 /* --- Contact details ---------------------------------------------------- */
 
@@ -517,14 +697,69 @@ a:hover { color: var(--blue-900); }
   padding: .85rem 0;
   border-bottom: 1px solid var(--line);
 }
+/* Fixed width, not a minimum. With a minimum the column is only as wide as each
+   row's own label, so the two long ones ("SMS a WhatsApp", "Kalkulace na místě")
+   push their value further right than every other row and the values stop
+   forming a column. 11rem clears the longest label on any of the three lists
+   ("Kalkulace na místě", ~154px here) with enough room left that a system font
+   other than this machine's does not overflow it; a longer label wraps to two
+   lines inside the column rather than widening it.
+   The width is shared rather than measured per list on purpose — the two lists
+   on kontakt.html sit under each other, and a column sized to each one's own
+   longest label would leave them misaligned with one another. */
 .contact-list dt, .contact-list .k {
-  min-width: 8rem;
+  flex: 0 0 11rem;
   font-weight: 600;
   color: var(--ink-muted);
 }
-.contact-list .v { font-size: 1.05rem; }
-.contact-list a { font-weight: 700; text-decoration: none; }
+/* The basis is what decides when the row stops being two columns: below
+   11 + 1 + 13rem of room the value no longer fits beside the label and wraps
+   under it, full width. Without it the value would instead be squeezed into
+   whatever the fixed label column left over — about 100px on a 320px phone,
+   which breaks "PO–PÁ 7:00–19:00" across lines. */
+.contact-list .v {
+  flex: 1 1 13rem;
+  font-size: 1.05rem;
+}
+/* Two of the rows hold a list of options rather than a single value: the two
+   ways to write instead of calling, and the two ways to pay. Run together they
+   read as one sentence and the separator ("—", "·", a comma) has to carry the
+   distinction; on their own lines the line break carries it and the separators
+   go away. It also pulls the two links apart, so a thumb cannot catch both. */
+.contact-list .v--rows {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+/* Every link in this list is the whole value it sits in, so none of them gets
+   the WCAG 2.2 2.5.8 inline exception and the 24px minimum applies. They were
+   22px — and one of them is the phone number, the thing the whole page exists
+   to get tapped. The padding takes them to 30px without moving the text.
+   inline-block is what makes vertical padding count towards the box. */
+.contact-list a {
+  display: inline-block;
+  padding-block: .25rem;
+  font-weight: 700;
+  text-decoration: none;
+}
 .contact-list a:hover { text-decoration: underline; }
+
+/* QR s vizitkou. Tady je podstatná spodní hranice, ne horní: kód má 69 modulů
+   plus klidovou zónu, dohromady 77. Aby ho foťák přečetl z displeje, musí na
+   jeden modul zbýt zhruba 3 px — 15rem (240 px) dává ~3,1 px na modul, takže
+   je to nejmenší velikost, která ještě spolehlivě funguje. Nezmenšovat.
+   Bílé pozadí a klidová zóna jsou uvnitř SVG, protože bez nich se kód nenačte
+   vůbec; rámeček je jen proto, aby bílý čtverec nesplýval se stránkou. */
+.qr {
+  width: 100%;
+  max-width: 15rem;
+  margin-top: 1rem;
+  /* The reset makes images display:block, so auto side margins centre it under
+     the left-aligned text above. */
+  margin-inline: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
 
 /* Mapa oblasti. Dokud js/map.js nenamountuje Leaflet (a bez JS napořád) drží
    .map jen náhradní odkaz s obrázkem, který si nese vlastní rámeček — proto
@@ -534,6 +769,17 @@ a:hover { color: var(--blue-900); }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  /* Leaflet stacks its own layers from 200 (tiles) to 1000 (controls), and
+     .leaflet-container is position: relative with no z-index of its own — so it
+     forms no stacking context and every one of those numbers is compared against
+     the rest of the page, including the fixed .callbar at 90. The map therefore
+     paints over the call bar on mobile. These two lines make the container a
+     stacking context: the layer order inside the map is unchanged, but outward
+     it is a single layer at z-index 0, which the call bar sits above.
+     Do not raise the call bar's z-index instead — it would have to clear 1000
+     to win, and then it would also cover things that are meant to be above it. */
+  position: relative;
+  z-index: 0;
 }
 /* Na kontaktu mapa navazuje na odstavec, ne na .section__head. Byl to inline
    style; jako třída to zvládne jeden sdílený partial pro obě stránky. */
@@ -567,13 +813,28 @@ a:hover { color: var(--blue-900); }
 
 /* --- Prose (legal pages) ------------------------------------------------ */
 
-.prose { max-width: 44rem; }
+/* break-word, not anywhere: it only kicks in for a run that genuinely cannot
+   fit, and unlike `anywhere` it leaves min-content sizing alone. The legal
+   pages are full of things with no break opportunity — e-mail addresses, bare
+   domains, and the rows of … in the withdrawal form, which overflowed their
+   paragraph into the gutter at 320px. */
+.prose { max-width: 44rem; overflow-wrap: break-word; }
 .prose h2 { margin-top: 2.5rem; margin-bottom: .75rem; }
 .prose h3 { margin-top: 1.75rem; margin-bottom: .5rem; }
 .prose p, .prose ul, .prose ol { margin-bottom: 1rem; }
 .prose ul, .prose ol { padding-left: 1.35rem; }
 .prose ul li { list-style: disc; margin-bottom: .4rem; }
 .prose ol li { list-style: decimal; margin-bottom: .4rem; }
+/* A link that is the whole list item is a standalone target, so WCAG 2.2
+   2.5.8 applies and the 24px minimum is real — the list on 404.html was 22px
+   tall. The inline exception covers links inside a sentence, which is why this
+   is :only-child and not every .prose link. Same fix as .site-footer li a;
+   scoped to .prose so it cannot reach the nav, whose padding is already
+   larger. */
+.prose li > a:only-child {
+  display: inline-block;
+  padding-block: .3rem;
+}
 .prose .lede {
   font-size: 1.15rem;
   color: var(--ink-muted);
@@ -650,6 +911,22 @@ a:hover { color: var(--blue-900); }
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
+}
+
+/* Copyright and the developer credit — the last line of the page, and the only
+   part of the footer that is not about the trade. Dimmer and smaller than the
+   § 435 block above it, which is what the visitor is actually there to read;
+   #a8c2d8 on --blue-900 is 7:1, so it stays past the 4.5:1 floor at this size.
+   The two halves sit side by side on a wide screen and stack on a narrow one. */
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  font-size: .8rem;
+  color: #a8c2d8;
 }
 
 /* --- Fixed call bar (mobile only) --------------------------------------- */

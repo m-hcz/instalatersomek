@@ -1,3 +1,19 @@
+# Od 2026-08-06 má web vlastní doménu (vodotoposomek.cz), takže běží v kořeni, ne
+# v podadresáři. Tenhle soubor je tím pádem dostupný jako
+# https://vodotoposomek.cz/robots.txt — což je podle RFC 9309 jediné místo, odkud ho
+# roboti čtou. Pravidla níže tedy platí.
+#
+# Předtím, na podadresáři m-hcz.github.io/instalatersomek/, byl tenhle soubor jen
+# zápisem záměru: robots.txt z podadresáře žádný robot nečte, platil ten v kořeni
+# domény github.io, a ten patří k úplně jinému repozitáři. (Stará adresa je tu
+# schválně bez „https://“ — s ním by ji sync při příští změně `webUrl` přepsal.)
+#
+# POZOR — účinné je to až ve chvíli, kdy doména na GitHub Pages skutečně míří
+# (CNAME + DNS). Do té doby platí to, co je odstavec výš.
+#
+# Nezávisle na cestě funguje <meta name="robots"> přímo ve stránce; tak je vyřešené
+# 404.html a poptavka-odeslana.html, a tak to zůstane.
+
 User-agent: *
 Allow: /
 
@@ -6,6 +22,8 @@ Allow: /
 Disallow: /partials/
 Disallow: /tools/
 
-# TODO(placeholder): `webUrl` ve values.json, pak `node tools/sync.mjs`. Řádek
-# odkomentovat teprve tehdy, až bude adresa skutečná — jinak sem míří nesmysl.
-# Sitemap: PLACEHOLDER-URL/sitemap.xml
+# Roboti jazykových modelů (GPTBot, ClaudeBot, PerplexityBot, Google-Extended a další)
+# spadají pod `User-agent: *` výše, takže mají přístup povolený. Je to záměr: web má
+# být k nalezení i přes ně. Nepřidávat jim Disallow.
+
+Sitemap: https://vodotoposomek.cz/sitemap.xml

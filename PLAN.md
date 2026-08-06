@@ -25,7 +25,7 @@ Section 4 was verified against primary and official sources on 2026-08-03 — se
 | Emergency callouts | **None — planned jobs only** | The § 1837 urgent-repair exemption will rarely apply → the 14-day withdrawal right covers most jobs. See 4.5 |
 | References | **Photos only**, no written testimonials | Avoids the review-disclosure duty **and** keeps the site outside the DSA. See 4.4 |
 | Visual style | Clean and trustworthy — blue + white | Large type, generous whitespace, phone number always within reach |
-| Domain | **github.io only — no custom domain, no CNAME** | Served from a subpath → **relative paths only, permanently**. No domain or DNS work is to be done |
+| Domain | **`vodotoposomek.cz`**, bought 2026-08-06 — reverses the earlier "github.io only" decision | Only `webUrl` was changed. `CNAME`, DNS and the Pages setting are the owner's and are **not** done. **Relative paths remain the rule** — correct under both the subpath and the domain |
 | Repo / folder name | **Owner will rename later** | Internal links are all relative, so a rename breaks nothing inside the site — only links already shared externally |
 | Czech copy | **Drafted by the developer, corrected by the owner** | The project is not blocked on the owner writing prose — only on him supplying facts |
 | Maintenance | **All changes go through the developer** | No CMS, no in-browser editing guide, no contributor documentation needed |
@@ -93,8 +93,9 @@ prepare, and a call to action under each. Then "Jak to probíhá" and the price 
 Both pages are written in the **first person singular** throughout — he is one man, not a company.
 Competitor copy says "Proč si vybrat **nás**"; here it is "mě". Do not let a company voice creep in.
 
-**reference.html** — photo grid, before/after where available. Captions naming the type of work and
-the town — these feed local SEO directly. Lightbox in vanilla JS. See the photo rules in 4.4.
+**reference.html** — photo grid, before/after where available. Captions naming the type of work.
+No town in the captions — see the service-area note in 5.2. Lightbox in vanilla JS. See the photo
+rules in 4.4.
 
 **kontakt.html** — phone and e-mail as tappable links · inquiry form · availability (working hours)
 · service area · static map image linking to a maps app · identification details · links to the
@@ -278,11 +279,12 @@ both a misleading commercial practice and a živnostenský úřad problem.
 - **JSON-LD** `Plumber` (a LocalBusiness subtype) with `areaServed` and `telephone`. **`openingHours`
   is omitted** — see 5.1.
 - **Open Graph** tags — Facebook sharing is the main organic channel for trades in the CZ market.
-- **Per-page `<title>` and meta description**, each targeting one search intent — realistically
-  `instalatér [town]`, `oprava wc [town]`, `hodinový manžel [town]`. Cannot be written until the town
-  list arrives.
+- **Per-page `<title>` and meta description**, each targeting one search intent. The geographic
+  term is the region, not a town — `instalatér a topenář ve Zlínském kraji`. Written and in place;
+  see 5.2 for what that costs.
 - **Budget** — whole site under ~150 kB.
-- **Paths** — relative only (`css/style.css`); permanent, since there will be no custom domain.
+- **Paths** — relative only (`css/style.css`). Still the rule after the move to a custom domain:
+  relative paths are correct under both hosts, so the site survives being served from either.
 - **Enforce HTTPS** must be switched on in the repository's Pages settings.
 
 ### 5.1 No fixed hours — two consequences
@@ -298,9 +300,38 @@ something in both directions and needs handling rather than ignoring.
   hours but to publish a **calling window** — "volejte kdykoli mezi 7:00 a 19:00, termín domluvíme
   podle vaší i mé situace". This is on the still-needed list in section 6.
 
+### 5.2 Service area: the region, not a town
+**Decided 2026-08-06.** The site names **Zlínský kraj** and nothing smaller — no home town, no list
+of villages, no travel radius in kilometres. Two values carry it, `kraj` and `krajKde`, and they
+match the outline the map already draws.
+
+This is a deliberate trade, and it costs something. `instalatér Zlín` is a far commoner query than
+any region-level phrase and carries clearer intent; Google's local pack ranks on proximity to the
+searcher, which a region-level page cannot signal. Region-level copy gives that up in exchange for
+not committing to a base town. If it is ever revisited, towns go back into `values.json` and into
+the copy on `index.html`, `sluzby.html` and `kontakt.html` — the partials need no change.
+
+**Revisited 2026-08-06, and settled one level short of towns.** The question was reopened because
+customers do search town by town. The decision taken was *structured data only*: `okresy` in
+`values.json` lists the region's four districts, and `sync.mjs` derives `{{areaServed}}` from it
+plus `kraj`, so the JSON-LD now asserts the kraj **and** okres Kroměříž, okres Uherské Hradiště,
+okres Vsetín and okres Zlín. **No visible copy changed** — the paragraph above still stands for
+every word a visitor reads.
+
+The reasoning: a district list tells a machine the service area is neither the whole country nor a
+single town, which is the honest answer, and it does it without the site naming a home town. It is
+weaker than town-level copy for the local pack — `areaServed` is a much softer signal than a town
+in the `<h1>` — so this buys less than the full revert would. It was chosen because the cost is
+also lower: nothing on the page commits him to a base town, and the decision above stays intact and
+can still be revisited on its own terms. **Extending `okresy` to individual obce is not a smaller
+step than the full revert — it is the same decision reached from behind, and needs the same
+explicit call.**
+
 ### Local SEO beyond the site
 A Google Business Profile and a Firmy.cz listing move the needle more for a tradesperson than
-anything on the site itself. Page copy should be built around the specific towns actually served.
+anything on the site itself — and more so now that the page copy is region-level, since a listing
+still carries a precise address. `firmyCz` and `bazos` in `values.json` feed both a visible list on
+`kontakt.html` and JSON-LD `sameAs`.
 
 ## 6. Business facts
 
@@ -315,14 +346,13 @@ anything on the site itself. Page copy should be built around the specific towns
 | Payment | **Cash on completion** and **bank transfer against an invoice**. **No card** — the terms should say so, so nobody expects a terminal |
 
 Three service blocks means three content blocks on `sluzby.html` and three sets of target search
-terms — `instalatér [town]`, `topenář [town]`, `hodinový manžel [town]`.
+terms — `instalatér`, `topenář`, `hodinový manžel`, each qualified by the region rather than a town.
 
 ### Still needed — blocking
 
 - full name as registered, sídlo, **IČO**
 - phone, e-mail
 - the competent obecní živnostenský úřad
-- towns / district served
 - years of experience
 - certifications actually held (výuční list, professional qualifications)
 - **a window during which it is acceptable to call** — see 5.1
@@ -347,7 +377,9 @@ Identification details and the access key are filled in last.
 - [ ] Form delivers to the owner's real inbox — verified by an actual submission
 - [ ] Form works with JavaScript disabled
 - [ ] Tap-to-call verified on a real phone, not an emulator
-- [ ] Every link resolves under the live subpath, not just on localhost
+- [ ] Every link resolves on the live host, not just on localhost
+- [ ] `vodotoposomek.cz` serves the site — `CNAME`, DNS and Pages setting done. Until then every
+      absolute URL (`canonical`, sitemap, the form's no-JS `redirect`) points at a dead host
 - [ ] Czech diacritics render correctly, including in the self-hosted font
 - [ ] 404 page reached and styled
 - [ ] Pages set to deploy from `main` / root, **Enforce HTTPS** on

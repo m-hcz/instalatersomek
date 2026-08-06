@@ -1,0 +1,29 @@
+<!-- Zápisy v katalozích. Nejsou to jen odkazy navíc: vyhledávače a jazykové modely
+     odpovídají na dotazy typu "instalatér {{kraj}}" většinou z katalogů, ne z osobního webu.
+     Tenhle seznam a `sameAs` ve strukturovaných datech říkají "to jsem pořád já" —
+     proto v nich musí být jméno, adresa a telefon do písmene stejné jako v patičce.
+     Odkazy vedou ven, proto rel="noopener". -->
+<!-- The whole block, heading included, is dropped while neither address is real:
+     `profily` is a derived flag in tools/sync.mjs that is a placeholder only when
+     both of these are. A section promising "you can also find me here" above two
+     links that go nowhere is worse than no section — the visitor clicks one and
+     lands on an error, which says more about the trade than the missing profile
+     would. Each item is conditional in its own right too, so supplying one address
+     shows one row rather than waiting for both.
+
+     Structured data needs no such guard: the jsonlist marker in partials/schema.html
+     already omits whatever is still a placeholder, and prints [] when neither is real.
+     Written without its braces on purpose — a marker inside a comment is still a
+     marker, and sync would expand this one into the page. -->{{#real:profily}}
+<h2 id="profily">Najdete mě i tady</h2>
+<ul class="contact-list">
+  <!-- TODO(placeholder): adresy profilů, klíče `firmyCz` a `bazos` ve values.json -->{{#real:firmyCz}}
+  <li>
+    <span class="k">Firmy.cz</span>
+    <span class="v"><a href="{{firmyCz}}" rel="noopener">Profil na Firmy.cz</a></span>
+  </li>{{/real:firmyCz}}{{#real:bazos}}
+  <li>
+    <span class="k">Bazoš</span>
+    <span class="v"><a href="{{bazos}}" rel="noopener">Inzerát na Bazoši</a></span>
+  </li>{{/real:bazos}}
+</ul>{{/real:profily}}

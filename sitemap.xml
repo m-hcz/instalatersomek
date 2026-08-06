@@ -1,38 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  TODO(placeholder): nahradit PLACEHOLDER-URL skutečnou adresou webu a aktualizovat
-  lastmod. Sitemap vyžaduje absolutní URL — je to jediné místo v projektu, kde
-  relativní cesty použít nelze.
+  Adresa webu je hodnota `webUrl` ve values.json — spolu s canonical odkazy a
+  formulářovým `redirect` je to jediné místo v projektu, kde se URL píše absolutně
+  (sitemap relativní cesty neumí). Po změně spustit `node tools/sync.mjs`, který ji
+  přepíše sem i do robots.txt. `lastmod` drží hodnota `datumAktualizace`.
+
+  Uvedené jsou jen stránky, které mají být ve výsledcích vyhledávání. 404.html a
+  poptavka-odeslana.html sem nepatří — obě nesou <meta name="robots" content="noindex">.
+
+  Odkaz na sitemapu je v robots.txt. Od chvíle, kdy web běží na vlastní doméně
+  (vodotoposomek.cz), je robots.txt v kořeni, takže si roboti sitemapu najdou sami —
+  na dřívějším podadresáři …github.io/instalatersomek/ to nefungovalo. Web je navíc
+  celý prolinkovaný z navigace, takže projít se dá i bez sitemapy.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>PLACEHOLDER-URL/index.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>PLACEHOLDER-URL/sluzby.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/sluzby.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>PLACEHOLDER-URL/reference.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/reference.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>PLACEHOLDER-URL/kontakt.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/kontakt.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>PLACEHOLDER-URL/obchodni-podminky.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/obchodni-podminky.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>PLACEHOLDER-URL/ochrana-osobnich-udaju.html</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://vodotoposomek.cz/ochrana-osobnich-udaju.html</loc>
+    <lastmod>2026-08-06</lastmod>
     <priority>0.3</priority>
   </url>
 </urlset>
