@@ -247,17 +247,71 @@ a phone in poor light.
 - **EET** — abolished (4.8).
 - **Cookie consent** — nothing is stored on the visitor's device (invariant 1).
 
-### 4.12 Certifications and the gas boundary
+### 4.12 Certifications, the gas boundary and the F-gas one
 
-Only claim what is actually held. Vodoinstalatérství and topenářství are **řemeslné živnosti**;
-**gas work is a vázaná živnost requiring TIČR authorisation**, and the owner has confirmed he does
-**not** offer it.
+Only claim what is actually held. Overstating a qualification is both a misleading commercial
+practice and a živnostenský úřad problem — that principle has not moved, and it is what the two
+boundaries below exist to enforce.
 
-**The copy must not drift across that line.** Heating work sits right next to it — a page offering
-"kotle" or "servis kotlů" without qualification reads as an offer to work on gas appliances. Heating
-copy must stay on the water side: radiators, heating pipework, underfloor heating, bleeding and
-balancing. Anything touching a gas appliance or gas pipework is out. Overstating qualifications is
-both a misleading commercial practice and a živnostenský úřad problem.
+Vodoinstalatérství and topenářství are **řemeslné živnosti**. The two neighbouring trades are not,
+and each has its own line.
+
+#### The gas boundary — moved 2026-08-17
+
+It used to read "no gas work at all". At the owner's instruction it now runs **between the gas
+pipework and the appliance**:
+
+- **Out** — gas pipework, valves, pressure tests, revisions. A **vázaná živnost** requiring
+  **TIČR authorisation**, which he does not hold.
+- **In** — hanging a gas boiler and connecting its **water and heating** side.
+- **The technician's** — the connection to the gas line itself, first commissioning, adjustment,
+  and the *protokol o uvedení do provozu*. An authorised service technician attends on site with
+  him and issues it; the customer needs it for the manufacturer's warranty.
+
+**Both halves have to stay in the copy.** "Osadím kotel" on its own reads as an offer to work on the
+gas line; "plyn nedělám" on its own is now false. The callout on `sluzby.html` and the scope
+sentence in `obchodni-podminky.html` are the two places this is stated, and they have to say the
+same thing — the second one is contractual, since it defines what an order can cover.
+
+#### Air conditioning, added 2026-08-17 — the site claims no certification at all
+
+**The owner holds no certificates, and the site names none.** Confirmed 2026-08-17. That is the
+governing fact for this section and it decides the register the copy is written in.
+
+Opening a **refrigerant circuit** — installation and every later service — is restricted to a
+certified person under **Regulation (EU) 517/2014** and **zákon č. 73/2012 Sb.** So the copy does
+not claim the work personally. It says **"zajistím"** and **"ve spolupráci s firmou KLIMAKOL"**,
+which is a statement about what the customer gets rather than about who is qualified to do what.
+`obchodni-podminky.html` matches: "Montáž a servis klimatizací zajišťuji ve spolupráci s partnerskou
+firmou."
+
+Three things must stay out of this section, in both directions:
+
+- **No certificate claim** — no number, no "certifikovaný", no "oprávnění", nothing that implies
+  authorisation. A qualification claimed but not held is a misleading commercial practice.
+- **No statutory citation either.** An earlier draft carried the Regulation and the zákon as a
+  neutral statement of what the law requires. It was removed on the owner's instruction: quoting the
+  rule next to an offer invites the reader to assume the offerer meets it, which is the same
+  implication by a longer route.
+- **No first-person installation verb** — "montuji klimatizace" reintroduces the claim that the two
+  points above remove.
+
+An F-gas callout and a `partials/klima-cert.html` existed briefly on 2026-08-17 and are both gone,
+along with the `fgasCert` value. Do not restore them.
+
+Equipment and the specialist work come from **KLIMAKOL s.r.o.** (Zlín, IČO 21548498), named on the
+page as a partner. That is a commercial relationship, not a qualification, and it must never be
+written so that their standing reads as covering his.
+
+#### The brand strip
+
+The seven manufacturers' marks on the air-conditioning section are **nominative use**: they name
+the brands he fits. They are not a dealership claim, and `.brands__note` under the strip says so in
+as many words. Do not add a manufacturer he does not actually fit, and do not delete the note.
+
+The files are vendored under `assets/img/znacky/`, taken from Wikimedia Commons and the
+manufacturers' own sites — deliberately **not** re-hosted from `klimakol.cz`, whose upload folder is
+theirs to serve rather than ours to copy.
 
 ## 5. Technical specification
 
@@ -314,18 +368,38 @@ the copy on `index.html`, `sluzby.html` and `kontakt.html` — the partials need
 **Revisited 2026-08-06, and settled one level short of towns.** The question was reopened because
 customers do search town by town. The decision taken was *structured data only*: `okresy` in
 `values.json` lists the region's four districts, and `sync.mjs` derives `{{areaServed}}` from it
-plus `kraj`, so the JSON-LD now asserts the kraj **and** okres Kroměříž, okres Uherské Hradiště,
-okres Vsetín and okres Zlín. **No visible copy changed** — the paragraph above still stands for
-every word a visitor reads.
+plus `kraj`. That bought less than a full revert, and was chosen because it committed the page to
+nothing.
 
-The reasoning: a district list tells a machine the service area is neither the whole country nor a
-single town, which is the honest answer, and it does it without the site naming a home town. It is
-weaker than town-level copy for the local pack — `areaServed` is a much softer signal than a town
-in the `<h1>` — so this buys less than the full revert would. It was chosen because the cost is
-also lower: nothing on the page commits him to a base town, and the decision above stays intact and
-can still be revisited on its own terms. **Extending `okresy` to individual obce is not a smaller
-step than the full revert — it is the same decision reached from behind, and needs the same
-explicit call.**
+**Reversed 2026-08-17 — towns are now named, visibly.** The trade above was made for findability
+reasons and it was undone for the same ones: `instalatér Zlín` is the query with the volume and the
+intent, and no region-level phrase substitutes for it.
+
+`mesta` in `values.json` holds twelve towns, covering all four okresy and including the sídlo:
+Zlín, Otrokovice, Vsetín, Valašské Meziříčí, Uherské Hradiště, Kroměříž, Uherský Brod, Rožnov pod
+Radhoštěm, Holešov, Luhačovice, Slavičín, Valašské Klobouky. It feeds two places:
+
+- **Visible copy** — the "Kam jezdím" block on `index.html` and the same row on `kontakt.html`.
+  This is the half that ranks.
+- **JSON-LD `areaServed`** — appended after the kraj and the okresy, typed `City` rather than
+  `AdministrativeArea` so the assertion is "obec", not "administrative unit of unstated size".
+
+**Twelve is a deliberate ceiling, not a starting point.** A page listing every obec in the kraj is
+the doorway pattern search engines discount and a reader recognises as padding. If the list grows,
+it should grow because he actually works there.
+
+What is still **not** on the site: a **travel radius in kilometres**. That would promise a
+reachability one person without a standby rota cannot hold, which is the same objection that keeps
+a response time off the emergency callout (4.x) and `openingHours` out of the JSON-LD (5.1).
+
+The largest remaining lever is the one this change did **not** touch: no `<title>` or `<h1>` names
+a town. `Instalatér a topenář ve Zlínském kraji` still heads the homepage. Putting `Zlín` there
+outranks everything above it — it is one edit, and it is a naming decision rather than a technical
+one.
+
+**`<meta name="keywords">` is not a placement and must not be added.** Google dropped it in 2009,
+Seznam ignores it, and a town list there would rank nothing while looking to a reader like the site
+is padding for robots.
 
 ### Local SEO beyond the site
 A Google Business Profile and a Firmy.cz listing move the needle more for a tradesperson than
@@ -339,14 +413,17 @@ still carries a precise address. `firmyCz` and `bazos` in `values.json` feed bot
 
 | Fact | Value |
 |---|---|
-| Services | **Vodoinstalatérství**, **topenářství**, **hodinový manžel** |
-| Gas work | **Not offered** — see the caution in 4.12 |
+| Services | **Vodoinstalatérství**, **topenářství**, **klimatizace**, **hodinový manžel** |
+| Gas work | **Pipework not offered; boiler installation is** — see 4.12 for exactly where the line falls |
+| Air conditioning | Added **2026-08-17**. **Arranged in cooperation with KLIMAKOL s.r.o.**, Zlín (IČO 21548498), who specialise in it. Never presented as his own trade — see 4.12 |
+| Certifications | **None held**, confirmed 2026-08-17. The site therefore names no certificate, no authorisation and no statute implying either. See 4.12 |
 | VAT | **Neplátce DPH** → footer states "Nejsem plátcem DPH"; every price shown is already final |
 | Working hours | **No fixed hours — by arrangement** → consequences in 5.1 |
 | Payment | **Cash on completion** and **bank transfer against an invoice**. **No card** — the terms should say so, so nobody expects a terminal |
 
-Three service blocks means three content blocks on `sluzby.html` and three sets of target search
-terms — `instalatér`, `topenář`, `hodinový manžel`, each qualified by the region rather than a town.
+Four service blocks means four content blocks on `sluzby.html` and four sets of target search
+terms — `instalatér`, `topenář`, `montáž klimatizace`, `hodinový manžel`, each qualified by the
+region rather than a town.
 
 ### Still needed — blocking
 

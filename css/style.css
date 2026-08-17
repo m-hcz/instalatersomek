@@ -394,6 +394,67 @@ a:hover { color: var(--blue-900); }
   margin-bottom: .6rem;
 }
 
+/* --- Brand strip (sluzby.html, klimatizace) ----------------------------- */
+
+/* A logo wall of seven manufacturers' marks, which arrive in wildly different
+   aspect ratios — 2.2:1 for LG, 6.3:1 for Panasonic — and in two formats. Sizing
+   them by width would make Panasonic tower over LG; sizing by height would make it
+   six times as wide. So each <li> is a fixed box and the mark scales down inside
+   it, touching whichever edge it reaches first. That is why max-width and
+   max-height are both 100% while width and height go back to auto: the reset sets
+   height:auto on every image, but the intrinsic width/height attributes on these
+   would otherwise win over the box. */
+.brands { margin-top: 1.75rem; }
+.brands h4 {
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--blue-900);
+  margin-bottom: .6rem;
+}
+/* auto-fit rather than wrapped flex items, because the cells have to be narrow
+   enough for two to sit side by side on a 320px phone and wide enough to be worth
+   looking at on a desktop — and a fixed width cannot be both. Inside .service on a
+   320px screen there is only about 200px of room left once .container, .service and
+   this list have taken their padding, so a fixed 6.5rem cell plus a gap overflows
+   and every mark ends up alone on its own row.
+
+   With a 5rem minimum the track count falls out of the available width instead: two
+   columns on a phone, five on a tablet, and on a desktop enough that auto-fit
+   collapses the empty ones and all seven marks sit in a single row. */
+.brands__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+  gap: 1rem;
+  padding: 1.25rem 1rem;
+  background: var(--blue-050);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.brands__list li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.5rem;
+}
+@media (min-width: 40em) {
+  .brands__list li { height: 2.75rem; }
+}
+.brands__list img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+/* Nominative use, not a dealership. The note is small but it is not decoration —
+   see the comment above the strip in sluzby.html. */
+.brands__note {
+  margin-top: .75rem;
+  font-size: .82rem;
+  color: var(--ink-muted);
+}
+
 /* --- Gallery ------------------------------------------------------------ */
 
 /* Three columns at full width instead of four, so each photo is about a

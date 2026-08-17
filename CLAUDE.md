@@ -74,8 +74,12 @@ node tools/sync.mjs            # apply
 node tools/sync.mjs --check    # exits 1 if any page is stale; use before committing
 ```
 
-Two things that will bite:
+Three things that will bite:
 
+- **The renderer does not skip comments.** It scans a partial as text, so writing
+  `{{#real:key}}` inside an HTML comment — to document it — opens a real conditional that pairs
+  with the next closing marker and silently drops everything between. `partials/klima-cert.html`
+  lost its whole callout to this once; its comment now describes the marker instead of quoting it.
 - **Czech declension.** One form of a place name is not enough. `kraj` is the nominative
   ("Zlínský kraj"); `krajKde` is the locative **and carries its own preposition** ("ve Zlínském
   kraji"), so never write `v`/`ve` next to it. Same trap for any value dropped into prose.
@@ -112,18 +116,27 @@ IP address is personal data under the GDPR. Banner and privacy notice are separa
 `assets/vendor/leaflet/`, never a CDN). It draws the outline of Zlínský kraj from
 `assets/data/zlinsky-kraj.geojson` over **OpenStreetMap tiles**.
 
-**The copy states the same area the map draws: the whole kraj, never a town.** Decided 2026-08-06 —
-no home town, no list of villages, no travel radius appears anywhere on the site. This costs real
-local-search ranking (PLAN.md 5.2 spells out why); it was removed deliberately, not lost, so do not
-reintroduce town-level copy without a new decision.
+**The map draws the kraj; the copy names the kraj and then its main towns.** The 2026-08-06 rule
+was "never a town" — that was **reversed on 2026-08-17** for findability, since `instalatér Zlín`
+is the query with the volume and no region-level phrase substitutes for it. PLAN.md 5.2 has the
+whole arc.
 
-The **visible copy** therefore knows only `kraj` and `krajKde`. Structured data goes one level
-finer: `okresy` lists the region's districts and `sync.mjs` derives `{{areaServed}}` from it plus
-`kraj`, so the JSON-LD says "this kraj and these four okresy" while the page still says only the
-kraj. Added 2026-08-06 as the explicitly chosen middle position — it tells a machine the service
-area is neither the whole country nor one town, without the site committing to a home town. **Do
-not extend `okresy` down to individual obce**: that is the town-level decision above, reached from
-behind, and it needs the same new decision.
+`mesta` in `values.json` holds twelve towns and feeds two places: the visible "Kam jezdím" block on
+`index.html` and `kontakt.html`, and JSON-LD `areaServed`, where `sync.mjs` appends them after
+`kraj` and `okresy` typed as `City`. `okresy` stays structured-data-only — between a kraj and a
+town list it would just be noise on the page.
+
+Three things that did not change with it:
+
+- **Twelve towns is a ceiling.** Listing every obce in the kraj is the doorway pattern engines
+  discount and readers read as padding. Grow the list only where he actually works.
+- **No travel radius in kilometres**, ever — same objection as a promised response time.
+- **Never add `<meta name="keywords">`.** Google dropped it in 2009 and Seznam ignores it; towns
+  there rank nothing. The three placements that work are a heading, body copy, and `areaServed`.
+
+Watch the declension: `mesta` is nominative, so it may only follow a colon or a dash. A preposition
+("do Zlín, Otrokovice") is broken Czech, and one comma-separated value cannot carry two cases —
+the same trap as `kraj`/`krajKde`.
 
 Those tiles are the **only** third-party request the site makes. The owner decided this on
 2026-08-04, knowing the cost:
@@ -188,6 +201,36 @@ Two things appear in nearly every Czech template online and are now **wrong** �
 the **EU ODR platform** link (Regulation (EU) 2024/3228 repealed the old rules; the platform ceased
 operating 2025-07-20 and MPO says existing links must be removed) and any mention of **EET**
 (abolished 2024-01-01).
+
+## Two qualification boundaries the copy must not drift across
+
+Vodoinstalatérství and topenářství are řemeslné živnosti. The two trades next to them are not, and
+claiming a qualification he does not hold is both a misleading commercial practice and a
+živnostenský úřad problem. Full detail in [PLAN.md](PLAN.md) 4.12.
+
+**Gas — the line moved on 2026-08-17 and is now finer than "no".** Out: pipework, valves, pressure
+tests, revisions (vázaná živnost, TIČR). In: hanging a boiler and plumbing its water and heating
+side. The technician's: the gas connection itself, first commissioning, and the *protokol o uvedení
+do provozu*. Both halves have to stay in the copy — "osadím kotel" alone reads as an offer to work
+on the gas line, and "plyn nedělám" alone is now false. Stated in two places that must agree:
+the callout on `sluzby.html` and the scope sentence in `obchodni-podminky.html`, the second of
+which is contractual.
+
+**Air conditioning — the owner holds no certificates, and the site names none.** Confirmed
+2026-08-17. Opening a refrigerant circuit is restricted to a certified person (Regulation (EU)
+517/2014), so the copy never claims the work personally: it says **"zajistím"** and **"ve
+spolupráci s firmou KLIMAKOL"** (Zlín), and `obchodni-podminky.html` says the same. Three things
+stay out — a certificate number or any word implying authorisation; **the statutory citation
+itself**, removed on the owner's instruction because quoting the rule beside an offer implies the
+offerer meets it; and a first-person installation verb like "montuji klimatizace". An F-gas callout,
+`partials/klima-cert.html` and the `fgasCert` value all existed briefly that day and were deleted —
+do not restore them. Klimakol is a commercial partner, never phrased so their standing reads as
+covering his.
+
+The seven manufacturers' marks under that section are **nominative use, not a dealership claim**,
+and `.brands__note` says so. Vendored under `assets/img/znacky/` from Wikimedia Commons and the
+manufacturers' own sites — not from `klimakol.cz`, whose upload folder is theirs to serve. Do not
+add a make he does not actually fit, and do not delete the note.
 
 ## No user-generated content, ever
 
@@ -275,7 +318,7 @@ grep -n '<script[^>]*src="http\|<link[^>]*href="http\|<iframe' *.html | grep -v 
 #   api.web3forms.com        form submit
 # The rest are inert and need no privacy-notice row — they are <a> targets the visitor
 # has to click (mapy.cz, wa.me, coi.cz, adr.coi.cz, uoou.gov.cz, openstreetmap.org,
-# leafletjs.com, msharp.cz), this site's own origin in canonical/og:url/JSON-LD (vodotoposomek.cz),
+# leafletjs.com, msharp.cz, klimakol.cz), this site's own origin in canonical/og:url/JSON-LD (vodotoposomek.cz),
 # or a vocabulary identifier that is never dereferenced (schema.org, in @context).
 # Anything beyond that list is a third party that has to be added to the privacy notice
 # first — and if it sets a cookie, it brings the consent banner with it.
@@ -319,6 +362,27 @@ One trap when you do move it: `webUrl` is substituted by plain text search, so *
 the old address gets rewritten too.** Mentioning a previous URL in a comment means writing it
 without the `https://` prefix, or the next sync silently replaces it and the comment starts
 contradicting itself. `robots.txt` has a note where this already happened once.
+
+## Never name a file after a DOS device — `assets/img/znacky/aux-logo.svg`
+
+The AUX logo is `aux-logo.svg` while its six neighbours are plain brand names. That is not
+untidiness and must not be "fixed".
+
+**`AUX` is a reserved MS-DOS device name**, as are `CON`, `PRN`, `NUL`, `COM1`–`COM9` and
+`LPT1`–`LPT9`. Windows refuses to open a file with one of those stems **whatever the extension**,
+so `aux.svg` is unopenable through the ordinary Win32 API. The failure is nastier than a plain
+error because the file can still be *created* by anything that writes through an extended-length
+path, and MSYS tools read it happily — so `ls` in Git Bash lists it at its real size while
+PowerShell's `Test-Path` returns `False` for the same path.
+
+What it actually cost here: `git add` opens files through Win32, so it failed on that one path
+and aborted with `fatal: adding files failed` — **blocking every commit in the repository**, not
+just that file. The site itself was fine, since Pages serves from Linux; the damage was entirely
+to the Windows working copy.
+
+Worth knowing generally, because this project is developed on Windows and served from Linux: a
+filename that is illegal here is often perfectly legal there, so this class of bug reaches the
+repo without anything on the site ever looking wrong.
 
 ## `.nojekyll`
 

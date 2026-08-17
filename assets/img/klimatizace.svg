@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 86 455 376" width="455" height="376">
+<!--
+  Ilustrace k sekci Klimatizace na sluzby.html. Kreslená, ne fotka — sedí ke třem
+  sousedním obrázkům (voda, instalater, hodinovy-manzel): silný tmavý obrys, plochá
+  barva, bílý podklad, žádné stínování.
+
+  Na rozdíl od nich je tahle původní, takže u ní na rozdíl od nich není otevřená
+  otázka licence (PLACEHOLDERS.md, oddíl 4). Proto SVG a ne WebP: pár kilobajtů,
+  ostré na každém displeji a je to text, takže se dá opravit v editoru.
+
+  Rozvržení: jednotka nahoře, proud vzduchu vpravo dole, sněhová vločka vlevo dole.
+  Kreslilo se to do čtverce 0 0 512 512 a viewBox je pak oříznutý těsně na kresbu —
+  proto ty nekulaté hodnoty. Souřadnice uvnitř zůstaly z původní mřížky, takže se
+  s nimi dá dál počítat. Ořez není kosmetika: .service__head img je čtvercový box
+  s object-fit: contain, takže prázdný okraj kolem kresby by ji jen zmenšil proti
+  třem sousedním obrázkům.
+
+  Vykresluje se na 72 px (od 46em na 96 px), tedy zhruba šestina téhle mřížky:
+  všechno je proto záměrně tučné a velké. Cokoli jemnějšího by v té velikosti zmizelo
+  a zbyla by z toho šeď.
+-->
+<defs>
+  <!-- Jedno rameno vločky i s větvičkami, počátek ve středu. Šestkrát otočené
+       přes <use> níž — jinak by to bylo osmnáct skoro stejných úseček. -->
+  <path id="k-spoke" d="M0,0 L0,-64 M0,-40 L-17,-57 M0,-40 L17,-57"/>
+</defs>
+
+<!-- Vnitřní jednotka. Tělo je rozdělené na dva díly, aby spodní pás (výdech) mohl
+     být tmavší; oba dohromady přesně vyplní zaoblený obdélník, který se přes ně
+     nakonec obtáhne, takže po švu není stopa. -->
+<path d="M46,120 A24,24 0 0 1 70,96 L442,96 A24,24 0 0 1 466,120 L466,200 L46,200 Z" fill="#eef3f6"/>
+<path d="M46,200 L466,200 L466,214 A24,24 0 0 1 442,238 L70,238 A24,24 0 0 1 46,214 Z" fill="#d5dfe6"/>
+
+<!-- Lamela výdechu, mírně natočená, aby bylo znát, že jednotka běží. Ty dva stupně
+     jsou strop, ne odhad: při delším natočení vyjede pravý konec nad dělicí čáru. -->
+<rect x="96" y="209" width="320" height="15" rx="7.5" fill="#8fa3b2" transform="rotate(-2 256 216)"/>
+
+<!-- Odlesk a kontrolka. Obojí čistě pro oživení plochy. -->
+<rect x="76" y="116" width="170" height="18" rx="9" fill="#ffffff" opacity=".85"/>
+<circle cx="436" cy="178" r="8" fill="#34c759" stroke="#2b2b2b" stroke-width="5"/>
+
+<line x1="46" y1="200" x2="466" y2="200" stroke="#2b2b2b" stroke-width="7"/>
+<rect x="46" y="96" width="420" height="142" rx="24" fill="none" stroke="#2b2b2b" stroke-width="10"/>
+
+<!-- Proud vzduchu. Modrá je vzatá z kapky ve voda.webp, ať oba obrázky drží spolu. -->
+<g fill="none" stroke="#29abe2" stroke-linecap="round">
+  <path d="M258,268 C288,308 322,324 358,320" stroke-width="20"/>
+  <path d="M306,268 C344,314 388,334 430,326" stroke-width="18" opacity=".88"/>
+  <path d="M354,268 C396,316 442,336 478,326" stroke-width="16" opacity=".76"/>
+</g>
+
+<!-- Vločka = chlazení. Šest ramen po 60°. -->
+<g transform="translate(146 386)" stroke="#29abe2" stroke-width="13" stroke-linecap="round">
+  <use href="#k-spoke"/>
+  <use href="#k-spoke" transform="rotate(60)"/>
+  <use href="#k-spoke" transform="rotate(120)"/>
+  <use href="#k-spoke" transform="rotate(180)"/>
+  <use href="#k-spoke" transform="rotate(240)"/>
+  <use href="#k-spoke" transform="rotate(300)"/>
+</g>
+</svg>

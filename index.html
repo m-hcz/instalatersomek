@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Instalatér a topenář ve Zlínském kraji — Šomek</title>
-<meta name="description" content="Instalatérské a topenářské práce a hodinový manžel ve Zlínském kraji. Cenu se dozvíte předem, termín domluvíme podle vás.">
+<meta name="description" content="Instalatérské a topenářské práce, montáž klimatizací a hodinový manžel ve Zlínském kraji. Cenu se dozvíte předem, termín domluvíme podle vás.">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <!-- partial:map-head -->
 <!-- Leaflet je vendorovaný, ne z CDN — viz CLAUDE.md. Musí být PŘED style.css,
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:title" content="Instalatér a topenář ve Zlínském kraji — Šomek">
-<meta property="og:description" content="Instalatérské a topenářské práce a hodinový manžel. Cenu se dozvíte předem.">
+<meta property="og:description" content="Instalatérské a topenářské práce, klimatizace a hodinový manžel. Cenu se dozvíte předem.">
 <!-- partial:head-meta path="" og="yes" -->
 <!-- Kanonická adresa stránky. Spolu se sitemap.xml a formulářovým `redirect` je to
      jediné místo, kde je URL absolutní — všude jinde relativní, viz CLAUDE.md.
@@ -56,8 +56,9 @@
       <div class="hero__inner">
         <h1>Instalatér a topenář ve Zlínském kraji</h1>
         <p class="hero__lead">
-          Opravy a montáže vody a topení, hodinový manžel okolo domu. Přijedu, práci si
-          na místě prohlédnu a řeknu cenu předem — teprve potom se pustím do díla.
+          Opravy a montáže vody a topení, klimatizace, hodinový manžel okolo domu.
+          Přijedu, práci si na místě prohlédnu a řeknu cenu předem — teprve potom se
+          pustím do díla.
         </p>
         <div class="btn-row">
           <a class="btn btn--primary btn--lg" href="tel:+420608542877">Zavolat 608 542 877</a>
@@ -80,9 +81,13 @@
     <div class="container">
       <div class="section__head">
         <h2>S čím vám pomůžu</h2>
-        <p>Tři okruhy prací, které dělám nejčastěji. Nejste si jistí, kam vaše práce patří? Zavolejte a zeptejte se.</p>
+        <p>Čtyři okruhy prací, se kterými se na mě lidé obracejí nejčastěji. Nejste si jistí, kam vaše práce patří? Zavolejte a zeptejte se.</p>
       </div>
 
+      <!-- Four cards in a three-column grid: the last one sits alone on the second
+           row from 60em up. That is deliberate — .grid--2 would pair them evenly but
+           would also halve the columns on the 40–60em range, where four cards then
+           read as two stacked pairs rather than one list. -->
       <div class="grid grid--3">
         <article class="card">
           <h3>Vodoinstalatérství</h3>
@@ -105,6 +110,18 @@
             <li>Podlahové topení</li>
             <li>Odvzdušnění a doplnění systému</li>
             <li>Výměna ventilů a termohlavic</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Klimatizace</h3>
+          <p>Montáž a servis ve spolupráci s partnerskou firmou. V létě chladí, na jaře a na podzim topí.</p>
+          <ul class="ticks">
+            <li>Nástěnné jednotky (monosplit)</li>
+            <li>Multisplit pro víc místností</li>
+            <li>Odvod kondenzátu a elektro</li>
+            <li>Uvedení do provozu</li>
+            <li>Servis a čištění</li>
           </ul>
         </article>
 
@@ -172,6 +189,14 @@
         <p>
           Působím ve Zlínském kraji. Nejste si jistí, jestli k vám dojedu?
           Zavolejte, domluvíme se.
+        </p>
+        <!-- The town list is in the nominative and must stay introduced by a colon or
+             a dash, never by a preposition: "do Zlín, Otrokovice" is not Czech, and one
+             comma-separated value cannot carry two cases. Same trap as kraj/krajKde.
+             The list itself is the `mesta` value — do not type towns in here by hand,
+             or index.html and kontakt.html drift apart. -->
+        <p class="muted">
+          Města, kam jezdím nejčastěji: Zlín, Otrokovice, Vsetín, Valašské Meziříčí, Uherské Hradiště, Kroměříž, Uherský Brod, Rožnov pod Radhoštěm, Holešov, Luhačovice, Slavičín, Valašské Klobouky — a obce mezi nimi.
         </p>
       </div>
       <!-- partial:map -->
@@ -264,7 +289,7 @@
     <div class="site-footer__cols">
       <div>
         <h2>Instalatér Šomek</h2>
-        <p>Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.</p>
+        <p>Vodoinstalatérské a topenářské práce, klimatizace a hodinový manžel ve Zlínském kraji.</p>
       </div>
       <div>
         <h2>Kontakt</h2>
@@ -367,7 +392,7 @@
   "name": "Tomáš Šomek",
   "alternateName": "Instalatér Šomek",
   "url": "https://vodotoposomek.cz/",
-  "description": "Vodoinstalatérské a topenářské práce a hodinový manžel ve Zlínském kraji.",
+  "description": "Vodoinstalatérské a topenářské práce, klimatizace a hodinový manžel ve Zlínském kraji.",
   "telephone": "+420608542877",
   "email": "somi.vodo.topo@gmail.com",
   "address": {
@@ -402,6 +427,54 @@
     {
       "@type": "AdministrativeArea",
       "name": "okres Zlín"
+    },
+    {
+      "@type": "City",
+      "name": "Zlín"
+    },
+    {
+      "@type": "City",
+      "name": "Otrokovice"
+    },
+    {
+      "@type": "City",
+      "name": "Vsetín"
+    },
+    {
+      "@type": "City",
+      "name": "Valašské Meziříčí"
+    },
+    {
+      "@type": "City",
+      "name": "Uherské Hradiště"
+    },
+    {
+      "@type": "City",
+      "name": "Kroměříž"
+    },
+    {
+      "@type": "City",
+      "name": "Uherský Brod"
+    },
+    {
+      "@type": "City",
+      "name": "Rožnov pod Radhoštěm"
+    },
+    {
+      "@type": "City",
+      "name": "Holešov"
+    },
+    {
+      "@type": "City",
+      "name": "Luhačovice"
+    },
+    {
+      "@type": "City",
+      "name": "Slavičín"
+    },
+    {
+      "@type": "City",
+      "name": "Valašské Klobouky"
     }
   ],
   "contactPoint": {
@@ -432,6 +505,14 @@
           "@type": "Service",
           "name": "Topenářství",
           "description": "Výměny a opravy radiátorů, rozvody topení, podlahové topení, seřízení otopné soustavy."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Klimatizace",
+          "description": "Montáž a servis klimatizací ve spolupráci s partnerskou firmou — monosplit i multisplit, zprovoznění, čištění."
         }
       },
       {

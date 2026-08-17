@@ -119,14 +119,22 @@ function view(v) {
   // replacements() rewrites the full brand before the bare surname, so the two
   // never collide.
   out.prijmeni = String(v.brand).trim().split(/\s+/).pop()
-  // JSON-LD areaServed: the kraj, then each okres from the comma-separated
-  // `okresy`. Districts are the finest area the site claims — the visible copy
-  // still names only the kraj (PLAN.md 5.2), so this must not grow into towns
-  // without that decision being revisited. Continuation lines get two extra
-  // spaces so the array sits under its own key in the rendered block.
-  const areas = [String(v.kraj)]
-    .concat(String(v.okresy || '').split(',').map((s) => s.trim()).filter(Boolean))
-    .map((name) => ({ '@type': 'AdministrativeArea', name }))
+  // JSON-LD areaServed: the kraj, then each okres, then each town — widest first.
+  // Towns were added on 2026-08-17 when the "no obce anywhere" rule of 2026-08-06
+  // was deliberately lifted (PLAN.md 5.2); before that this stopped at the okres
+  // and the comment here said it must not grow into towns without that decision.
+  // It has been taken, and the visible copy now names the same towns, so the two
+  // no longer disagree.
+  //
+  // Towns are City rather than AdministrativeArea. City is a subtype of it, so
+  // nothing that read the old shape breaks, but it says "obec" rather than "some
+  // administrative unit of unstated size" — which is the whole point of listing
+  // them. Continuation lines get two extra spaces so the array sits under its own
+  // key in the rendered block.
+  const list = (s) => String(s || '').split(',').map((x) => x.trim()).filter(Boolean)
+  const areas = [{ '@type': 'AdministrativeArea', name: String(v.kraj) }]
+    .concat(list(v.okresy).map((name) => ({ '@type': 'AdministrativeArea', name })))
+    .concat(list(v.mesta).map((name) => ({ '@type': 'City', name })))
   out.areaServed = JSON.stringify(areas, null, 2)
     .split('\n')
     .map((line, i) => (i ? '  ' + line : line))
