@@ -112,6 +112,7 @@
               <li>Rozvody topení, včetně přepojení a prodloužení</li>
               <li>Podlahové topení</li>
               <li>Osazení a připojení plynového kotle</li>
+              <li>Kontroly kotlů ATMOS, OPOP a Czechtherm (tzv. revize kotlů)</li>
               <li>Odvzdušnění a doplnění otopné soustavy</li>
               <li>Výměna ventilů, šroubení a termostatických hlavic</li>
               <li>Hydraulické seřízení — když jeden radiátor topí a druhý ne</li>
@@ -126,6 +127,35 @@
               <li>U bytů kontakt na správce kvůli vypuštění stoupačky</li>
             </ul>
           </div>
+        </div>
+        <!-- Solid-fuel boiler checks, added 2026-10-03 — PLAN.md 4.12 has the sources.
+             § 17 odst. 1 písm. h) zákona č. 201/2012 Sb. lets only an "odborně
+             způsobilá osoba" do them: trained AND authorised by the boiler's maker, AND
+             listed in MŽP's register (ipo.mzp.cz). Not listed means not qualified, per
+             MŽP's own FAQ. So the authorisation is per manufacturer and this copy names
+             makes, never "kotle" in general.
+
+             THE OWNER'S DECISION, 2026-10-03, made knowing the register state: name all
+             three makes. Re-checked that day, the register listed him for OPOP alone
+             (č. OPO2399, 2026-09-03 → 2029-09-30). He holds ATMOS and Czechtherm training
+             certificates, but until those makers enter him he is not qualified to check
+             their boilers, and the database sentence below is not yet true for them.
+             Issuing the doklad without registration is a přestupek of up to
+             100 000 Kč (§ 25 odst. 1 písm. u). Remove a make if its entry never appears
+             or lapses, and OPOP after 30. 9. 2029 unless renewed.
+
+             Never "revizní technik" — also the owner's call that day, after the reason
+             was put to him: it is the TIČR title for vyhrazená technická zařízení, the
+             very revisions the gas callout below says he does not do. "Revize kotlů"
+             stays in brackets as what people call the check, because it is what they
+             search for. Unlike the air-conditioning block, the statute is cited. -->
+        <div class="callout">
+          <p>
+            <strong>Technik pro kontroly kotlů ATMOS, OPOP a Czechtherm</strong> (tzv. revize
+            kotlů) podle zákona č. 201/2012 Sb. Najdete mě v
+            <a href="https://ipo.mzp.cz/" rel="noopener">databázi odborně způsobilých osob</a>
+            Ministerstva životního prostředí.
+          </p>
         </div>
         <!-- The gas boundary, moved on 2026-08-17 at the owner's instruction. It did
              run "no gas appliances at all"; it now runs between the gas pipework and
@@ -151,6 +181,32 @@
             ten budete potřebovat kvůli záruce.
           </p>
         </div>
+
+        <!-- Boiler brand strip, added 2026-10-03 — same component, same rules as the
+             air-conditioning one below: nominative use, not a dealership claim, and
+             only makes he actually fits (the owner confirmed all three). The note
+             used to end by limiting checks to OPOP; it went when the callout above
+             was shortened to name all three makes (PLAN.md 4.12).
+
+             Sources: each maker's own site — atmos.svg from atmos.eu, czechtherm.png
+             from czechtherm.cz (trimmed), opop.svg from the header of opop.cz with its
+             white letters set to the near-black they are printed in on the boilers.
+             Links go to the makers' Czech sites; atmos.cz redirects to atmos.eu, which
+             opens in Czech, so the link skips the hop. -->
+        <div class="brands">
+          <h4>Kotle, které osazuji</h4>
+          <ul class="brands__list">
+            <li><a href="https://www.atmos.eu/" rel="noopener"><img src="assets/img/znacky/atmos.svg" alt="ATMOS" width="167" height="88" loading="lazy"></a></li>
+            <li><a href="https://www.opop.cz/" rel="noopener"><img src="assets/img/znacky/opop.svg" alt="OPOP" width="116" height="30" loading="lazy"></a></li>
+            <li><a href="https://www.czechtherm.cz/" rel="noopener"><img src="assets/img/znacky/czechtherm.png" alt="Czechtherm" width="686" height="308" loading="lazy"></a></li>
+          </ul>
+          <p class="brands__note">
+            Loga jsou ochranné známky svých vlastníků a slouží jen k označení značek
+            kotlů, které osazuji. Nejsem jejich autorizovaný prodejce ani zastoupení.
+            Odkazy vedou na stránky výrobců.
+          </p>
+        </div>
+
         <div class="btn-row">
           <a class="btn btn--primary" href="tel:+420608542877">Zavolat 608 542 877</a>
           <a class="btn btn--ghost" href="kontakt.html">Napsat poptávku</a>
@@ -233,29 +289,39 @@
              manufacturers' own sites. Deliberately NOT re-hosted from klimakol.cz —
              their upload folder is their asset to serve, not ours to copy.
 
+             Links (2026-10-03, decided by the owner): each mark goes to the brand's
+             Czech site, or to its official Czech representative where the maker has
+             none — aux.cz is the importer, impromat-klima.cz represents Fujitsu, whose
+             own CZ page has redirected to its EU site since the maker renamed itself
+             GENERAL on 2026-01-01. Carrier has no Czech presence left (carrierklima.cz
+             is gone, carrier.com sends Czech visitors to its US site), so its mark is
+             not a link. The note says where the links go, so none of them reads as an
+             affiliation.
+
              width/height are each file's intrinsic size and are not the rendered size:
              every .brands__list li is a grid cell of fixed height and fluid width, and
              the mark scales down inside it. They are here because they are what stops
              the strip reflowing while the seven files load, and because the ratio
              between them is what the cell scales by. -->
         <div class="brands">
-          <h4>Značky, které montuji</h4>
+          <h4>Značky, které vám zajistím</h4>
           <ul class="brands__list">
             <!-- aux-logo.svg, not aux.svg. AUX is a reserved MS-DOS device name, so
                  Windows refuses to open a file called that whatever the extension —
                  git included, which aborts `git add` for the entire repo. Do not
                  "tidy" this back to match the other six filenames. -->
-            <li><img src="assets/img/znacky/aux-logo.svg" alt="AUX" width="167" height="44" loading="lazy"></li>
-            <li><img src="assets/img/znacky/lg.svg" alt="LG" width="600" height="275" loading="lazy"></li>
-            <li><img src="assets/img/znacky/sinclair.png" alt="Sinclair" width="740" height="141" loading="lazy"></li>
+            <li><a href="https://www.aux.cz/" rel="noopener"><img src="assets/img/znacky/aux-logo.svg" alt="AUX" width="167" height="44" loading="lazy"></a></li>
+            <li><a href="https://www.lg.com/cz/business/klimatizace/" rel="noopener"><img src="assets/img/znacky/lg.svg" alt="LG" width="600" height="275" loading="lazy"></a></li>
+            <li><a href="https://www.sinclair-solutions.com/cs/" rel="noopener"><img src="assets/img/znacky/sinclair.png" alt="Sinclair" width="740" height="141" loading="lazy"></a></li>
             <li><img src="assets/img/znacky/carrier.svg" alt="Carrier" width="300" height="121" loading="lazy"></li>
-            <li><img src="assets/img/znacky/fujitsu.svg" alt="Fujitsu" width="200" height="97" loading="lazy"></li>
-            <li><img src="assets/img/znacky/olimpia-splendid.png" alt="Olimpia Splendid" width="200" height="49" loading="lazy"></li>
-            <li><img src="assets/img/znacky/panasonic.svg" alt="Panasonic" width="504" height="80" loading="lazy"></li>
+            <li><a href="https://www.impromat-klima.cz/" rel="noopener"><img src="assets/img/znacky/fujitsu.svg" alt="Fujitsu" width="200" height="97" loading="lazy"></a></li>
+            <li><a href="https://www.olimpia-splendid.cz/" rel="noopener"><img src="assets/img/znacky/olimpia-splendid.png" alt="Olimpia Splendid" width="200" height="49" loading="lazy"></a></li>
+            <li><a href="https://www.aircon.panasonic.eu/CZ_cs/" rel="noopener"><img src="assets/img/znacky/panasonic.svg" alt="Panasonic" width="504" height="80" loading="lazy"></a></li>
           </ul>
           <p class="brands__note">
             Loga jsou ochranné známky svých vlastníků a slouží jen k označení značek,
-            které montuji. Nejsem jejich autorizovaný prodejce ani zastoupení.
+            které zajišťuji. Nejsem jejich autorizovaný prodejce ani zastoupení. Odkazy
+            vedou na české stránky výrobců nebo jejich oficiálního zastoupení.
           </p>
         </div>
 

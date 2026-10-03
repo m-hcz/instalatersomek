@@ -394,7 +394,7 @@ a:hover { color: var(--blue-900); }
   margin-bottom: .6rem;
 }
 
-/* --- Brand strip (sluzby.html, klimatizace) ----------------------------- */
+/* --- Brand strips (sluzby.html, topenářství and klimatizace) ------------ */
 
 /* A logo wall of seven manufacturers' marks, which arrive in wildly different
    aspect ratios — 2.2:1 for LG, 6.3:1 for Panasonic — and in two formats. Sizing
@@ -440,6 +440,16 @@ a:hover { color: var(--blue-900); }
 @media (min-width: 40em) {
   .brands__list li { height: 2.75rem; }
 }
+/* Most marks are links, one (Carrier) is not. The link takes over the box the
+   <li> gives the image — without it, max-height: 100% below would resolve against
+   an inline box of no fixed height and the mark would overflow its cell. */
+.brands__list a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
 .brands__list img {
   width: auto;
   height: auto;
@@ -465,16 +475,24 @@ a:hover { color: var(--blue-900); }
   gap: 1.25rem;
   grid-template-columns: repeat(auto-fill, minmax(min(20rem, 100%), 1fr));
 }
+/* The grid stretches every card in a row to the tallest one, so a card whose
+   caption wraps to two lines makes its neighbours taller too. The flex column
+   passes that height down to the figcaption, which grows into it; as a block,
+   the card's blue-050 background (the placeholder behind a loading photo)
+   showed through as a stripe under the shorter captions. */
 .gallery a {
-  display: block;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--blue-050);
   text-decoration: none;
 }
+.gallery figure { flex: 1; display: flex; flex-direction: column; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .gallery figcaption {
+  flex: 1;
   padding: .7rem .9rem .85rem;
   font-size: .92rem;
   color: var(--ink-muted);

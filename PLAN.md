@@ -247,7 +247,7 @@ a phone in poor light.
 - **EET** — abolished (4.8).
 - **Cookie consent** — nothing is stored on the visitor's device (invariant 1).
 
-### 4.12 Certifications, the gas boundary and the F-gas one
+### 4.12 Certifications, the gas boundary, the F-gas one and boiler checks
 
 Only claim what is actually held. Overstating a qualification is both a misleading commercial
 practice and a živnostenský úřad problem — that principle has not moved, and it is what the two
@@ -275,8 +275,9 @@ same thing — the second one is contractual, since it defines what an order can
 
 #### Air conditioning, added 2026-08-17 — the site claims no certification at all
 
-**The owner holds no certificates, and the site names none.** Confirmed 2026-08-17. That is the
-governing fact for this section and it decides the register the copy is written in.
+**The owner holds no F-gas certificate, and the site names none.** Confirmed 2026-08-17. That is
+the governing fact for this section and it decides the register the copy is written in. (The boiler
+authorisation below is unrelated and does not reach air conditioning.)
 
 Opening a **refrigerant circuit** — installation and every later service — is restricted to a
 certified person under **Regulation (EU) 517/2014** and **zákon č. 73/2012 Sb.** So the copy does
@@ -312,6 +313,91 @@ as many words. Do not add a manufacturer he does not actually fit, and do not de
 The files are vendored under `assets/img/znacky/`, taken from Wikimedia Commons and the
 manufacturers' own sites — deliberately **not** re-hosted from `klimakol.cz`, whose upload folder is
 theirs to serve rather than ours to copy.
+
+**Changed 2026-10-03, on the owner's decisions.** The heading went from "Značky, které montuji" to
+"Značky, které vám zajistím" (and the note to "zajišťuji"), removing the first-person installation
+verb this section excludes. Each mark now links to the brand's Czech site, or to its official Czech
+representative where there is none:
+
+| Mark | Link | Why that one |
+|---|---|---|
+| AUX | `aux.cz` | No manufacturer site in Czech; the official importer (AUX CZ&SK, Olomouc). It also sells installation, so it competes for customers — accepted |
+| LG | `lg.com/cz/business/klimatizace/` | Manufacturer, air-conditioning section |
+| Sinclair | `sinclair-solutions.com/cs/` | Manufacturer (`sinclair.cz` redirects there) |
+| Carrier | **none** | No Czech presence left: `carrierklima.cz` no longer resolves, and `carrier.com` sends Czech visitors to its US site |
+| Fujitsu | `impromat-klima.cz` | Official Czech representative. The maker became GENERAL on 2026-01-01 and its CZ page now redirects to its EU site |
+| Olimpia Splendid | `olimpia-splendid.cz` | Czech site of the brand, run by its distributor |
+| Panasonic | `aircon.panasonic.eu/CZ_cs/` | Manufacturer, heating & cooling, Czech |
+
+The note says the links go to "české stránky výrobců nebo jejich oficiálního zastoupení", so a link
+to an importer cannot read as his affiliation with it.
+
+#### The boiler brand strip — added 2026-10-03
+
+`sluzby.html` Topenářství carries the same component for **ATMOS, OPOP and Czechtherm**, headed
+"Kotle, které osazuji". The owner confirmed he fits all three; fitting a boiler needs no
+manufacturer registration. (Its note briefly ended by limiting checks to OPOP; that went the same day
+when the check callout was shortened to name all three — see below.) Logos
+come from the makers' own sites; `opop.svg` is their header logo with the white letters set to the
+near-black printed on the boilers. Links: `atmos.eu` (where `atmos.cz` redirects; it opens in
+Czech), `opop.cz`, `czechtherm.cz`.
+
+#### Solid-fuel boiler checks — added 2026-10-03, verified the same day
+
+The owner asked for "revizní technik kotlů ATMOS, OPOP, Czechtherm dle zákona č. 201/2012 Sb.",
+backed by manufacturers' training certificates ("…proškolil … v rozsahu nutném k provádění kontrol
+… podle § 17 odst. 1 písm. h)…"). What the law actually requires, read from the consolidated text in
+force from 2026-01-01:
+
+- **§ 17 odst. 1 písm. h)** — the operator of a solid-fuel combustion source of **10–300 kW** total
+  rated heat input that feeds a central-heating water system must have its *kontrola technického
+  stavu a provozu* done **at least once every three years** by an *odborně způsobilá osoba*: a
+  natural person **trained by the source's manufacturer, holding that manufacturer's authorisation**
+  for its installation, operation and maintenance, **and entered in the database under § 17a**.
+  Only where the maker is unknown, defunct or cannot supply a technician within the reference price
+  may a technician authorised by another maker for the same type step in, with the maker's statement.
+- **§ 17a** — MŽP runs the database (`ipo.mzp.cz`); the *manufacturer* enters its technicians within
+  30 days of authorising them. Authorisations lapse on expiry, or 12 months after the maker ceases.
+- **§ 16 odst. 9** — the technician must report each check to MŽP through ISPOP within 60 days of
+  issuing the doklad; failure is a přestupek up to 50 000 Kč (§ 25 odst. 1 písm. i, odst. 5 písm. e).
+- **§ 25 odst. 1 písm. u)** — issuing the doklad without being an authorised *odborně způsobilá
+  osoba*, or with false data, is a přestupek of a podnikající fyzická osoba, **up to 100 000 Kč**.
+- **MŽP's FAQ (2025-04-09), q. 13:** *"Osoba, která není uvedena v databázi odborně způsobilých osob
+  …, nemůže být ani odborně způsobilou osobou a kontroly … nesmí provádět."*
+
+**Register check, 2026-10-03** (the open-data export at `ipo.mzp.cz/ipo-vvm/stahnout-otevrena-data`,
+searched for IČO 68340435): one entry — **OPOP s.r.o., č. OPO2399, valid 2026-09-03 → 2029-09-30**,
+covering prohořívací, odhořívací, zplyňovací and automatic boilers and stoves with a water jacket.
+**ATMOS and Czechtherm had not entered him.** Both are registered makers, so the gap is theirs to
+close, probably inside their 30 days. Until each appears, naming it would claim a qualification the
+law says he does not yet have.
+
+**The owner's decision, the same day, with the above put to him:** the copy names **all three makes**.
+The first version named OPOP alone, with the explanation of the duty, the authorisation number and
+expiry. The owner had it replaced with one short statement:
+
+> **Technik pro kontroly kotlů ATMOS, OPOP a Czechtherm** (tzv. revize kotlů) podle zákona
+> č. 201/2012 Sb. Najdete mě v databázi odborně způsobilých osob Ministerstva životního prostředí.
+
+The same three makes appear in the "Co dělám" bullet, the `index.html` card and the JSON-LD
+service description. **What that leaves open:** until ATMOS and Czechtherm enter him, the database
+sentence is false for them, and the law bars him from checking their boilers. The § 25 fine falls on
+issuing the doklad, not on the website, but a qualification claimed and not held is also a misleading
+commercial practice (4.12 intro). **Re-check the register** — download the export above and search
+for IČO 68340435. If either entry has not appeared within a few weeks, or OPOP lapses after
+2029-09-30 unrenewed, that make comes out of all four places.
+
+What stayed from the first version:
+
+- **Per manufacturer, never in general.** The terms (`obchodni-podminky.html`) limit the service to
+  makers who authorised him **without naming them**, so the contract does not go stale each time one
+  is added or lapses.
+- **Not "revizní technik"** — the owner asked for it and dropped it once the reason was put to him.
+  That title belongs to vyhrazená technická zařízení and TIČR, the revisions the gas callout says he
+  does not do. The law's term is *kontrola*; "revize kotlů" stays in brackets, as what people call it
+  and search for.
+- **The statute is cited**, which reverses the air-conditioning rule for a reason: there, quoting the
+  law implied a qualification he lacks; here he holds it, at least for OPOP.
 
 ## 5. Technical specification
 
@@ -416,7 +502,7 @@ still carries a precise address. `firmyCz` and `bazos` in `values.json` feed bot
 | Services | **Vodoinstalatérství**, **topenářství**, **klimatizace**, **hodinový manžel** |
 | Gas work | **Pipework not offered; boiler installation is** — see 4.12 for exactly where the line falls |
 | Air conditioning | Added **2026-08-17**. **Arranged in cooperation with KLIMAKOL s.r.o.**, Zlín (IČO 21548498), who specialise in it. Never presented as his own trade — see 4.12 |
-| Certifications | **None held**, confirmed 2026-08-17. The site therefore names no certificate, no authorisation and no statute implying either. See 4.12 |
+| Certifications | **No F-gas certificate**, confirmed 2026-08-17, so nothing is named for air conditioning. **One boiler-check authorisation** since 2026-10-03: OPOP, č. OPO2399, valid to 2029-09-30, verified in MŽP's register. ATMOS and Czechtherm training held but not yet registered — the site names all three on the owner's decision; re-check. See 4.12 |
 | VAT | **Neplátce DPH** → footer states "Nejsem plátcem DPH"; every price shown is already final |
 | Working hours | **No fixed hours — by arrangement** → consequences in 5.1 |
 | Payment | **Cash on completion** and **bank transfer against an invoice**. **No card** — the terms should say so, so nobody expects a terminal |
@@ -494,3 +580,9 @@ Verified 2026-08-03.
 - [Macek Legal — Povinné údaje na webových stránkách podnikatelů](http://macek.lewest.cz/povinne-udaje-na-webovych-strankach-podnikatelu.html)
 - [AZ Legal — Pozor na vysoké pokuty za chybějící povinné údaje](https://azlegal.cz/mate-firemni-web-pozor-na-vysoke-pokuty-za-chybejici-povinne-udaje/)
 - [Právní prostor — Souhlas zákazníka se zpracováním osobních údajů: kdy je a kdy není potřeba](https://www.pravniprostor.cz/clanky/pravo-it/souhlas-zakaznika-se-zpracovanim-osobnich-udaju-kdy-je-kdy-neni-potreba)
+
+Added 2026-10-03, for the boiler checks in 4.12:
+
+- [Zákony pro lidi — 201/2012 Sb., o ochraně ovzduší (version in force from 2026-01-01)](https://www.zakonyprolidi.cz/cs/2012-201)
+- [MŽP — Nejčastější dotazy ke kontrole technického stavu a provozu (2025-04-09)](https://mzp.gov.cz/system/files/2025-04/OOO-FAQ_KTSP-20250409.pdf)
+- [MŽP — Databáze odborně způsobilých osob](https://ipo.mzp.cz/) and its open-data export, `https://ipo.mzp.cz/ipo-vvm/stahnout-otevrena-data`

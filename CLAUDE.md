@@ -202,11 +202,24 @@ the **EU ODR platform** link (Regulation (EU) 2024/3228 repealed the old rules; 
 operating 2025-07-20 and MPO says existing links must be removed) and any mention of **EET**
 (abolished 2024-01-01).
 
-## Two qualification boundaries the copy must not drift across
+## Qualification boundaries the copy must not drift across
 
 Vodoinstalatérství and topenářství are řemeslné živnosti. The two trades next to them are not, and
 claiming a qualification he does not hold is both a misleading commercial practice and a
 živnostenský úřad problem. Full detail in [PLAN.md](PLAN.md) 4.12.
+
+**Solid-fuel boiler checks — the one qualification the site names, and only per manufacturer.**
+Added 2026-10-03. Under § 17 odst. 1 písm. h) zákona č. 201/2012 Sb. only a technician trained
+**and** authorised by the boiler's maker **and** listed in MŽP's register (`ipo.mzp.cz`) may do the
+three-yearly check; MŽP's FAQ says plainly that someone not in the register is not qualified. So the
+copy names makes, never "kotle" in general. **The owner's decision, 2026-10-03:** name ATMOS, OPOP
+and Czechtherm, although the register that day listed him for **OPOP only** (č. OPO2399, valid to
+2029-09-30) — he holds the other two makers' training certificates and expects them to enter him.
+Until they do, the callout's "najdete mě v databázi" is not true for those two, and he must not issue
+a check certificate for their boilers. Re-check the register (PLAN.md 4.12 says how); if an entry
+never appears or lapses, that make comes out. **Never "revizní technik"** — the owner's call
+too, once the reason was put to him: it is the TIČR title for vyhrazená technická zařízení, which
+the gas callout says he does not hold. The statute *is* cited here, unlike for air conditioning.
 
 **Gas — the line moved on 2026-08-17 and is now finer than "no".** Out: pipework, valves, pressure
 tests, revisions (vázaná živnost, TIČR). In: hanging a boiler and plumbing its water and heating
@@ -216,7 +229,7 @@ on the gas line, and "plyn nedělám" alone is now false. Stated in two places t
 the callout on `sluzby.html` and the scope sentence in `obchodni-podminky.html`, the second of
 which is contractual.
 
-**Air conditioning — the owner holds no certificates, and the site names none.** Confirmed
+**Air conditioning — the owner holds no F-gas certificate, and the site names none.** Confirmed
 2026-08-17. Opening a refrigerant circuit is restricted to a certified person (Regulation (EU)
 517/2014), so the copy never claims the work personally: it says **"zajistím"** and **"ve
 spolupráci s firmou KLIMAKOL"** (Zlín), and `obchodni-podminky.html` says the same. Three things
@@ -230,7 +243,18 @@ covering his.
 The seven manufacturers' marks under that section are **nominative use, not a dealership claim**,
 and `.brands__note` says so. Vendored under `assets/img/znacky/` from Wikimedia Commons and the
 manufacturers' own sites — not from `klimakol.cz`, whose upload folder is theirs to serve. Do not
-add a make he does not actually fit, and do not delete the note.
+add a make he does not actually fit, and do not delete the note. Its heading is "Značky, které vám
+zajistím" — it read "…které montuji" until 2026-10-03, a first-person installation verb the rule
+above excludes.
+
+**Topenářství has a second strip** (2026-10-03): ATMOS, OPOP and Czechtherm, headed "Kotle, které
+osazuji". It lists makes he **fits**, which needs no registration. The check claim lives only in the
+callout above it.
+
+Both strips link each mark to the brand's Czech site, or to its official Czech representative
+where the maker has none (aux.cz is the AUX importer, impromat-klima.cz represents Fujitsu, now
+renamed GENERAL). **Carrier is deliberately unlinked**: it has no Czech presence left. The notes
+say where the links go.
 
 ## No user-generated content, ever
 
@@ -318,7 +342,9 @@ grep -n '<script[^>]*src="http\|<link[^>]*href="http\|<iframe' *.html | grep -v 
 #   api.web3forms.com        form submit
 # The rest are inert and need no privacy-notice row — they are <a> targets the visitor
 # has to click (mapy.cz, wa.me, coi.cz, adr.coi.cz, uoou.gov.cz, openstreetmap.org,
-# leafletjs.com, msharp.cz, klimakol.cz), this site's own origin in canonical/og:url/JSON-LD (vodotoposomek.cz),
+# leafletjs.com, msharp.cz, klimakol.cz, ipo.mzp.cz, and the brand-strip links on sluzby.html:
+# aux.cz, lg.com, sinclair-solutions.com, impromat-klima.cz, olimpia-splendid.cz,
+# aircon.panasonic.eu, atmos.eu, opop.cz, czechtherm.cz), this site's own origin in canonical/og:url/JSON-LD (vodotoposomek.cz),
 # or a vocabulary identifier that is never dereferenced (schema.org, in @context).
 # Anything beyond that list is a third party that has to be added to the privacy notice
 # first — and if it sets a cookie, it brings the consent banner with it.
