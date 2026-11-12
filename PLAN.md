@@ -187,13 +187,12 @@ consequence. The site's terms must carry the matching wording plus the model wit
 
 ### 4.6 Complaints — § 19 zákona č. 634/1992 Sb., § 2615 et seq. NOZ
 
-- Decide on a complaint **immediately**; in complex cases **within 3 working days**, excluding time
-  reasonably needed for expert assessment of the defect.
-- Resolve it and inform the customer **without undue delay, at the latest within 30 days**, unless a
-  longer period is agreed. **Missing the 30 days gives the customer the same rights as for a defect
-  that cannot be remedied.**
-- Issue **written confirmation** that a complaint was raised, stating when, what it concerns, and
-  the resolution the customer wants.
+- Resolve it and inform the customer **at the latest within 30 days**, unless a longer period is
+  agreed. **After that the customer may withdraw or demand a reasonable discount** (§ 19 odst. 4).
+- **Always** issue **written confirmation** that a complaint was raised — when, what it concerns,
+  the resolution wanted — and afterwards confirmation of the date and manner of resolution, or
+  written reasons for rejecting it (§ 19 odst. 2 and 5). Never "on request".
+- Corrected 2026-11-12: the "decide immediately / within 3 working days" duty is no longer in § 19.
 - Liability for defects of the work follows § 2615 et seq. NOZ; where the work qualifies as a
   **stavba**, the period is **5 years** (§ 2629), not 24 months.
 - The terms must say where a complaint is filed (phone / e-mail).
@@ -386,6 +385,10 @@ issuing the doklad, not on the website, but a qualification claimed and not held
 commercial practice (4.12 intro). **Re-check the register** — download the export above and search
 for IČO 68340435. If either entry has not appeared within a few weeks, or OPOP lapses after
 2029-09-30 unrenewed, that make comes out of all four places.
+
+**Re-checked 2026-11-12 — back to OPOP only.** The export still held one entry for IČO 68340435
+(OPOP, č. OPO2399), so ATMOS and Czechtherm came out of all four places. The quoted callout above
+now reads "Technik pro kontroly kotlů OPOP". A make goes back in when the register lists him for it.
 
 What stayed from the first version:
 

@@ -212,12 +212,11 @@ claiming a qualification he does not hold is both a misleading commercial practi
 Added 2026-10-03. Under § 17 odst. 1 písm. h) zákona č. 201/2012 Sb. only a technician trained
 **and** authorised by the boiler's maker **and** listed in MŽP's register (`ipo.mzp.cz`) may do the
 three-yearly check; MŽP's FAQ says plainly that someone not in the register is not qualified. So the
-copy names makes, never "kotle" in general. **The owner's decision, 2026-10-03:** name ATMOS, OPOP
-and Czechtherm, although the register that day listed him for **OPOP only** (č. OPO2399, valid to
-2029-09-30) — he holds the other two makers' training certificates and expects them to enter him.
-Until they do, the callout's "najdete mě v databázi" is not true for those two, and he must not issue
-a check certificate for their boilers. Re-check the register (PLAN.md 4.12 says how); if an entry
-never appears or lapses, that make comes out. **Never "revizní technik"** — the owner's call
+copy names makes, never "kotle" in general. **Since 2026-11-12 it names OPOP only** (č. OPO2399,
+valid to 2029-09-30): ATMOS and Czechtherm were named from 2026-10-03 on the owner's decision, but
+the register still did not list him for them six weeks later. Add a make only once its entry is in
+the register (PLAN.md 4.12 says how to check), and take one out when its entry lapses.
+**Never "revizní technik"** — the owner's call
 too, once the reason was put to him: it is the TIČR title for vyhrazená technická zařízení, which
 the gas callout says he does not hold. The statute *is* cited here, unlike for air conditioning.
 
